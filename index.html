@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MDX株式会社 | 事業と現場を理解するITパートナー</title>
+  <meta name="description" content="MDX株式会社は、SCS事業・ポータルサイト運営・IT/AI活用支援・業務改善の4領域で、中小企業や医療・介護事業者の業務課題を解決するBtoB企業です。現場の業務理解と継続的な伴走支援が強みです。" />
+  <!-- OGP / SNSシェア設定
+       公開前に以下の3項目を設定してください:
+       ① og:url   → サイトの正式URL（例: https://mdx-corp.jp/）
+       ② og:image → OGP画像のURL（1200×630px推奨、例: https://mdx-corp.jp/ogp.png）
+       ③ twitter:image → og:image と同じURLを設定
+  -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MDX株式会社 | 事業と現場を理解するITパートナー" />
+  <meta property="og:description" content="SCS事業・ポータルサイト運営・IT/AI活用支援を通じて、貴社の業務と事業の前進を支えます。" />
+  <meta property="og:site_name" content="MDX株式会社" />
+  <!-- <meta property="og:url" content="https://[TODO:ドメイン]/" /> -->
+  <!-- <meta property="og:image" content="https://[TODO:ドメイン]/ogp.png" /> -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MDX株式会社 | 事業と現場を理解するITパートナー" />
+  <meta name="twitter:description" content="SCS事業・ポータルサイト運営・IT/AI活用支援を通じて、貴社の業務と事業の前進を支えます。" />
+  <!-- <meta name="twitter:image" content="https://[TODO:ドメイン]/ogp.png" /> -->
+  <!-- TODO: favicon.ico をルートに配置してください（配置後すぐ反映されます） -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="#" class="logo" aria-label="MDX株式会社 トップへ">
+        <span class="logo-text">MDX<span class="logo-sub">株式会社</span></span>
+      </a>
+      <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link">事業概要</a></li>
+          <li><a href="#strengths" class="nav-link">MDXの強み</a></li>
+          <li><a href="#services" class="nav-link">主要事業</a></li>
+          <li><a href="#customers" class="nav-link">想定顧客</a></li>
+          <li><a href="#flow" class="nav-link">支援の流れ</a></li>
+          <li><a href="#company" class="nav-link">会社情報</a></li>
+          <li><a href="#contact" class="nav-link nav-link--cta">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="top">
+      <div class="hero-inner container">
+        <div class="hero-content">
+          <p class="hero-eyebrow">BtoBテクノロジーパートナー</p>
+          <h1 class="hero-heading">事業と現場を理解する、<br>ITパートナー。</h1>
+          <p class="hero-sub">SCS対応・ポータル運営・IT/AI活用支援を通じて、<br class="pc-br">現場で機能する仕組みを設計・実装・運用まで一貫して支えます。</p>
+          <div class="hero-actions">
+            <a href="#services" class="btn btn--primary">事業内容を見る</a>
+            <a href="#contact" class="btn btn--outline">お問い合わせ</a>
+          </div>
+          <ul class="hero-tags" aria-label="対応領域">
+            <li>SCS事業</li>
+            <li>ポータル運営</li>
+            <li>IT・AI活用</li>
+            <li>業務改善</li>
+          </ul>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-graphic">
+            <div class="graphic-block graphic-block--1"></div>
+            <div class="graphic-block graphic-block--2"></div>
+            <div class="graphic-block graphic-block--3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRUST BANNER ===== -->
+    <section class="trust-banner" aria-label="MDXが大切にしていること">
+      <div class="container">
+        <p class="trust-banner-label">実務に根ざした支援</p>
+        <div class="trust-banner-grid">
+          <div class="trust-banner-item">
+            <span class="trust-banner-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <p>技術だけでなく、業務の実態を理解した上で支援します。</p>
+          </div>
+          <div class="trust-banner-item">
+            <span class="trust-banner-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <p>導入して終わりではなく、運用・定着まで責任を持ちます。</p>
+          </div>
+          <div class="trust-banner-item">
+            <span class="trust-banner-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <p>AIやITを、現場で実際に使える形に落とし込みます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">About</p>
+          <h2 class="section-title">事業概要</h2>
+        </div>
+        <div class="about-body">
+          <p class="about-lead">MDX株式会社は、セキュリティ・ポータル運営・IT/AI活用・業務改善の4領域で、中小企業や医療・介護事業者の業務課題を解決するBtoB企業です。</p>
+          <p class="about-text">私たちは「IT導入」を目的として捉えず、貴社の事業課題を解決するための手段として提供します。現場の業務フローを理解した上で、実際に使える仕組みを設計・導入・定着まで一貫して支援します。</p>
+        </div>
+        <div class="about-numbers">
+          <div class="number-item">
+            <span class="number-value">4</span>
+            <span class="number-label">専門領域</span>
+          </div>
+          <div class="number-item">
+            <span class="number-value">B2B</span>
+            <span class="number-label">特化モデル</span>
+          </div>
+          <div class="number-item">
+            <span class="number-value">継続</span>
+            <span class="number-label">伴走型支援</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STRENGTHS ===== -->
+    <section class="section strengths" id="strengths">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Strengths</p>
+          <h2 class="section-title">MDXの強み</h2>
+        </div>
+        <ul class="strengths-list">
+          <li class="strength-item">
+            <div class="strength-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M10 16l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="strength-body">
+              <h3 class="strength-title">業務設計まで踏み込む</h3>
+              <p class="strength-text">ITの導入だけでなく、現場で実際に使える業務フローの設計まで支援します。</p>
+            </div>
+          </li>
+          <li class="strength-item">
+            <div class="strength-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 16c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="16" cy="16" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="strength-body">
+              <h3 class="strength-title">AIを実務に落とし込む</h3>
+              <p class="strength-text">AI技術を、現場が使いこなせる形で導入・定着まで一貫してサポートします。</p>
+            </div>
+          </li>
+          <li class="strength-item">
+            <div class="strength-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 4L28 10v12l-12 6L4 22V10l12-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M16 4v18M4 10l12 6 12-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="strength-body">
+              <h3 class="strength-title">セキュリティと事業推進の両立</h3>
+              <p class="strength-text">セキュリティ対応を、事業の成長を妨げない形で計画・実行します。</p>
+            </div>
+          </li>
+          <li class="strength-item">
+            <div class="strength-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 16c0-4.4 3.6-8 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M24 16c0 4.4-3.6 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M14 8l2-4 2 4M18 24l-2 4-2-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="strength-body">
+              <h3 class="strength-title">単発ではなく継続的に支える</h3>
+              <p class="strength-text">導入後の運用・改善まで見据え、長期的なパートナーとして伴走します。</p>
+            </div>
+          </li>
+          <li class="strength-item">
+            <div class="strength-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="11" r="5" stroke="currentColor" stroke-width="2"/>
+                <path d="M6 26c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="strength-body">
+              <h3 class="strength-title">事業理解のある誠実な対応</h3>
+              <p class="strength-text">技術提案の前に、まず貴社の事業と課題を丁寧にヒアリングします。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Services</p>
+          <h2 class="section-title">主要事業</h2>
+          <p class="section-lead">4つの領域で、貴社の業務課題と事業推進を支援します。</p>
+        </div>
+        <div class="services-grid">
+
+          <article class="service-card">
+            <div class="service-number" aria-hidden="true">01</div>
+            <h3 class="service-title">SCS事業</h3>
+            <p class="service-subtitle">セキュリティ対応支援・評価・改善</p>
+            <p class="service-desc">中小企業や医療・介護事業者が直面するセキュリティ課題に対し、現状評価から対策実装・継続改善まで一貫して支援します。事業を止めずに、実行可能な安全基盤の整備をサポートします。</p>
+            <ul class="service-points">
+              <li>セキュリティ現状の評価・リスク整理</li>
+              <li>対策計画の立案と優先順位付け</li>
+              <li>運用体制の整備と継続的な改善支援</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number" aria-hidden="true">02</div>
+            <h3 class="service-title">ポータルサイト運営</h3>
+            <p class="service-subtitle">業界特化型ポータルの企画・運営</p>
+            <p class="service-desc">業界・地域・用途に特化したポータルサイトを企画・開発・運営します。情報の整理と集客導線の設計を通じて、BtoB・BtoC両面でのビジネス機会創出を支援します。</p>
+            <ul class="service-points">
+              <li>業界特化ポータルの企画・設計・開発</li>
+              <li>SEO・集客導線・掲載基盤の構築</li>
+              <li>運営改善・データ活用の継続サポート</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number" aria-hidden="true">03</div>
+            <h3 class="service-title">IT・AI活用支援</h3>
+            <p class="service-subtitle">AI導入・業務自動化・実装・保守</p>
+            <p class="service-desc">AIや自動化技術を現場の業務フローに組み込み、実際に使える形で定着させます。「試しに導入したが使われていない」という失敗を防ぐため、要件定義から保守まで一貫して伴走します。</p>
+            <ul class="service-points">
+              <li>AI活用の要件定義・PoC支援</li>
+              <li>業務自動化ツールの実装・導入</li>
+              <li>定着支援・保守・継続改善の対応</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number" aria-hidden="true">04</div>
+            <h3 class="service-title">業務改善・デジタル基盤整備</h3>
+            <p class="service-subtitle">フォーム・管理画面・ワークフロー整備</p>
+            <p class="service-desc">業務の属人化解消や情報管理の改善を、現場の実態に合わせて進めます。フォーム・管理画面・ワークフローの整備を通じて、担当者に依存しない仕組みを構築します。</p>
+            <ul class="service-points">
+              <li>業務フロー可視化と課題整理</li>
+              <li>フォーム・管理画面・ワークフローの開発</li>
+              <li>マニュアル整備・引継ぎ体制の構築</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CUSTOMERS ===== -->
+    <section class="section customers" id="customers">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">For Whom</p>
+          <h2 class="section-title">このような課題をお持ちの企業様へ</h2>
+          <p class="section-lead">規模や業種に関わらず、業務改善・IT活用・セキュリティ対応に課題を感じているBtoB事業者のご支援を得意としています。</p>
+        </div>
+        <ul class="issue-list">
+          <li class="issue-item">
+            <span class="issue-check" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>セキュリティ対応を進めたいが、何から着手すればよいか分からない</span>
+          </li>
+          <li class="issue-item">
+            <span class="issue-check" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>ITやAIを導入したいが、現場の運用に落としきれない</span>
+          </li>
+          <li class="issue-item">
+            <span class="issue-check" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>業務が属人化しており、担当者が変わると止まってしまう</span>
+          </li>
+          <li class="issue-item">
+            <span class="issue-check" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>問い合わせ対応や情報管理が煩雑で、効率が上がらない</span>
+          </li>
+          <li class="issue-item">
+            <span class="issue-check" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>ポータルやWeb経由の集客・情報発信の導線を整備したい</span>
+          </li>
+          <li class="issue-item">
+            <span class="issue-check" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>単発の制作依頼ではなく、継続的に相談できるパートナーがほしい</span>
+          </li>
+        </ul>
+        <div class="customers-cta">
+          <p>一つでも当てはまる場合は、まずお気軽にご相談ください。</p>
+          <a href="#contact" class="btn btn--primary">ご相談・お問い合わせ</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FLOW ===== -->
+    <section class="section flow" id="flow">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Process</p>
+          <h2 class="section-title">支援の流れ</h2>
+          <p class="section-lead">ご相談から運用まで、一貫して対応します。</p>
+        </div>
+        <ol class="flow-list" aria-label="支援ステップ">
+          <li class="flow-item">
+            <div class="flow-step" aria-hidden="true">01</div>
+            <div class="flow-body">
+              <h3 class="flow-title">お問い合わせ</h3>
+              <p class="flow-desc">フォームまたはメールにてお気軽にご連絡ください。内容に応じて担当よりご返信いたします。</p>
+            </div>
+          </li>
+          <li class="flow-item">
+            <div class="flow-step" aria-hidden="true">02</div>
+            <div class="flow-body">
+              <h3 class="flow-title">ヒアリング</h3>
+              <p class="flow-desc">貴社の事業・業務・現状の課題についてお伺いします。オンラインでの対応も可能です。</p>
+            </div>
+          </li>
+          <li class="flow-item">
+            <div class="flow-step" aria-hidden="true">03</div>
+            <div class="flow-body">
+              <h3 class="flow-title">現状整理・課題把握</h3>
+              <p class="flow-desc">ヒアリング内容をもとに現状を整理し、課題の優先順位を明確化します。</p>
+            </div>
+          </li>
+          <li class="flow-item">
+            <div class="flow-step" aria-hidden="true">04</div>
+            <div class="flow-body">
+              <h3 class="flow-title">ご提案</h3>
+              <p class="flow-desc">課題に応じた支援内容・スケジュール・費用をご提案します。単発のご提案にも対応します。</p>
+            </div>
+          </li>
+          <li class="flow-item">
+            <div class="flow-step" aria-hidden="true">05</div>
+            <div class="flow-body">
+              <h3 class="flow-title">実装・導入支援</h3>
+              <p class="flow-desc">合意内容に沿って、実装・設定・導入支援を進めます。進捗は随時共有します。</p>
+            </div>
+          </li>
+          <li class="flow-item">
+            <div class="flow-step" aria-hidden="true">06</div>
+            <div class="flow-body">
+              <h3 class="flow-title">運用・継続改善</h3>
+              <p class="flow-desc">導入後も伴走し、運用状況を確認しながら継続的に改善します。</p>
+            </div>
+          </li>
+        </ol>
+        <p class="flow-note">ご相談内容に応じて、単発のご提案から継続的な支援まで柔軟に対応します。現状整理の段階からでも、お気軽にご相談ください。</p>
+      </div>
+    </section>
+
+    <!-- ===== COMPANY ===== -->
+    <section class="section company" id="company">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Company</p>
+          <h2 class="section-title">会社情報</h2>
+        </div>
+        <div class="company-table-wrap">
+          <table class="company-table">
+            <tbody>
+              <tr>
+                <th scope="row">会社名</th>
+                <td>MDX株式会社</td>
+              </tr>
+              <tr>
+                <th scope="row">代表者</th>
+                <td>大澤 基</td>
+              </tr>
+              <tr>
+                <th scope="row">所在地</th>
+                <!-- TODO: 正式な所在地を入力 -->
+                <td>（掲載準備中）</td>
+              </tr>
+              <tr>
+                <th scope="row">設立</th>
+                <!-- TODO: 設立年月を入力（例: 2023年4月） -->
+                <td>（掲載準備中）</td>
+              </tr>
+              <tr>
+                <th scope="row">事業内容</th>
+                <td>SCS事業、ポータルサイト運営、IT/AI活用支援、業務改善支援</td>
+              </tr>
+              <tr>
+                <th scope="row">お問い合わせ</th>
+                <!-- TODO: メールアドレスを入力後、以下の形式に変更してください:
+                     <a href="mailto:info@mdx-corp.jp">info@mdx-corp.jp</a> -->
+                <td>（掲載準備中）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Contact</p>
+          <h2 class="section-title">ご相談・お問い合わせ</h2>
+          <p class="section-lead">SCS対応、ポータル運営、IT/AI活用についてお気軽にご相談ください。<br>貴社の課題に合わせてご提案いたします。</p>
+        </div>
+        <div class="contact-guide">
+          <p>SCS事業、ポータル運営、IT・AI活用支援に関するご相談を受け付けています。<br>内容を確認のうえ、順次ご返信いたします。</p>
+        </div>
+        <!-- TODO: script.js の FORMSPREE_FORM_ID にFormspreeのフォームIDを入力してください -->
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name" class="form-label">お名前 <span class="required" aria-label="必須">必須</span></label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="山田 太郎" required autocomplete="name" />
+            <p class="form-error" id="name-error" role="alert" aria-live="polite"></p>
+          </div>
+          <div class="form-group">
+            <label for="affiliation" class="form-label">会社名 / ご所属 <span class="optional">任意</span></label>
+            <input type="text" id="affiliation" name="affiliation" class="form-input" placeholder="例：株式会社○○ / ○○クリニック / ○○部" autocomplete="organization" />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">メールアドレス <span class="required" aria-label="必須">必須</span></label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="example@company.co.jp" required autocomplete="email" />
+            <p class="form-error" id="email-error" role="alert" aria-live="polite"></p>
+          </div>
+          <div class="form-group">
+            <label for="category" class="form-label">お問い合わせ種別 <span class="required" aria-label="必須">必須</span></label>
+            <div class="select-wrap">
+              <select id="category" name="category" class="form-select" required>
+                <option value="">選択してください</option>
+                <option value="scs">SCS事業について</option>
+                <option value="portal">ポータルサイト運営について</option>
+                <option value="ai">IT・AI活用支援について</option>
+                <option value="dx">業務改善・デジタル基盤整備について</option>
+                <option value="partner">業務提携・協業について</option>
+                <option value="other">その他</option>
+              </select>
+            </div>
+            <p class="form-error" id="category-error" role="alert" aria-live="polite"></p>
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">お問い合わせ内容 <span class="required" aria-label="必須">必須</span></label>
+            <textarea id="message" name="message" class="form-textarea" rows="6" placeholder="ご相談内容やご質問をご記入ください。" required></textarea>
+            <p class="form-error" id="message-error" role="alert" aria-live="polite"></p>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn--primary btn--lg" id="submit-btn">お問い合わせを送信</button>
+          </div>
+          <div class="form-error-general" id="form-error-general" hidden role="alert">
+            送信に失敗しました。時間をおいて再度お試しいただくか、メールにてご連絡ください。
+          </div>
+          <p class="form-privacy">お預かりした情報は、お問い合わせ対応以外の目的には使用いたしません。詳細は<a href="privacy.html" class="form-privacy-link">プライバシーポリシー</a>をご確認ください。</p>
+          <p class="form-note">通常2営業日以内にご返信いたします。</p>
+        </form>
+        <div class="form-success" id="form-success" hidden>
+          <div class="success-inner">
+            <p class="success-icon" aria-hidden="true">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" stroke="#0ea5e9" stroke-width="2"/>
+                <path d="M14 24l8 8 12-16" stroke="#0ea5e9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </p>
+            <h3 class="success-title">お問い合わせを受け付けました</h3>
+            <p class="success-text">内容を確認のうえ、順次ご返信いたします。<br>通常2営業日以内にご連絡いたします。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="logo" aria-label="MDX株式会社 トップへ">
+            <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
+          </a>
+          <p class="footer-tagline">事業と現場を理解するITパートナー</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul class="footer-nav-list">
+            <li><a href="#about">事業概要</a></li>
+            <li><a href="#services">主要事業</a></li>
+            <li><a href="#strengths">MDXの強み</a></li>
+            <li><a href="#flow">支援の流れ</a></li>
+            <li><a href="#company">会社情報</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <nav class="footer-policy-nav" aria-label="ポリシーナビゲーション">
+          <ul class="footer-policy-list">
+            <li><a href="privacy.html">プライバシーポリシー</a></li>
+            <!-- TODO: 免責事項ページを作成後にリンクを設定してください -->
+            <li><a href="#">免責事項</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copy">
+          <small>&copy; <span id="footer-year"></span> MDX株式会社. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

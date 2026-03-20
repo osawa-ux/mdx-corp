@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プライバシーポリシー | MDX株式会社</title>
+  <meta name="description" content="MDX株式会社のプライバシーポリシーです。お客様の個人情報の取り扱いについてご説明します。" />
+  <!-- TODO: favicon.ico をルートに配置してください -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* プライバシーポリシーページ専用スタイル */
+    .policy-main {
+      padding-top: var(--header-height);
+      min-height: 100vh;
+    }
+    .policy-hero {
+      background-color: var(--color-primary);
+      padding: 48px 0;
+      text-align: center;
+    }
+    .policy-hero-title {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .policy-hero-sub {
+      margin-top: 10px;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .policy-body {
+      max-width: 760px;
+      margin-inline: auto;
+      padding: 64px 24px 80px;
+    }
+    .policy-updated {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      margin-bottom: 40px;
+    }
+    .policy-intro {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      line-height: 1.95;
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .policy-section {
+      margin-bottom: 44px;
+    }
+    .policy-section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 14px;
+      padding-left: 12px;
+      border-left: 3px solid var(--color-accent);
+      line-height: 1.5;
+    }
+    .policy-text {
+      font-size: 0.925rem;
+      color: var(--color-text);
+      line-height: 1.95;
+    }
+    .policy-text + .policy-text {
+      margin-top: 12px;
+    }
+    .policy-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .policy-list li {
+      font-size: 0.925rem;
+      color: var(--color-text);
+      line-height: 1.85;
+      padding-left: 18px;
+      position: relative;
+    }
+    .policy-list li::before {
+      content: '・';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+    .policy-contact-box {
+      margin-top: 48px;
+      padding: 24px;
+      background-color: var(--color-bg-sub);
+      border-radius: var(--radius-lg);
+      font-size: 0.9rem;
+      color: var(--color-text);
+      line-height: 1.9;
+    }
+    .policy-contact-box p + p {
+      margin-top: 6px;
+    }
+    .policy-contact-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+    .policy-back {
+      text-align: center;
+      margin-top: 56px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="index.html" class="logo" aria-label="MDX株式会社 トップへ">
+        <span class="logo-text">MDX<span class="logo-sub">株式会社</span></span>
+      </a>
+      <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
+        <ul class="nav-list">
+          <li><a href="index.html#about" class="nav-link">事業概要</a></li>
+          <li><a href="index.html#services" class="nav-link">主要事業</a></li>
+          <li><a href="index.html#company" class="nav-link">会社情報</a></li>
+          <li><a href="index.html#contact" class="nav-link nav-link--cta">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="policy-main">
+
+    <div class="policy-hero">
+      <div class="container">
+        <h1 class="policy-hero-title">プライバシーポリシー</h1>
+        <p class="policy-hero-sub">Privacy Policy</p>
+      </div>
+    </div>
+
+    <div class="policy-body">
+
+      <!-- TODO: 制定日と最終更新日を入力してください（例: 2026年3月） -->
+      <p class="policy-updated">制定日：2026年●月●日　最終更新日：2026年●月●日</p>
+
+      <p class="policy-intro">MDX株式会社（以下「当社」）は、お客様の個人情報の保護を重要な責務と考え、以下のとおりプライバシーポリシーを定めます。当社サービスをご利用の際は、本ポリシーの内容をご確認ください。</p>
+
+      <div class="policy-section">
+        <h2 class="policy-section-title">1. 取得する情報</h2>
+        <p class="policy-text">当社は、お問い合わせフォームその他のご連絡手段を通じて、以下の情報を取得することがあります。</p>
+        <ul class="policy-list">
+          <li>お名前</li>
+          <li>会社名・所属先</li>
+          <li>メールアドレス</li>
+          <li>お問い合わせ内容</li>
+          <li>その他、お客様が任意でご提供いただいた情報</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-title">2. 利用目的</h2>
+        <p class="policy-text">取得した個人情報は、以下の目的のために利用します。</p>
+        <ul class="policy-list">
+          <li>お問い合わせへの回答・対応</li>
+          <li>サービスに関するご提案・ご連絡</li>
+          <li>業務上必要な連絡・情報提供</li>
+          <li>当社サービスの改善・開発のための分析（個人を特定しない形での利用に限る）</li>
+        </ul>
+        <p class="policy-text">上記以外の目的で個人情報を利用する場合は、あらかじめご本人の同意を得るものとします。</p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-title">3. 第三者提供</h2>
+        <p class="policy-text">当社は、以下のいずれかに該当する場合を除き、取得した個人情報を第三者に提供しません。</p>
+        <ul class="policy-list">
+          <li>ご本人の同意がある場合</li>
+          <li>法令に基づく開示が必要な場合</li>
+          <li>人の生命・身体・財産の保護のために必要であり、ご本人の同意を得ることが困難な場合</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-title">4. 安全管理</h2>
+        <p class="policy-text">当社は、取得した個人情報の漏洩・滅失・毀損を防止するため、適切なセキュリティ対策を講じます。個人情報を取り扱う業務を外部に委託する場合は、委託先に対して適切な監督を行います。</p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-title">5. 開示・訂正・削除等のご請求</h2>
+        <p class="policy-text">ご自身の個人情報について、開示・訂正・利用停止・削除等をご希望の場合は、下記お問い合わせ窓口までご連絡ください。本人確認のうえ、法令に従い対応いたします。</p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-title">6. Cookie・アクセス解析</h2>
+        <p class="policy-text">当社ウェブサイトでは、サービス改善を目的として、Google Analyticsなどのアクセス解析ツールを利用することがあります。これらのツールはCookieを使用して情報を収集しますが、個人を特定する情報は含まれません。Cookieの使用を望まない場合は、ブラウザの設定で無効にすることができます。</p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-section-title">7. プライバシーポリシーの変更</h2>
+        <p class="policy-text">本ポリシーは、法令の改正やサービス内容の変更に応じて更新することがあります。変更後のポリシーは、当サイトに掲載した時点で効力を生じるものとします。</p>
+      </div>
+
+      <div class="policy-contact-box">
+        <h2 class="policy-contact-title">8. お問い合わせ窓口</h2>
+        <p>個人情報の取り扱いに関するご質問・ご相談は、下記までお問い合わせください。</p>
+        <p><strong>MDX株式会社</strong></p>
+        <!-- TODO: 所在地を入力（例: 東京都○○区○○1-2-3） -->
+        <p>所在地：（準備中）</p>
+        <!-- TODO: メールアドレスを入力（例: info@mdx-corp.jp）
+             入力後は以下のようにリンクにしてください:
+             <a href="mailto:info@mdx-corp.jp">info@mdx-corp.jp</a> -->
+        <p>メール：（準備中）</p>
+      </div>
+
+      <div class="policy-back">
+        <a href="index.html" class="btn btn--primary">トップページに戻る</a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="MDX株式会社 トップへ">
+            <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
+          </a>
+          <p class="footer-tagline">事業と現場を理解するITパートナー</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul class="footer-nav-list">
+            <li><a href="index.html#about">事業概要</a></li>
+            <li><a href="index.html#services">主要事業</a></li>
+            <li><a href="index.html#company">会社情報</a></li>
+            <li><a href="index.html#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <nav class="footer-policy-nav" aria-label="ポリシーナビゲーション">
+          <ul class="footer-policy-list">
+            <li><a href="privacy.html">プライバシーポリシー</a></li>
+            <li><a href="#">免責事項</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copy">
+          <small>&copy; <span id="footer-year"></span> MDX株式会社. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ハンバーガーメニュー
+    (function () {
+      var hamburger = document.getElementById('hamburger');
+      var nav = document.getElementById('global-nav');
+      if (!hamburger || !nav) return;
+      hamburger.addEventListener('click', function () {
+        var isOpen = nav.classList.contains('is-open');
+        hamburger.classList.toggle('is-active', !isOpen);
+        hamburger.setAttribute('aria-expanded', String(!isOpen));
+        hamburger.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
+        nav.classList.toggle('is-open', !isOpen);
+      });
+    })();
+    // フッター年
+    (function () {
+      var el = document.getElementById('footer-year');
+      if (el) el.textContent = new Date().getFullYear();
+    })();
+    // ヘッダースクロール
+    (function () {
+      var header = document.getElementById('site-header');
+      if (!header) return;
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('is-scrolled', window.scrollY > 10);
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
