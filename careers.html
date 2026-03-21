@@ -21,7 +21,7 @@
     .careers-hero-sub { margin-top: 12px; font-size: 0.95rem; color: rgba(255,255,255,0.6); }
 
     /* Section common */
-    .careers-section { max-width: 800px; margin-inline: auto; padding: 64px 24px 0; }
+    .careers-section { max-width: 800px; margin-inline: auto; padding: 56px 24px 0; }
     .careers-section:last-of-type { padding-bottom: 80px; }
     .careers-section-title {
       font-size: 1.15rem; font-weight: 700; color: var(--color-primary);
@@ -37,6 +37,7 @@
       font-size: 0.95rem; color: var(--color-text); line-height: 1.95;
       padding-bottom: 48px; border-bottom: 1px solid var(--color-border);
     }
+    .careers-intro p + p { margin-top: 14px; }
 
     /* Highlight cards */
     .careers-highlights {
@@ -68,6 +69,13 @@
       content: '・'; position: absolute; left: 0; color: var(--color-accent);
     }
 
+    /* Feature blocks */
+    .careers-feature { margin-top: 28px; }
+    .careers-feature-title {
+      font-size: 0.95rem; font-weight: 700; color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
     /* Job table */
     .careers-table-wrap { margin-top: 24px; overflow-x: auto; }
     .careers-table { width: 100%; border-collapse: collapse; font-size: 0.925rem; }
@@ -81,7 +89,7 @@
       border-bottom: 1px solid var(--color-border);
     }
 
-    /* Fit list */
+    /* Fit grid */
     .careers-fit-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;
     }
@@ -143,27 +151,39 @@
     <!-- ===== HERO ===== -->
     <div class="careers-hero">
       <div class="container">
-        <h1 class="careers-hero-title">AIを使って、現場の「当たり前」を<br>変えていく仕事。</h1>
+        <h1 class="careers-hero-title">AIと業務改善で、<br>仕事の"当たり前"を変える。</h1>
         <p class="careers-hero-sub">IT・業務改善人材 募集中｜正社員</p>
       </div>
     </div>
 
     <!-- ===== INTRO ===== -->
     <div class="careers-intro">
-      <p>MDX株式会社は、SCS事業・ポータルサイト運営・IT/AI活用支援・業務改善を手がけるBtoB企業です。</p>
-      <p>私たちが求めているのは、コードを書く人ではありません。現場の業務を理解し、AIツールを使って「仕組みそのもの」を改善できる人です。Claude CodeやGeminiなどのAIツールを日常的に活用し、業務フローの整理・標準化・自動化を推進します。</p>
+      <p>MDX株式会社では、AIツール（Claude / Gemini）を活用しながら、日々の業務をより効率的で再現性のあるものへと変えていく取り組みを行っています。</p>
+      <p>多くの現場では、非効率な作業や属人化した業務がまだ数多く残っています。私たちはそれらを一つひとつ整理し、AIやITツールを活用することで、よりスムーズで持続可能な仕組みに変えていくことを目指しています。</p>
+      <p>そのために必要なのは、「特別な技術」だけではなく、目の前の業務をより良くしたいという視点と、実際に手を動かして改善していく力です。</p>
     </div>
 
-    <!-- ===== WHY MDX ===== -->
+    <!-- ===== JOB DESCRIPTION ===== -->
     <div class="careers-section">
-      <h2 class="careers-section-title">この仕事が面白い理由</h2>
-      <p class="careers-text">一般的なIT職と異なり、ただ指示された仕様を実装する仕事ではありません。「なぜこの業務が必要なのか」「本当にこの手順でいいのか」から考え、AIの力を借りて業務そのものを設計し直す仕事です。</p>
-      <p class="careers-text">Claude CodeやGeminiといったAIツールは、使い方次第で生産性を大きく変えます。これらを実務で使いこなしながら、現場にとって本当に意味のある改善を積み重ねていく――それがこのポジションの面白さです。</p>
+      <h2 class="careers-section-title">この仕事でやること</h2>
+      <p class="careers-text">本ポジションでは、AIツールやITを活用しながら、業務の整理・改善・標準化を進めていただきます。単に作業をこなすのではなく、「どうすればもっと良くなるか」を考えながら仕組みを作っていく役割です。</p>
+      <ul class="careers-list">
+        <li>Claude / Gemini を活用した業務改善・効率化</li>
+        <li>業務フローの整理・可視化</li>
+        <li>マニュアルの作成・更新</li>
+        <li>データ整理・情報の構造化</li>
+        <li>ITツールの導入・運用サポート</li>
+        <li>社内の業務に関する課題抽出と改善提案</li>
+      </ul>
+    </div>
 
+    <!-- ===== ENVIRONMENT ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">働く環境</h2>
       <div class="careers-highlights">
         <div class="careers-highlight-card">
           <p class="careers-highlight-label">TOOL</p>
-          <p class="careers-highlight-value">Claude Code / Gemini を<br>業務で日常的に使用</p>
+          <p class="careers-highlight-value">Claude / Gemini を<br>日常的に使用</p>
         </div>
         <div class="careers-highlight-card">
           <p class="careers-highlight-label">SUPPORT</p>
@@ -171,22 +191,80 @@
         </div>
         <div class="careers-highlight-card">
           <p class="careers-highlight-label">ENVIRONMENT</p>
-          <p class="careers-highlight-value">デュアルモニター環境<br>整備済み</p>
+          <p class="careers-highlight-value">デュアルモニター<br>標準装備</p>
+        </div>
+      </div>
+      <p class="careers-text" style="margin-top:20px;">新しいツールややり方を試しやすい環境です。AIツールについては、実務の中で使いながら習得できるため、Claude Codeの経験がなくても問題ありません。</p>
+    </div>
+
+    <!-- ===== FEATURES ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">この仕事の特徴</h2>
+
+      <div class="careers-feature">
+        <p class="careers-feature-title">AIを「実務で使う」経験ができる</p>
+        <p class="careers-text">実験的な利用ではなく、日々の業務の中でAIを活用し、実際の成果につなげていきます。</p>
+      </div>
+
+      <div class="careers-feature">
+        <p class="careers-feature-title">改善の余地が多く、手応えがある</p>
+        <p class="careers-text">まだ整備されていない領域も多く、自分の取り組みがそのまま仕組みとして残っていきます。</p>
+      </div>
+
+      <div class="careers-feature">
+        <p class="careers-feature-title">裁量を持って進められる</p>
+        <p class="careers-text">細かい手順がすべて決まっているわけではなく、状況に応じて考えながら進めていくスタイルです。</p>
+      </div>
+    </div>
+
+    <!-- ===== WHO FITS ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">こんな方に向いています</h2>
+      <div class="careers-fit-grid">
+        <div class="careers-fit-item">
+          <strong>業務の無駄や非効率に気づくことが多い方。</strong><br>「もっとこうすればいいのに」と思ったことがある人に向いています。
+        </div>
+        <div class="careers-fit-item">
+          <strong>改善や効率化に興味がある方。</strong><br>目の前のタスクをこなすだけでなく、業務全体を見渡して考えられる方を求めています。
+        </div>
+        <div class="careers-fit-item">
+          <strong>新しいツールや技術を試すことが好きな方。</strong><br>AIツールの経験は不問です。「触ってみたい」という意欲がある方を歓迎します。
+        </div>
+        <div class="careers-fit-item">
+          <strong>指示を待つより、自分で考えて動く方が得意な方。</strong><br>ITの知識を「実務で活かしたい」と考えている方をお待ちしています。
         </div>
       </div>
     </div>
 
-    <!-- ===== JOB DESCRIPTION ===== -->
+    <!-- ===== TRAITS ===== -->
     <div class="careers-section">
-      <h2 class="careers-section-title">業務内容</h2>
-      <p class="careers-text">AIツールを活用した業務改善が中心です。「作業をこなす」のではなく「仕組みをつくる」ことに重点を置いています。</p>
+      <h2 class="careers-section-title">活躍しやすい方の特徴</h2>
       <ul class="careers-list">
-        <li>AIツール（Claude Code / Gemini 等）を活用した業務改善・効率化</li>
-        <li>業務フローの整理・可視化・標準化</li>
-        <li>業務マニュアル・手順書の作成・改善</li>
-        <li>データの整理・構造化・活用基盤の構築</li>
-        <li>ITツールの選定・導入・運用サポート</li>
-        <li>社内の業務課題のヒアリングと改善提案</li>
+        <li>小さく試しながら改善を進められる方</li>
+        <li>完璧でなくてもまず動ける方</li>
+        <li>周囲とコミュニケーションを取りながら進められる方</li>
+        <li>抽象的な課題を整理して具体化できる方</li>
+      </ul>
+    </div>
+
+    <!-- ===== WHY NO EXPERIENCE OK ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">未経験でも取り組める理由</h2>
+      <ul class="careers-list">
+        <li>業務ごとにマニュアルが整備されている</li>
+        <li>AIツールは実務の中で習得可能</li>
+        <li>最初からすべてを任せるのではなく、段階的に業務を広げていく</li>
+      </ul>
+      <p class="careers-text" style="margin-top:16px;">「AIに詳しいこと」よりも、業務を良くしたいという姿勢を重視しています。</p>
+    </div>
+
+    <!-- ===== PERSONA ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">求める人物像</h2>
+      <ul class="careers-list">
+        <li>元SE、社内SE、ITサポート、ヘルプデスクなどの経験をお持ちの方</li>
+        <li>業務改善やDXに関心のある方</li>
+        <li>新しい環境でも柔軟に学びながら進められる方</li>
       </ul>
     </div>
 
@@ -202,7 +280,19 @@
             </tr>
             <tr>
               <th>給与</th>
-              <td>月給 30万円〜35万円<br><span style="font-size:0.85rem;color:var(--color-text-light);">経験・スキルに応じて決定</span></td>
+              <td>月給 300,000円〜350,000円<br><span style="font-size:0.85rem;color:var(--color-text-light);">経験・スキルに応じて決定</span></td>
+            </tr>
+            <tr>
+              <th>勤務時間</th>
+              <td>9:00〜18:00（休憩 13:00〜14:00）</td>
+            </tr>
+            <tr>
+              <th>休日</th>
+              <td>土日祝休み</td>
+            </tr>
+            <tr>
+              <th>勤務地</th>
+              <td>神奈川県横浜市都筑区</td>
             </tr>
             <tr>
               <th>業務内容</th>
@@ -214,74 +304,29 @@
             </tr>
             <tr>
               <th>必須条件</th>
-              <td>
-                IT業界での実務経験（年数不問）<br>
-                業務改善・効率化に対する関心と意欲
-              </td>
+              <td>IT業界での実務経験（年数不問）<br>業務改善・効率化に対する関心と意欲</td>
             </tr>
             <tr>
               <th>歓迎条件</th>
-              <td>
-                SE・社内SE・ITサポートの実務経験<br>
-                業務フロー設計やマニュアル整備の経験<br>
-                AIツールの活用経験（未経験でもOK）
-              </td>
-            </tr>
-            <tr>
-              <th>勤務地</th>
-              <td>神奈川県横浜市都筑区</td>
-            </tr>
-            <tr>
-              <th>勤務時間</th>
-              <td><!-- 確定後に記載 -->（詳細は面談時にご案内）</td>
-            </tr>
-            <tr>
-              <th>休日・休暇</th>
-              <td><!-- 確定後に記載 -->（詳細は面談時にご案内）</td>
+              <td>SE・社内SE・ITサポートの実務経験<br>業務フロー設計やマニュアル整備の経験<br>AIツールの活用経験（未経験でもOK）</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- ===== WHO FITS ===== -->
-    <div class="careers-section">
-      <h2 class="careers-section-title">こんな方に向いています</h2>
-      <div class="careers-fit-grid">
-        <div class="careers-fit-item">
-          <strong>「もっとこうすればいいのに」</strong><br>と思ったことがある人。前職で非効率な業務に疑問を感じた経験がある方に向いています。
-        </div>
-        <div class="careers-fit-item">
-          <strong>作業よりも仕組みに興味がある人。</strong><br>目の前のタスクをこなすだけでなく、業務全体を見渡して改善を考えられる方を求めています。
-        </div>
-        <div class="careers-fit-item">
-          <strong>新しいツールを試すのが好きな人。</strong><br>AIツールの経験は不問です。「触ってみたい」「使いこなしたい」という意欲がある方を歓迎します。
-        </div>
-        <div class="careers-fit-item">
-          <strong>伝わる文章を書ける人。</strong><br>マニュアル作成やフロー整理が多い仕事です。分かりやすく整理して伝える力を重視しています。
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== WHY NO EXPERIENCE OK ===== -->
-    <div class="careers-section">
-      <h2 class="careers-section-title">Claude Code 未経験でも大丈夫な理由</h2>
-      <p class="careers-text">社内にClaude Codeの業務活用マニュアルを整備しています。基本操作から実務での使い方まで、段階的に習得できる環境です。</p>
-      <p class="careers-text">重要なのはツールの経験ではなく、「業務をどう改善するか」を考える力です。IT業界で実務を経験した方であれば、AIツールの操作は入社後に十分キャッチアップできます。</p>
-    </div>
-
     <!-- ===== MESSAGE ===== -->
     <div class="careers-section">
       <div class="careers-message-box">
-        <p>私たちが一緒に働きたいのは、<br>「言われたことをやる人」ではなく、<br>「こうした方がいい」と提案できる人です。</p>
-        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:16px;">AIは道具です。それを使って何を変えるか――その判断ができる方をお待ちしています。</p>
+        <p>このポジションは、単に与えられた業務をこなす仕事ではありません。<br>日々の業務を見直し、より良い形に変えていく役割です。</p>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:16px;">「こうしたらもっと良くなる」と考え、それを実際に形にしていける方と<br>ご一緒できれば嬉しく思います。</p>
       </div>
     </div>
 
     <!-- ===== CTA ===== -->
     <div class="careers-section">
       <h2 class="careers-section-title">応募・ご質問</h2>
-      <p class="careers-text">ご応募・ご質問は、以下のお問い合わせフォームまたはメールにてお送りください。カジュアルなご相談も歓迎します。</p>
+      <p class="careers-text">ご応募・ご質問は、以下のお問い合わせフォームまたはメールにてお送りください。<br>まずは見学やカジュアルなご相談からでも歓迎しています。</p>
       <div class="careers-cta">
         <a href="index.html#contact" class="btn btn--primary btn--lg">お問い合わせフォームへ</a>
         <p class="careers-cta-note">または <a href="mailto:info@mdx-inc.co.jp" style="color:var(--color-accent);">info@mdx-inc.co.jp</a> まで</p>
