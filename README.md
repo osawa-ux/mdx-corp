@@ -26,6 +26,7 @@ mdx-corp/
 ├── favicon.ico             # favicon（16x16 / 32x32）
 ├── favicon.svg             # favicon（SVG版）
 ├── apple-touch-icon.png    # Apple Touch Icon（180x180）
+├── careers.html            # 採用情報ページ
 ├── CNAME                   # GitHub Pages カスタムドメイン設定
 └── assets/
     └── ogp/
@@ -43,6 +44,8 @@ mdx-corp/
 | Formspree フォームID | `script.js` | 先頭付近の `FORMSPREE_FORM_ID` |
 | OGP画像 | `assets/ogp/ogp.png` | head内の `og:image` パスは変更不要 |
 | privacy / disclaimer 更新日 | 各HTML | `.policy-updated` の日付テキスト |
+| 採用情報の募集要項 | `careers.html` | 募集要項テーブル |
+| 採用応募フォーム | `careers.html` | Google フォームへのリンク |
 
 ## Formspree 設定
 
@@ -93,6 +96,12 @@ git push
 - [ ] OGP画像が正しく表示されるか（https://www.opengraph.xyz で確認）
 - [ ] privacy.html / disclaimer.html のリンクが動作するか
 - [ ] Search Console でエラーがないか
+
+## 採用ページ
+
+- **応募フォーム:** Google フォーム（外部リンク）
+- **フォーム通知:** Google フォーム側で設定（Formspreeとは別管理）
+- **NG表現:** 医療・クリニック・患者などの表現は使用しない（IT/DX企業として表現）
 
 ## 注意事項
 
