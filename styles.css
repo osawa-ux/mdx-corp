@@ -545,6 +545,66 @@ button {
   line-height: 1.95;
 }
 
+/* --- Philosophy / Approach 共通 --- */
+.philosophy,
+.approach {
+  background-color: var(--color-bg-sub);
+}
+.philosophy-body,
+.approach-body {
+  max-width: 700px;
+  margin-inline: auto;
+  text-align: center;
+}
+.philosophy-body p,
+.approach-body p {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 2;
+}
+.philosophy-body p + p,
+.approach-body p + p {
+  margin-top: 18px;
+}
+
+/* --- Cases --- */
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.case-card {
+  padding: 28px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.case-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+  padding-left: 14px;
+  border-left: 3px solid var(--color-accent);
+  line-height: 1.5;
+}
+.case-desc {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.9;
+}
+.cases-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-top: 32px;
+}
+@media (max-width: 768px) {
+  .cases-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .about-numbers {
   display: flex;
   justify-content: center;

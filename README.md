@@ -71,6 +71,8 @@ var FORMSPREE_FORM_ID = 'xreydklq';
 - **カスタムドメイン:** `mdx-inc.co.jp`（GitHub Pages Settings で設定済み）
 - **HTTPS:** Enforce HTTPS 有効
 - **DNS:** お名前.com で A レコード（GitHub Pages IP × 4）+ CNAME（www → osawa-ux.github.io）
+- **メール:** Google Workspace（info@mdx-inc.co.jp）設定済み・MXレコード反映済み
+- **CNAME ファイル:** 削除厳禁（カスタムドメインが外れる）
 
 ## 更新手順
 
@@ -106,6 +108,6 @@ git push
 ## 注意事項
 
 - `CNAME` ファイルは削除しないこと（カスタムドメインが外れる）
-- Formspree の無料プランは月50件まで
+- Formspree は Pro プラン（月5,000件）に課金済み
 - OGP画像を差し替えた場合、SNS側のキャッシュ反映に時間がかかる
 - `sitemap.xml` にページを追加した場合、Search Console で再送信する
