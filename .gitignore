@@ -3,3 +3,10 @@
 Thumbs.db
 *.log
 node_modules/
+
+# Google API 認証
+credentials.json
+token.json
+sa-key.json
+service-account-key.json
+*-service-account.json

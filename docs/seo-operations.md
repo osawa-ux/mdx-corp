@@ -110,9 +110,96 @@ MDX株式会社コーポレートサイト（mdx-inc.co.jp）の公開後1か月
 
 ---
 
+---
+
+## Search Console API ツール (自動化)
+
+`tools/search_console_submit.py` を使うと、sitemap 再送信と URL Inspection を CLI から実行できます。
+
+### 事前設定
+
+#### 1. Google Cloud 側
+
+1. [Google Cloud Console](https://console.cloud.google.com/) でプロジェクトを作成（既存でもOK）
+2. 「APIとサービス」→「ライブラリ」から以下を有効化
+   - **Google Search Console API**
+3. 認証方式を選ぶ（下記いずれか）
+
+#### 2a. OAuth 2.0（ローカル実行向け・推奨）
+
+1. 「APIとサービス」→「認証情報」→「OAuth クライアントID を作成」
+   - アプリケーションの種類: **デスクトップアプリ**
+2. JSON ファイルをダウンロードし、プロジェクトルートに `credentials.json` として配置
+3. 初回実行時にブラウザが開き Google アカウントで認証
+4. 認証後 `token.json` が自動生成され、以降は再認証不要
+
+#### 2b. サービスアカウント（GitHub Actions 向け）
+
+1. 「APIとサービス」→「認証情報」→「サービスアカウントを作成」
+2. キーを JSON 形式でダウンロード
+3. Search Console → 設定 → ユーザーと権限 → 該当サービスアカウントのメールアドレスを **所有者** として追加
+4. 環境変数 `GOOGLE_APPLICATION_CREDENTIALS` にキーファイルのパスを指定
+
+#### 3. 環境変数
+
+```bash
+cp .env.example .env
+# .env を編集して設定値を確認
+```
+
+#### 4. Python 依存インストール
+
+```bash
+pip install -r requirements.txt
+```
+
+### 実行コマンド
+
+```bash
+# sitemap.xml を再送信
+python tools/search_console_submit.py submit-sitemap
+
+# 特定URLの Inspection
+python tools/search_console_submit.py inspect --url https://mdx-inc.co.jp/
+
+# デフォルトURL (トップ + careers) をまとめて Inspection
+python tools/search_console_submit.py inspect-defaults
+
+# 一括実行: sitemap再送信 → Inspection → 結果まとめ
+python tools/search_console_submit.py submit-and-check
+
+# 結果を JSON に保存
+python tools/search_console_submit.py submit-and-check --json results.json
+```
+
+### よくあるエラー
+
+| エラー | 原因 | 対処 |
+|---|---|---|
+| HTTP 401 | トークン期限切れ | `token.json` を削除して再実行 |
+| HTTP 403 | アクセス権なし | Search Console でアカウントが所有者かフルユーザーか確認 |
+| HTTP 404 | プロパティ未登録 or URL不一致 | `.env` の `SEARCH_CONSOLE_SITE_URL` を確認 |
+| HTTP 429 | API 呼び出し上限 | 時間をおいて再実行（自動リトライあり） |
+| `credentials.json` が見つからない | OAuth 設定漏れ | Google Cloud Console からダウンロードして配置 |
+
+### GitHub Actions での自動実行
+
+`.github/workflows/search-console-submit.yml` が用意済みです。
+
+有効化するには:
+1. サービスアカウントのキー JSON の内容をコピー
+2. GitHub リポジトリ → Settings → Secrets → `GOOGLE_SA_KEY_JSON` として登録
+3. master への push 時に自動実行される（HTML / sitemap.xml の変更時のみ）
+
+手動実行: Actions タブ → Search Console Submit → Run workflow
+
+---
+
 ## 参考リンク
 
 - Search Console: https://search.google.com/search-console
+- Search Console API ドキュメント: https://developers.google.com/webmaster-tools/v1/api_reference_index
+- URL Inspection API: https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect
 - GA4: https://analytics.google.com
 - OGP 確認: https://www.opengraph.xyz
 - サイトマップ: https://mdx-inc.co.jp/sitemap.xml

@@ -1,0 +1,61 @@
+# Search Console sitemap 再送信 & URL Inspection
+#
+# トリガー:
+#   - master への push 時に自動実行
+#   - 手動実行 (workflow_dispatch)
+#
+# 事前設定が必要なシークレット:
+#   GOOGLE_SA_KEY_JSON — サービスアカウントのキーファイル内容 (JSON文字列)
+#
+# 事前設定が必要な手順:
+#   1. Google Cloud Console でプロジェクトを作成
+#   2. Search Console API を有効化
+#   3. サービスアカウントを作成しキーをダウンロード
+#   4. Search Console で該当サービスアカウントを所有者として追加
+#   5. キーファイルの内容を GitHub リポジトリの Secrets に GOOGLE_SA_KEY_JSON として登録
+
+name: Search Console Submit
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '*.html'
+      - 'sitemap.xml'
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Write service account key
+        run: echo '${{ secrets.GOOGLE_SA_KEY_JSON }}' > sa-key.json
+
+      - name: Submit sitemap & inspect URLs
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: sa-key.json
+          SEARCH_CONSOLE_SITE_URL: https://mdx-inc.co.jp/
+          SEARCH_CONSOLE_SITEMAP_URL: https://mdx-inc.co.jp/sitemap.xml
+          INSPECT_DEFAULT_URLS: https://mdx-inc.co.jp/,https://mdx-inc.co.jp/careers.html
+        run: python tools/search_console_submit.py submit-and-check --json results.json
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: search-console-results
+          path: results.json
+          retention-days: 30
+
+      - name: Cleanup key
+        if: always()
+        run: rm -f sa-key.json
