@@ -58,7 +58,7 @@ PROJECT_ROOT = SCRIPT_DIR.parent
 # .env を読み込み (プロジェクトルート)
 load_dotenv(PROJECT_ROOT / ".env")
 
-SITE_URL = os.getenv("SEARCH_CONSOLE_SITE_URL", "https://mdx-inc.co.jp/")
+SITE_URL = os.getenv("SEARCH_CONSOLE_SITE_URL", "sc-domain:mdx-inc.co.jp")
 SITEMAP_URL = os.getenv("SEARCH_CONSOLE_SITEMAP_URL", "https://mdx-inc.co.jp/sitemap.xml")
 
 # URL Inspection のデフォルト対象

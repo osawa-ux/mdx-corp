@@ -43,7 +43,7 @@ jobs:
       - name: Submit sitemap & inspect URLs
         env:
           GOOGLE_APPLICATION_CREDENTIALS: sa-key.json
-          SEARCH_CONSOLE_SITE_URL: https://mdx-inc.co.jp/
+          SEARCH_CONSOLE_SITE_URL: sc-domain:mdx-inc.co.jp
           SEARCH_CONSOLE_SITEMAP_URL: https://mdx-inc.co.jp/sitemap.xml
           INSPECT_DEFAULT_URLS: https://mdx-inc.co.jp/,https://mdx-inc.co.jp/careers.html,https://mdx-inc.co.jp/privacy.html,https://mdx-inc.co.jp/disclaimer.html
         run: python tools/search_console_submit.py submit-and-check --json results.json
