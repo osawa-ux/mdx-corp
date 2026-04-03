@@ -996,6 +996,28 @@ button {
   text-align: center;
 }
 
+.contact-guide-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 20px;
+}
+
+.contact-guide-list li {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.contact-guide-list li::before {
+  content: '✓';
+  color: var(--color-accent);
+  font-weight: 700;
+  margin-right: 6px;
+}
+
 /* フォーム */
 .contact-form {
   max-width: 720px;
@@ -1410,7 +1432,7 @@ button {
 
   /* 事業 */
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   /* 課題 */
