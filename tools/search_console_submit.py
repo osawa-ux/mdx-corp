@@ -390,7 +390,7 @@ def _handle_http_error(e, context="API呼び出し"):
 # ---------------------------------------------------------------------------
 def main():
     parser = argparse.ArgumentParser(
-        description="Google Search Console API ツール — sitemap再送信 & URL Inspection",
+        description="Google Search Console API - sitemap再送信 & URL Inspection",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 使用例:
