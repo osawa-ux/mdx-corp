@@ -3,6 +3,8 @@
 Thumbs.db
 *.log
 node_modules/
+__pycache__/
+*.pyc
 
 # Google API 認証
 credentials.json
