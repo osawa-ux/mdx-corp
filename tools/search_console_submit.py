@@ -64,7 +64,7 @@ SITEMAP_URL = os.getenv("SEARCH_CONSOLE_SITEMAP_URL", "https://mdx-inc.co.jp/sit
 # URL Inspection のデフォルト対象
 _default_urls = os.getenv(
     "INSPECT_DEFAULT_URLS",
-    "https://mdx-inc.co.jp/,https://mdx-inc.co.jp/careers.html",
+    "https://mdx-inc.co.jp/,https://mdx-inc.co.jp/careers.html,https://mdx-inc.co.jp/privacy.html,https://mdx-inc.co.jp/disclaimer.html",
 )
 DEFAULT_INSPECT_URLS = [u.strip() for u in _default_urls.split(",") if u.strip()]
 
@@ -422,7 +422,7 @@ def main():
     # inspect-defaults
     subparsers.add_parser(
         "inspect-defaults",
-        help="デフォルトURL (トップ, careers) をまとめて検査する",
+        help="デフォルトURL (トップ, careers, privacy, disclaimer) をまとめて検査する",
     )
 
     # submit-and-check

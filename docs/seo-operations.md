@@ -162,7 +162,7 @@ python tools/search_console_submit.py submit-sitemap
 # 特定URLの Inspection
 python tools/search_console_submit.py inspect --url https://mdx-inc.co.jp/
 
-# デフォルトURL (トップ + careers) をまとめて Inspection
+# デフォルトURL (トップ + careers + privacy + disclaimer) をまとめて Inspection
 python tools/search_console_submit.py inspect-defaults
 
 # 一括実行: sitemap再送信 → Inspection → 結果まとめ
@@ -181,6 +181,27 @@ python tools/search_console_submit.py submit-and-check --json results.json
 | HTTP 404 | プロパティ未登録 or URL不一致 | `.env` の `SEARCH_CONSOLE_SITE_URL` を確認 |
 | HTTP 429 | API 呼び出し上限 | 時間をおいて再実行（自動リトライあり） |
 | `credentials.json` が見つからない | OAuth 設定漏れ | Google Cloud Console からダウンロードして配置 |
+
+### 自動化できる範囲と手動作業の切り分け
+
+#### API で自動化できること
+
+| 操作 | コマンド | 説明 |
+|---|---|---|
+| Sitemap 再送信 | `submit-sitemap` | sitemap.xml を GSC に再送信 |
+| インデックス状態確認 | `inspect` / `inspect-defaults` | 各URLの登録状況・canonical・クロール日時を取得 |
+| 一括実行 | `submit-and-check` | 上記をまとめて実行し結果を要約 |
+| CI/CD 連携 | GitHub Actions | HTML/sitemap変更時に自動実行 |
+
+#### 人間がGSC画面で手動実行する必要がある操作
+
+| 操作 | 理由 |
+|---|---|
+| **「インデックス登録をリクエスト」** | URL Inspection API は状態確認のみ。登録リクエスト送信は GSC の URL検査画面からのみ可能 |
+| **プロパティの所有権確認** | DNS / HTMLタグ / Google Analytics 等による初回検証が必要 |
+| **ユーザー・権限管理** | GSC 設定画面で手動操作 |
+| **手動ペナルティの解除申請** | セキュリティの問題 → 再審査リクエストは画面のみ |
+| **検索パフォーマンスの詳細分析** | クエリ・CTR・順位のトレンド分析は GSC 画面が最適 |
 
 ### GitHub Actions での自動実行
 

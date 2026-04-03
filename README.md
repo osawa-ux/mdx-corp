@@ -105,7 +105,7 @@ cp .env.example .env
 # sitemap 再送信
 python tools/search_console_submit.py submit-sitemap
 
-# デフォルトURL (トップ + careers) を検査
+# デフォルトURL (全4ページ) を検査
 python tools/search_console_submit.py inspect-defaults
 
 # 一括実行: sitemap再送信 → Inspection → 結果まとめ
