@@ -12,3 +12,6 @@ token.json
 sa-key.json
 service-account-key.json
 *-service-account.json
+
+# Local run output
+results.json
