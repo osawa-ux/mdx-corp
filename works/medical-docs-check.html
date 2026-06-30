@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>医療文書チェック支援システム（主治医意見書・訪問看護指示書）開発事例 | MDX株式会社</title>
+  <meta name="description" content="主治医意見書などの公的文書の記載チェックと、訪問看護指示書の未作成・期限切れ検出アラートを自動化した医療機関向けシステムの開発事例。PDF解析・和暦西暦整合・ルール判定で確認すべき箇所を重要度付きで提示し、最終判断は専門職が行う設計を採用。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="医療文書チェック支援システム（主治医意見書・訪問看護指示書）開発事例 | MDX株式会社" />
+  <meta property="og:description" content="主治医意見書などの公的文書の記載チェックと、訪問看護指示書の未作成・期限切れ検出アラートを自動化した医療機関向けシステムの開発事例。最終判断は専門職が行う設計。" />
+  <meta property="og:site_name" content="MDX株式会社" />
+  <meta property="og:url" content="https://mdx-inc.co.jp/works/medical-docs-check.html" />
+  <meta property="og:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="医療文書チェック支援システム（主治医意見書・訪問看護指示書）開発事例 | MDX株式会社" />
+  <meta name="twitter:description" content="主治医意見書などの公的文書の記載チェックと、訪問看護指示書の未作成・期限切れ検出アラートを自動化した医療機関向けシステムの開発事例。最終判断は専門職が行う設計。" />
+  <meta name="twitter:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <link rel="canonical" href="https://mdx-inc.co.jp/works/medical-docs-check.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=20260701a" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MZTNZ1G68S');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "https://mdx-inc.co.jp/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "開発事例",
+        "item": "https://mdx-inc.co.jp/works.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "医療文書チェック",
+        "item": "https://mdx-inc.co.jp/works/medical-docs-check.html"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "医療文書チェック支援システム ― 主治医意見書・訪問看護指示書の記載確認を仕組みで支える開発事例",
+    "description": "主治医意見書などの公的文書の記載チェックと、訪問看護指示書の未作成・期限切れ検出アラートを自動化した医療機関向けシステムの開発事例。PDF解析・和暦西暦整合・ルール判定で確認すべき箇所を重要度付きで提示し、最終判断は専門職が行う設計を採用。",
+    "author": {
+      "@type": "Organization",
+      "name": "MDX株式会社",
+      "url": "https://mdx-inc.co.jp/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MDX株式会社",
+      "url": "https://mdx-inc.co.jp/",
+      "logo": "https://mdx-inc.co.jp/assets/ogp/ogp.png"
+    },
+    "datePublished": "2026-06-30",
+    "dateModified": "2026-06-30",
+    "about": {
+      "@type": "Service",
+      "name": "医療文書チェック支援",
+      "serviceType": "医療機関向け業務自動化",
+      "provider": {
+        "@type": "Organization",
+        "name": "MDX株式会社"
+      }
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "自院の様式・電子カルテでも使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、対応可能です。主治医意見書のフォーマットや電子カルテの画面構造に合わせて、PDF解析ルールとブラウザ操作ロジックをカスタマイズします。現行の業務システム環境と帳票フォーマットをヒアリングした上で、段階導入の計画をご提案します。まずはご相談ください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "AIや自動化が記載内容を自動で確定するのですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。本システムの役割は「確認すべき箇所を重要度付きで提示する補助ツール」にとどまります。記載内容の正誤判断・対応要否の最終判断は必ず担当者（専門職）が行う設計です。自動化がそのまま文書を確定したり、送信・提出を実行したりする仕組みにはなっていません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "患者情報の取り扱いはどうなっていますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "患者情報をシステム外へ送信しない設計を基本方針としています。PDF解析・文書照合の処理は医療機関のローカル環境内で完結し、外部サービスへのデータ送信経路をアーキテクチャ上で持たない構成です。導入前に情報取り扱い方針を必ず確認し、dry-runによる動作検証を行った上で本番運用を開始します。"
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== works/medical-docs-check.html 固有スタイル ===== */
+    .case-hero {
+      background-color: var(--color-primary);
+      padding: calc(var(--header-height) + 56px) 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .case-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 65% 50%, rgba(14, 165, 233, 0.13) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .case-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .case-breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+    .case-breadcrumb a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+    }
+    .case-breadcrumb a:hover { color: rgba(255,255,255,0.75); }
+    .case-breadcrumb-sep { color: rgba(255,255,255,0.3); }
+    .case-hero-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background-color: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      padding: 3px 11px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .case-hero-heading {
+      font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+    }
+    .case-hero-summary {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.95;
+      max-width: 720px;
+      margin-bottom: 14px;
+    }
+    .case-hero-note {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    /* サブナビ */
+    .case-subnav {
+      background-color: var(--color-bg-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0;
+      position: sticky;
+      top: var(--header-height);
+      z-index: 90;
+    }
+    .case-subnav-list {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 0;
+    }
+    .case-subnav-list a {
+      display: block;
+      padding: 13px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color var(--transition-base), border-color var(--transition-base);
+    }
+    .case-subnav-list a:hover {
+      color: #fff;
+      border-bottom-color: var(--color-accent);
+    }
+
+    /* 本文セクション */
+    .case-section { background-color: var(--color-bg-sub); }
+    .case-section:nth-child(even) { background-color: var(--color-bg); }
+
+    .case-body {
+      max-width: 800px;
+      margin-inline: auto;
+    }
+    .case-body p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-text);
+      margin-bottom: 1.3em;
+    }
+    .case-body p:last-child { margin-bottom: 0; }
+
+    /* 技術ブロック */
+    .case-tech-grid {
+      display: grid;
+      gap: 20px;
+    }
+    @media (min-width: 640px) {
+      .case-tech-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .case-tech-item {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 20px 20px 18px;
+    }
+    .case-tech-item-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+    .case-tech-item-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .case-tech-item-desc {
+      font-size: 0.83rem;
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    /* 数値バッジ群 */
+    .case-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .case-stat {
+      background-color: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      border-radius: var(--radius-md);
+      padding: 14px 22px;
+      text-align: center;
+      min-width: 120px;
+    }
+    .case-stat-num {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .case-stat-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
+    .case-stat-note {
+      font-size: 0.72rem;
+      color: var(--color-text-light);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* AI注意書き */
+    .case-ai-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background-color: rgba(14, 165, 233, 0.06);
+      border: 1px solid rgba(14, 165, 233, 0.18);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin: 24px 0;
+      font-size: 0.85rem;
+      color: var(--color-text);
+      line-height: 1.75;
+    }
+    .case-ai-note strong {
+      color: var(--color-accent);
+    }
+
+    /* チェックリスト */
+    .case-check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .case-check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      line-height: 1.7;
+    }
+    .case-check-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--color-accent);
+      border-radius: 50%;
+      background-color: rgba(14, 165, 233, 0.12);
+      margin-top: 3px;
+      position: relative;
+    }
+    .case-check-list li::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* FAQ (details/summary アコーディオン) */
+    .case-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .case-faq-item {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .case-faq-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 22px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      transition: background-color var(--transition-base);
+    }
+    .case-faq-details summary::-webkit-details-marker { display: none; }
+    .case-faq-details summary::after {
+      content: '';
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 7l5 5 5-5' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: transform 0.25s ease;
+    }
+    .case-faq-details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    .case-faq-details summary:hover {
+      background-color: rgba(255,255,255,0.03);
+    }
+    .case-faq-answer {
+      padding: 0 22px 18px;
+      font-size: 0.87rem;
+      color: var(--color-text);
+      line-height: 1.85;
+    }
+
+    /* CTA */
+    .case-cta-section {
+      background-color: var(--color-primary);
+      text-align: center;
+    }
+    .case-cta-heading {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    .case-cta-lead {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.9;
+      margin-bottom: 32px;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .case-inline-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .case-inline-links a {
+      color: var(--color-accent);
+      font-size: 0.87rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .case-inline-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+        <span class="logo-text">MDX<span class="logo-sub">株式会社</span></span>
+      </a>
+      <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
+        <ul class="nav-list">
+          <li><a href="/index.html#pillars" class="nav-link">3本柱</a></li>
+          <li><a href="/index.html#strengths" class="nav-link">MDXの強み</a></li>
+          <li><a href="/index.html#services" class="nav-link">対応領域</a></li>
+          <li><a href="/works.html" class="nav-link">開発事例</a></li>
+          <li><a href="/index.html#flow" class="nav-link">支援の流れ</a></li>
+          <li><a href="/about.html" class="nav-link">会社・代表</a></li>
+          <li><a href="/index.html#contact" class="nav-link nav-link--cta">無料で相談する</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="case-hero">
+      <div class="case-hero-inner container">
+        <nav class="case-breadcrumb" aria-label="パンくずリスト">
+          <a href="/index.html">ホーム</a>
+          <span class="case-breadcrumb-sep" aria-hidden="true">›</span>
+          <a href="/works.html">開発事例</a>
+          <span class="case-breadcrumb-sep" aria-hidden="true">›</span>
+          <span>医療文書チェック</span>
+        </nav>
+        <p class="case-hero-label">医療機関向け｜MDX Flow</p>
+        <h1 class="case-hero-heading">医療文書チェック支援システム<br>― 主治医意見書・訪問看護指示書の記載確認を仕組みで支える開発事例</h1>
+        <p class="case-hero-summary">公的文書の記載漏れ・様式誤りや、訪問看護指示書の更新漏れといった「気づきにくい確認漏れ」を、PDF解析とルール判定で重要度付きに可視化し、専門職の確認を効率化する医療機関向けシステムの開発事例。最終判断は必ず担当者（専門職）が行う、人間レビュー前提の設計。</p>
+        <p class="case-hero-note">※ 情報保護の観点から、医療機関名・スタッフ・患者情報は一切掲載していません。</p>
+      </div>
+    </section>
+
+    <!-- ===== ページ内サブナビ ===== -->
+    <nav class="case-subnav" aria-label="ページ内ナビゲーション">
+      <div class="container">
+        <ul class="case-subnav-list">
+          <li><a href="#background">背景・課題</a></li>
+          <li><a href="#approach">解決アプローチ</a></li>
+          <li><a href="#tech">技術と設計</a></li>
+          <li><a href="#safety">安全設計</a></li>
+          <li><a href="#phase">段階導入</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#cta">ご相談</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===== ① 背景・課題 ===== -->
+    <section class="section case-section" id="background" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Background</p>
+          <h2 class="section-title">背景と課題</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>訪問診療や在宅医療を行う医療機関では、主治医意見書・訪問看護指示書といった公的な書類を継続的に作成・管理する必要があります。これらの文書は様式が定められており、記載漏れや和暦・西暦の表記ゆれ、必須フィールドの未記入といった誤りが発生した場合、手戻りや提出期限の遅延につながります。</p>
+          <p>一方、訪問看護指示書は有効期間が設けられており、期限切れや未作成のまま看護が継続してしまうリスクもあります。これらの確認業務は従来、担当者が個別に書類を目視で確認することに依存しており、業務量が多い日や引き継ぎのタイミングで漏れが生じやすい構造でした。</p>
+          <p>こうした課題に対し、次の3点を同時に解決できる仕組みが求められていました。</p>
+          <ul class="case-check-list">
+            <li>公的文書の記載内容を、担当者の経験値に依存せず仕組みで検出できること</li>
+            <li>訪問看護指示書の未作成・期限切れを、業務フローの中で自動的に気づける仕組みがあること</li>
+            <li>最終判断は専門職が行い、自動化が文書の確定や提出を行わない設計であること</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ② 解決アプローチ ===== -->
+    <section class="section case-section" id="approach" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Approach</p>
+          <h2 class="section-title">解決アプローチ</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>本プロジェクトでは、性質の異なる2つの医療文書チェック機能を開発しました。</p>
+          <p>ひとつ目は、主治医意見書などの公的文書を対象としたPDFチェック機能です。pdfplumberを用いてPDFからテキストを抽出し、患者氏名・生年月日・傷病名・作成日といった各フィールドの記載有無を確認します。和暦と西暦が混在しやすい医療文書の特性に対応するため、和暦西暦正規化ロジックを内製し、生年月日の表記ゆれによる誤検知を抑制しています。チェック結果は重要度（error / warning / note）別に整理したレポートとして出力され、担当者が優先的に確認すべき箇所を一目で把握できるよう設計しています。スキャンによる画像PDFはテキスト抽出の対象外となるため、ツールが明示的に警告を出す仕組みとしています。</p>
+          <p>ふたつ目は、訪問看護指示書の未作成・期限切れを検出するアラート機能です。業務システムからPlaywrightで情報を自動取得し、ルールエンジンが指示書の作成記録・有効期限を判定。未作成や期限切れ間近の患者をリストアップし、Gmail APIを経由して担当者にアラートメールを自動送信します。同日内の重複通知を自動的に抑止する仕組みと、メールを実際には送らないdry-runモードを設け、誤送信リスクを最小化しています。</p>
+          <p>いずれの機能も、「気づきを促す補助ツール」として設計されており、記載内容の確定判断や対応要否の最終決定は必ず担当者（専門職）が行うことを前提としています。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ③ 技術と設計 ===== -->
+    <section class="section case-section" id="tech" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Technology</p>
+          <h2 class="section-title">技術と設計の工夫</h2>
+        </div>
+
+        <div class="case-stats reveal">
+          <div class="case-stat">
+            <span class="case-stat-num">PDF解析</span>
+            <span class="case-stat-label">pdfplumber による<br>テキスト抽出</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">ルール判定</span>
+            <span class="case-stat-label">重要度付き<br>チェックレポート</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">dry-run対応</span>
+            <span class="case-stat-label">誤送信リスク<br>最小化</span>
+          </div>
+        </div>
+        <p class="case-stat-note">※ 数値での定量評価は実施していないため、設計上の特徴を定性ラベルで表記しています。</p>
+
+        <div class="case-tech-grid" style="margin-top: 32px;">
+
+          <div class="case-tech-item reveal">
+            <p class="case-tech-item-label">PDF Analysis</p>
+            <h3 class="case-tech-item-title">PDF解析と和暦西暦正規化</h3>
+            <p class="case-tech-item-desc">pdfplumberでPDFからテキストを抽出し、正規表現パターンでフィールドを特定します。医療文書で頻出する和暦・西暦の混在に対応するため、和暦西暦正規化ロジックを内製。生年月日の表記ゆれによる誤検知を抑制しています。画像PDFはテキスト抽出不可のため、ツールが明示的に警告を出します。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-1">
+            <p class="case-tech-item-label">Report</p>
+            <h3 class="case-tech-item-title">重要度付きチェックレポート</h3>
+            <p class="case-tech-item-desc">チェック結果をerror（必須フィールド未記載・不一致）/ warning（要確認）/ note（参考情報）の3段階重要度で分類し、担当者が優先的に確認すべき箇所をMarkdown・JSON形式で出力します。記載内容の確定は担当者が行うため、レポートは「提示」に徹した設計です。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-2">
+            <p class="case-tech-item-label">Alert Engine</p>
+            <h3 class="case-tech-item-title">指示書の期限ルール判定とGmailアラート</h3>
+            <p class="case-tech-item-desc">Playwrightで業務システムから情報を自動取得し、訪問看護指示書の作成記録・有効期限をルールエンジンで判定。未作成・期限切れ間近の患者をリストアップし、Gmail APIで担当者にアラートメールを送信します。定期実行を前提とした設計で、業務フローに組み込みやすい構成です。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-3">
+            <p class="case-tech-item-label">Safety</p>
+            <h3 class="case-tech-item-title">重複通知抑止とdry-runモード（誤送信防止）</h3>
+            <p class="case-tech-item-desc">同日内に同一患者へ重複してアラートを送らないよう、送信済みキーをJSONファイルで管理し自動抑止します。dry-runモードでは実際のメール送信を行わず、検出結果のみを標準出力で確認できるため、本番適用前の安全な動作検証が可能です。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ④ 安全設計 ===== -->
+    <section class="section case-section" id="safety" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Safety</p>
+          <h2 class="section-title">安全設計・人間レビュー前提</h2>
+        </div>
+        <div class="case-body reveal">
+          <div class="case-ai-note">
+            <div>
+              <strong>医療×自動化の基本原則:</strong> 本システムにおける自動化の役割は「確認すべき箇所を重要度付きで提示する補助ツール」です。記載内容の正誤判断・対応要否の最終判断は必ず担当者（専門職）が行います。自動化がそのまま文書を確定したり、提出・送信を実行したりする仕組みにはなっていません。
+            </div>
+          </div>
+          <p>患者情報を外部サービスへ送信しない設計を基本方針としています。PDF解析・文書照合の処理は医療機関のローカル環境内で完結し、患者氏名・生年月日・傷病名などの情報が外部のサーバーへ流出する経路をアーキテクチャ上で持たない構成です。通常のログ出力でも患者個人情報はマスクして記録されます。</p>
+          <ul class="case-check-list">
+            <li>患者情報の処理はローカル環境内で完結（外部送信経路なし）</li>
+            <li>チェック結果は「提示と根拠の明示」のみ——最終判断は専門職が行う</li>
+            <li>dry-runモード実装により、本番適用前の安全な動作確認が可能</li>
+            <li>重複通知抑止により、同一患者への誤った重複アラートを自動防止</li>
+            <li>画像PDFはテキスト抽出不可として明示警告——過信を防ぐ設計</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ⑤ 段階導入 ===== -->
+    <section class="section case-section" id="phase" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Phased Rollout</p>
+          <h2 class="section-title">段階導入の進め方</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>医療機関への導入は、現場への負担を最小化するために段階的に進めています。最初から全文書・全機能を対象とするのではなく、「最も確認漏れが起きやすく、仕組み化の効果が見えやすい書類」から開始し、実運用の中で対象範囲を拡張するアプローチを採っています。</p>
+          <ul class="case-check-list">
+            <li>Phase 1: ヒアリング・要件定義（対象文書・業務システム環境・情報取り扱い方針の確認）</li>
+            <li>Phase 2: 優先チェック項目の実装とdry-run検証（本番環境での動作確認）</li>
+            <li>Phase 3: 限定的な本番運用開始・フィードバック収集</li>
+            <li>Phase 4: 対象文書・チェックルールの段階的拡張と継続改善</li>
+          </ul>
+          <p>帳票フォーマットや業務システムの画面構造は医療機関によって異なるため、初期ヒアリングで現行の環境を確認した上でチェックロジックをカスタマイズします。運用開始後も実際の誤検知・漏れパターンを収集しながら改善を重ねる体制を採っています。</p>
+
+          <div class="case-inline-links">
+            <a href="/works.html">← 開発事例一覧に戻る</a>
+            <a href="/works/receipt-check.html">レセプト算定支援の事例 →</a>
+            <a href="/about.html">MDXについて →</a>
+            <a href="/index.html#contact">ご相談・お問い合わせ →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section case-section" id="faq" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">FAQ</p>
+          <h2 class="section-title">よくあるご質問</h2>
+        </div>
+        <div class="case-faq-list reveal" style="max-width: 800px; margin-inline: auto;">
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>自院の様式・電子カルテでも使えますか？</summary>
+              <p class="case-faq-answer">はい、対応可能です。主治医意見書のフォーマットや電子カルテ・業務システムの画面構造に合わせて、PDF解析ルールとブラウザ操作ロジックをカスタマイズします。現行の環境と帳票フォーマットをヒアリングした上で、段階導入の計画をご提案します。まずはご相談ください。</p>
+            </details>
+          </div>
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>AIや自動化が記載内容を自動で確定するのですか？</summary>
+              <p class="case-faq-answer">いいえ。本システムの役割は「確認すべき箇所を重要度付きで提示する補助ツール」にとどまります。記載内容の正誤判断・対応要否の最終判断は必ず担当者（専門職）が行う設計です。自動化がそのまま文書を確定したり、提出・送信を実行したりする仕組みにはなっていません。この「人間レビューを前提とした設計」はシステムの根幹であり、変更しない方針です。</p>
+            </details>
+          </div>
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>患者情報の取り扱いはどうなっていますか？</summary>
+              <p class="case-faq-answer">患者情報をシステム外へ送信しない設計を基本方針としています。PDF解析・文書照合の処理は医療機関のローカル環境内で完結し、外部サービスへのデータ送信経路をアーキテクチャ上で持たない構成です。導入前に情報取り扱い方針を必ず確認し、dry-runによる動作検証を行った上で本番運用を開始します。</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section case-cta-section" id="cta">
+      <div class="container">
+        <h2 class="case-cta-heading">医療文書の確認業務について、<br>まずはお気軽にご相談ください。</h2>
+        <p class="case-cta-lead">「似た課題を抱えている」「自院の帳票・電子カルテ環境で動くか確認したい」など、構想段階でのご相談も歓迎します。</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+          <a href="/index.html#contact" class="btn btn--primary btn--lg">無料で相談する</a>
+          <a href="/works.html" class="btn btn--outline">開発事例一覧へ</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+            <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
+          </a>
+          <p class="footer-tagline">Apps, Automation &amp; Portals.</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul class="footer-nav-list">
+            <li><a href="/index.html#pillars">3本柱</a></li>
+            <li><a href="/index.html#services">対応領域</a></li>
+            <li><a href="/index.html#strengths">MDXの強み</a></li>
+            <li><a href="/works.html">開発事例</a></li>
+            <li><a href="/index.html#flow">支援の流れ</a></li>
+            <li><a href="/about.html">会社・代表</a></li>
+            <li><a href="/index.html#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <nav class="footer-policy-nav" aria-label="ポリシーナビゲーション">
+          <ul class="footer-policy-list">
+            <li><a href="/privacy.html">プライバシーポリシー</a></li>
+            <li><a href="/disclaimer.html">免責事項</a></li>
+            <li><a href="/careers.html">採用情報</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copy">
+          <small>&copy; <span id="footer-year"></span> MDX株式会社. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js?v=20260630"></script>
+</body>
+</html>

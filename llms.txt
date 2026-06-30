@@ -12,9 +12,10 @@
 
 - [開発事例一覧](https://mdx-inc.co.jp/works.html): アプリ開発・業務自動化・ポータル開発の3本柱にわたる取り組みを課題・解決・技術・効果の形式で紹介。
 - [医療機関向け レセプト算定支援システム](https://mdx-inc.co.jp/works/receipt-check.html): Python製ルールエンジン＋AI二次チェックで算定漏れの被疑箇所を根拠付きに提示。最終判断は専門職が行う設計。
-- [業界特化ポータルの共通生成基盤と自社運営ポータル群](https://mdx-inc.co.jp/works.html#works-portal): 在宅クリニックナビ他5ポータルを同一基盤で運営。
-- [公的文書（主治医意見書等）の記載内容チェック自動化](https://mdx-inc.co.jp/works.html#works-flow): PDFを取り込み記載漏れ・不一致を重要度付きで検出。
-- [中小企業向け統合労務SaaS（romubase・開発中）](https://mdx-inc.co.jp/works.html#works-app): 雇用契約書を起点に勤怠・給与・社保へ自動派生する一気通貫SaaS。
+- [業界特化ポータルの共通生成基盤](https://mdx-inc.co.jp/works/portal-platform.html): Python製の内製ジェネレーター・Geocoding品質監査・中立性チェック二重化・薄いページのnoindex/sitemap除外で、在宅クリニックナビ他5ポータルを同一基盤で品質を保って運営。
+- [医療文書チェック支援システム（主治医意見書・訪問看護指示書）](https://mdx-inc.co.jp/works/medical-docs-check.html): PDF解析・和暦西暦整合・ルール判定で記載漏れや指示書の未作成・期限切れを重要度付きに検出。最終判断は専門職が行う設計。
+- [資料→記事 自動化パイプライン（人間ゲート＋機微情報フィルタ）](https://mdx-inc.co.jp/works/content-pipeline.html): PPTXからLLMで記事下書きを生成。機微情報フィルタ二段＋公開は人間承認ゲートを維持し、意図しない情報発信を構造的に防ぐ。
+- [中小企業向け統合労務SaaS（romubase・開発中）](https://mdx-inc.co.jp/works/romubase.html): 雇用契約書をSSoTに勤怠・給与・社保へ自動派生する統合労務SaaS。モバイル・Web両対応（開発中）。
 
 ## 自社運営ポータル
 

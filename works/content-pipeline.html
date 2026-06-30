@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>資料→記事 自動化パイプライン（人間ゲート＋機微情報フィルタ）開発事例 | MDX株式会社</title>
+  <meta name="description" content="プレゼン資料（PPTX）から記事下書きをLLMで自動生成し、機微情報フィルタの二段化と公開前の人間承認ゲートを備えた発信自動化パイプラインの開発事例。送信・公開の最終判断は人間が行う設計で、意図しない情報発信を構造的に防ぐ。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="資料→記事 自動化パイプライン（人間ゲート＋機微情報フィルタ）開発事例 | MDX株式会社" />
+  <meta property="og:description" content="プレゼン資料（PPTX）から記事下書きをLLMで自動生成し、機微情報フィルタの二段化と公開前の人間承認ゲートを備えた発信自動化パイプラインの開発事例。送信・公開の最終判断は人間が行う設計で、意図しない情報発信を構造的に防ぐ。" />
+  <meta property="og:site_name" content="MDX株式会社" />
+  <meta property="og:url" content="https://mdx-inc.co.jp/works/content-pipeline.html" />
+  <meta property="og:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="資料→記事 自動化パイプライン（人間ゲート＋機微情報フィルタ）開発事例 | MDX株式会社" />
+  <meta name="twitter:description" content="プレゼン資料（PPTX）から記事下書きをLLMで自動生成し、機微情報フィルタの二段化と公開前の人間承認ゲートを備えた発信自動化パイプラインの開発事例。" />
+  <meta name="twitter:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <link rel="canonical" href="https://mdx-inc.co.jp/works/content-pipeline.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=20260701a" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MZTNZ1G68S');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "https://mdx-inc.co.jp/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "開発事例",
+        "item": "https://mdx-inc.co.jp/works.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "資料→記事自動化",
+        "item": "https://mdx-inc.co.jp/works/content-pipeline.html"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "資料制作・発信の自動化 ― 人間ゲートと機微情報フィルタを備えた記事下書きパイプライン",
+    "description": "プレゼン資料（PPTX）から記事下書きをLLMで自動生成し、機微情報フィルタの二段化と公開前の人間承認ゲートを備えた発信自動化パイプラインの開発事例。送信・公開の最終判断は人間が行う設計で、意図しない情報発信を構造的に防ぐ。",
+    "author": {
+      "@type": "Organization",
+      "name": "MDX株式会社",
+      "url": "https://mdx-inc.co.jp/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MDX株式会社",
+      "url": "https://mdx-inc.co.jp/",
+      "logo": "https://mdx-inc.co.jp/assets/ogp/ogp.png"
+    },
+    "datePublished": "2026-06-30",
+    "dateModified": "2026-06-30",
+    "about": {
+      "@type": "Service",
+      "name": "資料制作・発信自動化",
+      "serviceType": "業務自動化・コンテンツパイプライン",
+      "provider": {
+        "@type": "Organization",
+        "name": "MDX株式会社"
+      }
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "自動で記事が公開されるのですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。公開操作は必ず人間が最終承認を行うゲートを経る設計です。パイプラインは「記事下書きの生成と機微情報のチェック」を自動化しますが、note等への実際の公開には人間による明示的な承認ステップが必要で、フラグなしでは公開経路に到達しない仕組みになっています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "機微情報の混入はどう防ぎますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AIモデル（LLM）への送信前と、APIの応答受信後の2段階で機微情報フィルタを実行します。いずれかの段階で問題を検出した場合はその時点で処理を停止し、リトライも禁止するfail-close設計です。フィルタはバイパス不可の構造になっています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "自社の資料フォーマットでも使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PPTX形式の資料を入力として想定しており、スライド構成や内容の種類に応じて解析・生成ロジックを調整できます。業種や資料の用途（勉強会資料・外部発表・紹介資料等）ごとの要件をヒアリングした上で、カスタマイズの方針をご提案します。"
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== works/content-pipeline.html 固有スタイル ===== */
+    .case-hero {
+      background-color: var(--color-primary);
+      padding: calc(var(--header-height) + 56px) 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .case-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 65% 50%, rgba(14, 165, 233, 0.13) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .case-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .case-breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+    .case-breadcrumb a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+    }
+    .case-breadcrumb a:hover { color: rgba(255,255,255,0.75); }
+    .case-breadcrumb-sep { color: rgba(255,255,255,0.3); }
+    .case-hero-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background-color: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      padding: 3px 11px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .case-hero-heading {
+      font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+    }
+    .case-hero-summary {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.95;
+      max-width: 720px;
+      margin-bottom: 14px;
+    }
+    .case-hero-note {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    /* サブナビ */
+    .case-subnav {
+      background-color: var(--color-bg-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0;
+      position: sticky;
+      top: var(--header-height);
+      z-index: 90;
+    }
+    .case-subnav-list {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 0;
+    }
+    .case-subnav-list a {
+      display: block;
+      padding: 13px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color var(--transition-base), border-color var(--transition-base);
+    }
+    .case-subnav-list a:hover {
+      color: #fff;
+      border-bottom-color: var(--color-accent);
+    }
+
+    /* 本文セクション */
+    .case-section { background-color: var(--color-bg-sub); }
+    .case-section:nth-child(even) { background-color: var(--color-bg); }
+
+    .case-body {
+      max-width: 800px;
+      margin-inline: auto;
+    }
+    .case-body p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-text);
+      margin-bottom: 1.3em;
+    }
+    .case-body p:last-child { margin-bottom: 0; }
+
+    /* 技術ブロック */
+    .case-tech-grid {
+      display: grid;
+      gap: 20px;
+    }
+    @media (min-width: 640px) {
+      .case-tech-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .case-tech-item {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 20px 20px 18px;
+    }
+    .case-tech-item-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+    .case-tech-item-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .case-tech-item-desc {
+      font-size: 0.83rem;
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    /* 数値バッジ群 */
+    .case-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .case-stat {
+      background-color: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      border-radius: var(--radius-md);
+      padding: 14px 22px;
+      text-align: center;
+      min-width: 120px;
+    }
+    .case-stat-num {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .case-stat-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
+    .case-stat-note {
+      font-size: 0.72rem;
+      color: var(--color-text-light);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* AI注意書き */
+    .case-ai-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background-color: rgba(14, 165, 233, 0.06);
+      border: 1px solid rgba(14, 165, 233, 0.18);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin: 24px 0;
+      font-size: 0.85rem;
+      color: var(--color-text);
+      line-height: 1.75;
+    }
+    .case-ai-note strong {
+      color: var(--color-accent);
+    }
+
+    /* チェックリスト */
+    .case-check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .case-check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      line-height: 1.7;
+    }
+    .case-check-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--color-accent);
+      border-radius: 50%;
+      background-color: rgba(14, 165, 233, 0.12);
+      margin-top: 3px;
+      position: relative;
+    }
+    .case-check-list li::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* FAQ (details/summary アコーディオン) */
+    .case-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .case-faq-item {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .case-faq-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 22px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      transition: background-color var(--transition-base);
+    }
+    .case-faq-details summary::-webkit-details-marker { display: none; }
+    .case-faq-details summary::after {
+      content: '';
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 7l5 5 5-5' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: transform 0.25s ease;
+    }
+    .case-faq-details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    .case-faq-details summary:hover {
+      background-color: rgba(255,255,255,0.03);
+    }
+    .case-faq-answer {
+      padding: 0 22px 18px;
+      font-size: 0.87rem;
+      color: var(--color-text);
+      line-height: 1.85;
+    }
+
+    /* CTA */
+    .case-cta-section {
+      background-color: var(--color-primary);
+      text-align: center;
+    }
+    .case-cta-heading {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    .case-cta-lead {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.9;
+      margin-bottom: 32px;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .case-inline-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .case-inline-links a {
+      color: var(--color-accent);
+      font-size: 0.87rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .case-inline-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+        <span class="logo-text">MDX<span class="logo-sub">株式会社</span></span>
+      </a>
+      <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
+        <ul class="nav-list">
+          <li><a href="/index.html#pillars" class="nav-link">3本柱</a></li>
+          <li><a href="/index.html#strengths" class="nav-link">MDXの強み</a></li>
+          <li><a href="/index.html#services" class="nav-link">対応領域</a></li>
+          <li><a href="/works.html" class="nav-link">開発事例</a></li>
+          <li><a href="/index.html#flow" class="nav-link">支援の流れ</a></li>
+          <li><a href="/about.html" class="nav-link">会社・代表</a></li>
+          <li><a href="/index.html#contact" class="nav-link nav-link--cta">無料で相談する</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="case-hero">
+      <div class="case-hero-inner container">
+        <nav class="case-breadcrumb" aria-label="パンくずリスト">
+          <a href="/index.html">ホーム</a>
+          <span class="case-breadcrumb-sep" aria-hidden="true">›</span>
+          <a href="/works.html">開発事例</a>
+          <span class="case-breadcrumb-sep" aria-hidden="true">›</span>
+          <span>資料→記事自動化</span>
+        </nav>
+        <p class="case-hero-label">業務自動化｜MDX Flow</p>
+        <h1 class="case-hero-heading">資料制作・発信の自動化<br>― 人間ゲートと機微情報フィルタを備えた記事下書きパイプライン</h1>
+        <p class="case-hero-summary">資料（PPTX）から記事下書きを生成する手作業と、機微情報の目視チェックの負担を、LLMパイプライン＋二段フィルタで仕組み化し、公開の最終判断は人間が承認するゲートを残した発信自動化の開発事例。スピードと安全性を両立する設計。</p>
+        <p class="case-hero-note">※ 本ページに掲載する内容は設計思想であり、実データ・実出力は含みません。</p>
+      </div>
+    </section>
+
+    <!-- ===== ページ内サブナビ ===== -->
+    <nav class="case-subnav" aria-label="ページ内ナビゲーション">
+      <div class="container">
+        <ul class="case-subnav-list">
+          <li><a href="#background">背景・課題</a></li>
+          <li><a href="#approach">解決アプローチ</a></li>
+          <li><a href="#tech">技術と設計</a></li>
+          <li><a href="#safety">安全設計</a></li>
+          <li><a href="#phase">段階導入</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#cta">ご相談</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===== ① 背景・課題 ===== -->
+    <section class="section case-section" id="background" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Background</p>
+          <h2 class="section-title">背景と課題</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>勉強会・学会発表・院外講演・クリニック紹介など、対外的な発信機会が増えるにつれて、プレゼン資料（PPTX）を社外向け記事へ変換する作業の負荷が課題になってきます。スライドのエッセンスを文章に再構成し、専門的すぎる表現を調整し、参考図を差し替えて——この一連の作業は熟練した担当者でなければ品質が保てず、一本あたりの工数も無視できません。</p>
+          <p>さらに深刻なのが、機微情報の混入リスクです。スライド資料には、患者名・スタッフ名・内部データなど、対外発信に適さない情報が含まれることがあります。これらを目視でチェックする運用は属人的であり、確認漏れが発生した場合のリスクは高い。とりわけ医療・福祉領域では、意図しない情報発信が信頼失墜に直結します。</p>
+          <p>この課題を受けて、次の3点を同時に解決する仕組みが求められました。</p>
+          <ul class="case-check-list">
+            <li>資料から記事下書きへの変換を自動化し、担当者の工数を削減すること</li>
+            <li>機微情報の混入をシステムが構造的に検出・遮断できること</li>
+            <li>公開という最も影響の大きい操作は、必ず人間が承認する設計であること</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ② 解決アプローチ ===== -->
+    <section class="section case-section" id="approach" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Approach</p>
+          <h2 class="section-title">解決アプローチ</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>PPTXファイルを入力として、各スライドの内容を解析し、LLM（大規模言語モデル）を用いて記事の下書きを自動生成するパイプラインを設計・実装しました。単なる「テキスト抽出＋貼り付け」ではなく、スライドの流れと論旨を読み取り、読者に伝わる記事構成へ再編するところまでをシステムが担います。</p>
+          <p>開発において最も重点を置いたのは、「速く動くこと」よりも「安全に止まれること」です。機微情報の検出・遮断を最優先の設計要件として定め、自動化の恩恵を享受しながらも、意図しない情報発信が起きない構造をアーキテクチャ層で保証しています。</p>
+          <p>公開操作については、自動化の対象外とする方針を採用しました。パイプラインが行うのは「下書きの生成と安全性チェック」までです。「記事を公開する」という最終アクションは、担当者が内容を確認した上で明示的に承認するゲートを必ず経由する設計になっています。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ③ 技術と設計 ===== -->
+    <section class="section case-section" id="tech" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Technology</p>
+          <h2 class="section-title">技術と設計の工夫</h2>
+        </div>
+
+        <div class="case-stats reveal">
+          <div class="case-stat">
+            <span class="case-stat-num">2段</span>
+            <span class="case-stat-label">機微情報フィルタ</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">6段</span>
+            <span class="case-stat-label">公開ガード設計</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">既定OFF</span>
+            <span class="case-stat-label">公開・削除操作</span>
+          </div>
+        </div>
+        <p class="case-stat-note">※ 上記は設計上の構造を示すラベルです。定量的な削減率・時間短縮値は計測・確認した数値のみを記載する方針のため、本ページでは省略しています。</p>
+
+        <div class="case-tech-grid" style="margin-top: 32px;">
+
+          <div class="case-tech-item reveal">
+            <p class="case-tech-item-label">Content Generation</p>
+            <h3 class="case-tech-item-title">PPTX解析→LLM記事下書き生成</h3>
+            <p class="case-tech-item-desc">PPTXファイルを入力として各スライドの内容を解析し、スライドの論旨と流れをもとにLLMが記事下書きを生成します。単なるテキスト抽出にとどまらず、読者向けの文章構成への再編まで自動化し、担当者は編集と公開判断に集中できます。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-1">
+            <p class="case-tech-item-label">Safety Filter</p>
+            <h3 class="case-tech-item-title">機微情報フィルタ二段（送信前＋応答後・fail-close）</h3>
+            <p class="case-tech-item-desc">AIモデル（LLM）への送信前と、APIの応答受信後の2段階で機微情報フィルタを実行します。いずれかの段階で問題を検出した時点で処理を停止し、リトライも行わないfail-close設計です。フィルタはバイパス不可の構造で、機微情報の発信経路をアーキテクチャ上で遮断します。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-2">
+            <p class="case-tech-item-label">Publish Guard</p>
+            <h3 class="case-tech-item-title">publish/delete 多段ガード＋env防御（既定OFF）</h3>
+            <p class="case-tech-item-desc">公開・削除操作は明示フラグなしでは実行経路に到達しない設計（コードレベルで unreachable）。環境変数による制御も既定では無効化されており、意図せず公開・削除が走る経路を複数の独立したガードで多重に防いでいます。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-3">
+            <p class="case-tech-item-label">Human Gate</p>
+            <h3 class="case-tech-item-title">公開は人間承認ゲート（自動公開なし）</h3>
+            <p class="case-tech-item-desc">記事の公開という最終アクションは、必ず担当者が内容を確認し明示的に承認するゲートを経由します。パイプラインが自動で記事を公開することはなく、「下書きの生成と安全チェック」と「公開という人間の意思決定」を明確に分離した設計です。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ④ 安全設計 ===== -->
+    <section class="section case-section" id="safety" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Safety</p>
+          <h2 class="section-title">安全設計・機微情報保護</h2>
+        </div>
+        <div class="case-body reveal">
+          <div class="case-ai-note">
+            <div>
+              <strong>設計の核心:</strong> 機微情報フィルタの二段化と、公開操作の人間ゲート維持は本パイプラインの変更しない設計原則です。自動化によってスピードを得ながら、意図しない情報発信が構造的に起きない仕組みを両立しています。
+            </div>
+          </div>
+          <p>機微情報フィルタは、AIモデル（LLM）への送信前と応答後の2段階で独立して動作します。一方のフィルタが問題を検出した場合でも、もう一方が補完する多重防護の構造です。フィルタが問題を検出した際は即座に処理を停止し、その後のリトライも禁止するfail-close設計を採用しています。</p>
+          <ul class="case-check-list">
+            <li>機微情報フィルタはバイパス不可——コードレベルで回避経路を持たない</li>
+            <li>送信前フィルタ：正規表現ルールベースで機微情報パターンを走査</li>
+            <li>API応答後フィルタ：LLMが生成した内容に対して再度機微情報走査を実施</li>
+            <li>公開・削除操作は明示フラグなしでは unreachable（既定OFF・env多重防御）</li>
+            <li>公開の最終判断は担当者による明示的な承認ゲートを必ず経由する</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ⑤ 段階導入 ===== -->
+    <section class="section case-section" id="phase" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Phased Rollout</p>
+          <h2 class="section-title">段階導入の進め方</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>本パイプラインは、一度に全機能をリリースするのではなく、安全性を確認しながら段階的に機能を拡張する進め方を採っています。最初のフェーズでは「特定シリーズの資料を対象とした下書き生成」に絞り、機微情報フィルタと人間ゲートの動作を実運用で確認することを優先します。</p>
+          <ul class="case-check-list">
+            <li>Phase 1: 要件定義（対象資料・発信先・機微情報の定義・公開フロー確認）</li>
+            <li>Phase 2: 機微情報フィルタの実装と検証（テスト資料によるdry-run確認）</li>
+            <li>Phase 3: 下書き生成の限定的な本番運用開始・品質フィードバック収集</li>
+            <li>Phase 4: 対象資料種別の拡張・生成品質の継続改善</li>
+          </ul>
+          <p>公開ゲートの設計は初期フェーズから実装しており、機能を追加しても人間ゲートが後退しない構造を維持します。担当者の運用フローに合わせて、チェックと承認のステップを調整しながら定着を図ります。</p>
+
+          <div class="case-inline-links">
+            <a href="/works.html">← 開発事例一覧に戻る</a>
+            <a href="/about.html">MDXについて →</a>
+            <a href="/index.html#contact">ご相談・お問い合わせ →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section case-section" id="faq" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">FAQ</p>
+          <h2 class="section-title">よくあるご質問</h2>
+        </div>
+        <div class="case-faq-list reveal" style="max-width: 800px; margin-inline: auto;">
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>自動で記事が公開されるのですか？</summary>
+              <p class="case-faq-answer">いいえ。公開操作は必ず人間が最終承認を行うゲートを経る設計です。パイプラインは「記事下書きの生成と機微情報のチェック」を自動化しますが、note等への実際の公開には人間による明示的な承認ステップが必要で、フラグなしでは公開経路に到達しない仕組みになっています。「下書きを作る自動化」と「公開するという意思決定」は、設計上明確に分離されています。</p>
+            </details>
+          </div>
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>機微情報の混入はどう防ぎますか？</summary>
+              <p class="case-faq-answer">AIモデル（LLM）への送信前と、APIの応答受信後の2段階で機微情報フィルタを実行します。いずれかの段階で問題を検出した場合はその時点で処理を停止し、リトライも禁止するfail-close設計です。フィルタはバイパス不可の構造になっており、機微情報が発信経路に乗る前に構造的に遮断します。</p>
+            </details>
+          </div>
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>自社の資料フォーマットでも使えますか？</summary>
+              <p class="case-faq-answer">PPTX形式の資料を入力として想定しており、スライド構成や内容の種類に応じて解析・生成ロジックを調整できます。業種や資料の用途（勉強会資料・外部発表・紹介資料等）ごとの要件をヒアリングした上で、カスタマイズの方針をご提案します。まずはご相談ください。</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section case-cta-section" id="cta">
+      <div class="container">
+        <h2 class="case-cta-heading">資料発信の自動化について、<br>まずはお気軽にご相談ください。</h2>
+        <p class="case-cta-lead">「似た課題を抱えている」「自社の資料フォーマットで動くか確認したい」など、構想段階でのご相談も歓迎します。</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+          <a href="/index.html#contact" class="btn btn--primary btn--lg">無料で相談する</a>
+          <a href="/works.html" class="btn btn--outline">開発事例一覧へ</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+            <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
+          </a>
+          <p class="footer-tagline">Apps, Automation &amp; Portals.</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul class="footer-nav-list">
+            <li><a href="/index.html#pillars">3本柱</a></li>
+            <li><a href="/index.html#services">対応領域</a></li>
+            <li><a href="/index.html#strengths">MDXの強み</a></li>
+            <li><a href="/works.html">開発事例</a></li>
+            <li><a href="/index.html#flow">支援の流れ</a></li>
+            <li><a href="/about.html">会社・代表</a></li>
+            <li><a href="/index.html#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <nav class="footer-policy-nav" aria-label="ポリシーナビゲーション">
+          <ul class="footer-policy-list">
+            <li><a href="/privacy.html">プライバシーポリシー</a></li>
+            <li><a href="/disclaimer.html">免責事項</a></li>
+            <li><a href="/careers.html">採用情報</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copy">
+          <small>&copy; <span id="footer-year"></span> MDX株式会社. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js?v=20260630"></script>
+</body>
+</html>

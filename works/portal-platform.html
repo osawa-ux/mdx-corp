@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>業界特化ポータルの共通生成基盤 開発事例 | MDX株式会社</title>
+  <meta name="description" content="複数の業界特化ポータルを1つの共通基盤で生成・運営する技術事例。Python製の内製ジェネレーター・Geocoding品質監査・中立性チェック二重化・薄いページの構造的除外で、全国規模の施設情報を品質を保って配信する設計を紹介。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="業界特化ポータルの共通生成基盤 開発事例 | MDX株式会社" />
+  <meta property="og:description" content="複数の業界特化ポータルを1つの共通基盤で生成・運営する技術事例。Python製の内製ジェネレーター・Geocoding品質監査・中立性チェック二重化・薄いページの構造的除外で、全国規模の施設情報を品質を保って配信する設計を紹介。" />
+  <meta property="og:site_name" content="MDX株式会社" />
+  <meta property="og:url" content="https://mdx-inc.co.jp/works/portal-platform.html" />
+  <meta property="og:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="業界特化ポータルの共通生成基盤 開発事例 | MDX株式会社" />
+  <meta name="twitter:description" content="複数の業界特化ポータルを1つの共通基盤で生成・運営する技術事例。Python製の内製ジェネレーター・Geocoding品質監査・中立性チェック二重化・薄いページの構造的除外で、全国規模の施設情報を品質を保って配信する設計を紹介。" />
+  <meta name="twitter:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <link rel="canonical" href="https://mdx-inc.co.jp/works/portal-platform.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=20260701a" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MZTNZ1G68S');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "https://mdx-inc.co.jp/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "開発事例",
+        "item": "https://mdx-inc.co.jp/works.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "ポータル共通生成基盤",
+        "item": "https://mdx-inc.co.jp/works/portal-platform.html"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "業界特化ポータルの共通生成基盤 ― 複数ポータルを1つの仕組みで支える開発事例",
+    "description": "複数の業界特化ポータルを1つの共通基盤で生成・運営する技術事例。Python製の内製ジェネレーター・Geocoding品質監査・中立性チェック二重化・薄いページの構造的除外で、全国規模の施設情報を品質を保って配信する設計を紹介。",
+    "author": {
+      "@type": "Organization",
+      "name": "MDX株式会社",
+      "url": "https://mdx-inc.co.jp/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MDX株式会社",
+      "url": "https://mdx-inc.co.jp/",
+      "logo": "https://mdx-inc.co.jp/assets/ogp/ogp.png"
+    },
+    "datePublished": "2026-06-30",
+    "dateModified": "2026-06-30",
+    "about": {
+      "@type": "Service",
+      "name": "業界特化ポータル共通生成基盤",
+      "serviceType": "ポータルサイト開発・運営",
+      "provider": {
+        "@type": "Organization",
+        "name": "MDX株式会社"
+      }
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "他業種・他地域のポータルも作れますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、対応可能です。共通基盤（build_site.py）はconfig切り替えで業種・ドメインを切り替えられる設計です。47都道府県の地域SEOテンプレート（region_texts）も共通化されており、新業種への横展開に際してゼロから書き直す必要はありません。まずどのような施設・事業者情報を掲載したいかをヒアリングさせてください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "掲載情報の品質はどう担保していますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "複数の仕組みで品質を担保しています。Geocoding APIで全施設の緯度経度を付与し、latlng欠損監査スクリプトで地図品質を継続監視します。中立性チェック（check_neutrality.py）はgit commit時のpre-commitフックとビルド時の二重構成で禁止語の混入を防ぎます。また正式な施設IDを持たない薄いページ（EXP*プレフィックス）はnoindexかつsitemap除外を強制し、サイト全体の評価を守る設計を採っています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "既存サイトのSEO移行も相談できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、ご相談いただけます。既存サイトからの移行では、URLの引き継ぎ設計・リダイレクト設定・Search Consoleへの再送信を含めたSEO移行計画をご提案します。共通基盤を使った静的サイト生成・GitHub Pages・Cloudflareの構成により、表示速度とインデックス効率の両立を目指します。まずは現状のサイト構成をヒアリングさせてください。"
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== works/portal-platform.html 固有スタイル ===== */
+    .case-hero {
+      background-color: var(--color-primary);
+      padding: calc(var(--header-height) + 56px) 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .case-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 65% 50%, rgba(14, 165, 233, 0.13) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .case-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .case-breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+    .case-breadcrumb a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+    }
+    .case-breadcrumb a:hover { color: rgba(255,255,255,0.75); }
+    .case-breadcrumb-sep { color: rgba(255,255,255,0.3); }
+    .case-hero-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background-color: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      padding: 3px 11px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .case-hero-heading {
+      font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+    }
+    .case-hero-summary {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.95;
+      max-width: 720px;
+      margin-bottom: 14px;
+    }
+    .case-hero-note {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    /* サブナビ */
+    .case-subnav {
+      background-color: var(--color-bg-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0;
+      position: sticky;
+      top: var(--header-height);
+      z-index: 90;
+    }
+    .case-subnav-list {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 0;
+    }
+    .case-subnav-list a {
+      display: block;
+      padding: 13px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color var(--transition-base), border-color var(--transition-base);
+    }
+    .case-subnav-list a:hover {
+      color: #fff;
+      border-bottom-color: var(--color-accent);
+    }
+
+    /* 本文セクション */
+    .case-section { background-color: var(--color-bg-sub); }
+    .case-section:nth-child(even) { background-color: var(--color-bg); }
+
+    .case-body {
+      max-width: 800px;
+      margin-inline: auto;
+    }
+    .case-body p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-text);
+      margin-bottom: 1.3em;
+    }
+    .case-body p:last-child { margin-bottom: 0; }
+
+    /* 技術ブロック */
+    .case-tech-grid {
+      display: grid;
+      gap: 20px;
+    }
+    @media (min-width: 640px) {
+      .case-tech-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .case-tech-item {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 20px 20px 18px;
+    }
+    .case-tech-item-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+    .case-tech-item-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .case-tech-item-desc {
+      font-size: 0.83rem;
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    /* 数値バッジ群 */
+    .case-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .case-stat {
+      background-color: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      border-radius: var(--radius-md);
+      padding: 14px 22px;
+      text-align: center;
+      min-width: 120px;
+    }
+    .case-stat-num {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .case-stat-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
+    .case-stat-note {
+      font-size: 0.72rem;
+      color: var(--color-text-light);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* 品質・中立性ノート（case-ai-note 流用） */
+    .case-ai-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background-color: rgba(14, 165, 233, 0.06);
+      border: 1px solid rgba(14, 165, 233, 0.18);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin: 24px 0;
+      font-size: 0.85rem;
+      color: var(--color-text);
+      line-height: 1.75;
+    }
+    .case-ai-note strong {
+      color: var(--color-accent);
+    }
+
+    /* チェックリスト */
+    .case-check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .case-check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      line-height: 1.7;
+    }
+    .case-check-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--color-accent);
+      border-radius: 50%;
+      background-color: rgba(14, 165, 233, 0.12);
+      margin-top: 3px;
+      position: relative;
+    }
+    .case-check-list li::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* FAQ (details/summary アコーディオン) */
+    .case-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .case-faq-item {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .case-faq-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 22px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      transition: background-color var(--transition-base);
+    }
+    .case-faq-details summary::-webkit-details-marker { display: none; }
+    .case-faq-details summary::after {
+      content: '';
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 7l5 5 5-5' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: transform 0.25s ease;
+    }
+    .case-faq-details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    .case-faq-details summary:hover {
+      background-color: rgba(255,255,255,0.03);
+    }
+    .case-faq-answer {
+      padding: 0 22px 18px;
+      font-size: 0.87rem;
+      color: var(--color-text);
+      line-height: 1.85;
+    }
+
+    /* CTA */
+    .case-cta-section {
+      background-color: var(--color-primary);
+      text-align: center;
+    }
+    .case-cta-heading {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    .case-cta-lead {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.9;
+      margin-bottom: 32px;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .case-inline-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .case-inline-links a {
+      color: var(--color-accent);
+      font-size: 0.87rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .case-inline-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+        <span class="logo-text">MDX<span class="logo-sub">株式会社</span></span>
+      </a>
+      <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
+        <ul class="nav-list">
+          <li><a href="/index.html#pillars" class="nav-link">3本柱</a></li>
+          <li><a href="/index.html#strengths" class="nav-link">MDXの強み</a></li>
+          <li><a href="/index.html#services" class="nav-link">対応領域</a></li>
+          <li><a href="/works.html" class="nav-link">開発事例</a></li>
+          <li><a href="/index.html#flow" class="nav-link">支援の流れ</a></li>
+          <li><a href="/about.html" class="nav-link">会社・代表</a></li>
+          <li><a href="/index.html#contact" class="nav-link nav-link--cta">無料で相談する</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="case-hero">
+      <div class="case-hero-inner container">
+        <nav class="case-breadcrumb" aria-label="パンくずリスト">
+          <a href="/index.html">ホーム</a>
+          <span class="case-breadcrumb-sep" aria-hidden="true">›</span>
+          <a href="/works.html">開発事例</a>
+          <span class="case-breadcrumb-sep" aria-hidden="true">›</span>
+          <span>ポータル共通生成基盤</span>
+        </nav>
+        <p class="case-hero-label">MDX Portal｜共通生成基盤</p>
+        <h1 class="case-hero-heading">業界特化ポータルの共通生成基盤<br>― 複数ポータルを1つの仕組みで支える開発事例</h1>
+        <p class="case-hero-summary">業種ごとに手作業でサイトを作る限界を、config駆動の内製ジェネレーターで解消。Geocoding品質監査・中立性チェックの二重化・薄いページの構造的除外を組み込み、全国規模の施設情報を品質を保ちながら継続運営できる共通基盤を構築した事例をご紹介します。</p>
+        <p class="case-hero-note">※ 掲載件数は2026年6月時点の本番公開値です。</p>
+      </div>
+    </section>
+
+    <!-- ===== ページ内サブナビ ===== -->
+    <nav class="case-subnav" aria-label="ページ内ナビゲーション">
+      <div class="container">
+        <ul class="case-subnav-list">
+          <li><a href="#background">背景・課題</a></li>
+          <li><a href="#approach">解決アプローチ</a></li>
+          <li><a href="#tech">技術と設計</a></li>
+          <li><a href="#quality">品質・中立性設計</a></li>
+          <li><a href="#phase">段階導入</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#cta">ご相談</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===== ① 背景・課題 ===== -->
+    <section class="section case-section" id="background" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Background</p>
+          <h2 class="section-title">背景と課題</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>「業界特化のポータルサイトを作りたい」という需要は、医療・介護・法務など多くの領域に存在します。しかし、業種ごとに手作業でHTMLを生成・更新し続けることには限界があります。掲載施設数が数千〜数万件規模になると、ページ生成・データ更新・SEO管理のコストが急速に膨らみ、複数業種への横展開はさらに困難になります。</p>
+          <p>また、全国の施設情報を扱うポータルでは、緯度経度の欠損（地図に表示されない施設が混在する）、掲載内容の偏りや中立性の担保、薄いコンテンツページによるサイト評価の低下といった品質課題が常につきまといます。これらを「人手で都度チェックする」運用モデルでは、スケールと品質の両立ができません。</p>
+          <p>こうした背景から、次の3点を同時に解決できる仕組みが必要でした。</p>
+          <ul class="case-check-list">
+            <li>config切り替えだけで複数業種のポータルを同じコードベースから生成できること</li>
+            <li>Geocoding品質・中立性・薄いページの除外が仕組みとして自動化されていること</li>
+            <li>小さなチームで複数サイトを継続的に運営できる低コスト体制を実現できること</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ② 解決アプローチ ===== -->
+    <section class="section case-section" id="approach" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Approach</p>
+          <h2 class="section-title">解決アプローチ</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>Pythonで静的サイトジェネレーターを内製し、<code>build_site.py</code>という1ファイルをconfigの切り替えだけで複数業種のポータルに横展開できる共通基盤を構築しました。業種ごとのサイト名・ドメイン・料金・文言の差分は<code>site_config_*.json</code>に集約し、地域SEOテンプレート（47都道府県の導入文・FAQ）は<code>region_texts_*.json</code>として分離することで、新業種への追加コストを大幅に下げています。</p>
+          <p>データ品質の設計では、Geocoding APIで全施設の緯度経度を付与し、品質監査スクリプト（latlng欠損監査）で地図表示の品質を継続的にモニタリングします。中立性チェックは<code>check_neutrality.py</code>として独立したスクリプトに整理し、git commit時のpre-commitフックとビルド時の両方で自動実行する二重構成にすることで、禁止語の混入を構造的に防いでいます。</p>
+          <p>また、正式な施設IDを持たない薄いページは、ビルド時に自動でnoindexかつsitemap除外が強制される設計を採用しています。これにより、量産サイトにありがちな「薄いページがインデックスされてサイト全体の評価を下げる」問題を構造的に排除しています。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ③ 技術と設計 ===== -->
+    <section class="section case-section" id="tech" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Technology</p>
+          <h2 class="section-title">技術と設計の工夫</h2>
+        </div>
+
+        <div class="case-stats reveal">
+          <div class="case-stat">
+            <span class="case-stat-num">15,759<span style="font-size:0.9rem;">件</span></span>
+            <span class="case-stat-label">在宅クリニックナビ掲載数</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">17,958<span style="font-size:0.9rem;">件</span></span>
+            <span class="case-stat-label">訪問看護ナビ掲載数</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">47</span>
+            <span class="case-stat-label">対応都道府県テンプレ数</span>
+          </div>
+        </div>
+        <p class="case-stat-note">※ 掲載件数は2026年6月時点の本番公開値。共通基盤（build_site.py）による生成。</p>
+
+        <div class="case-tech-grid" style="margin-top: 32px;">
+
+          <div class="case-tech-item reveal">
+            <p class="case-tech-item-label">Generator</p>
+            <h3 class="case-tech-item-title">config駆動の内製ジェネレーター</h3>
+            <p class="case-tech-item-desc"><code>build_site.py</code>は1ファイルで全業種に対応するPython製の内製静的サイトジェネレーターです。業種・ドメイン・文言の差分はJSONのconfigに集約されており、<code>--config</code>オプションの切り替えだけで在宅クリニックナビ・訪問看護ナビ等を同一コードベースからビルドできます。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-1">
+            <p class="case-tech-item-label">Geocoding</p>
+            <h3 class="case-tech-item-title">Geocoding品質監査</h3>
+            <p class="case-tech-item-desc">Geocoding APIを使って全施設の緯度経度を付与し、latlng欠損監査スクリプトで地図品質を継続的にモニタリングします。欠損があれば品質レポートに出力され、ビルド前のチェックに組み込まれています。地図に表示されない施設を野放しにしない設計です。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-2">
+            <p class="case-tech-item-label">Quality</p>
+            <h3 class="case-tech-item-title">中立性チェック二重化（pre-commit＋ビルド）</h3>
+            <p class="case-tech-item-desc">特定クリニック名・個人名などの禁止語チェックを行う<code>check_neutrality.py</code>は、git commit時のpre-commitフックとbuild_site.py実行時の両方で自動実行されます。CI（GitHub Actions）との組み合わせで、ポータルの中立性を多重に担保しています。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-3">
+            <p class="case-tech-item-label">SEO Protection</p>
+            <h3 class="case-tech-item-title">薄いページのnoindex/sitemap除外による品質保護</h3>
+            <p class="case-tech-item-desc">正式な施設IDを持たない薄いページ（EXP*プレフィックス）は、ビルド時に自動でnoindexかつsitemapから除外されます。有料プラン契約済みであっても例外なく適用する設計で、量産サイトにありがちなインデックス品質の低下を構造的に防いでいます。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ④ 品質・中立性設計 ===== -->
+    <section class="section case-section" id="quality" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Quality &amp; Neutrality</p>
+          <h2 class="section-title">品質・中立性設計の基本原則</h2>
+        </div>
+        <div class="case-body reveal">
+          <div class="case-ai-note">
+            <div>
+              <strong>ポータル中立性の原則:</strong> 業界特化ポータルは、特定の事業者を優遇・推薦するのではなく、利用者が公平に情報を比較できる場として設計します。掲載内容の中立性は、自動チェックとCI二重化によって仕組みとして担保しています。
+            </div>
+          </div>
+          <p>掲載施設が数万件規模になると、人手での品質管理は現実的ではありません。本共通基盤では、品質の担保を「仕組み」として自動化することを基本方針としています。中立性チェックは禁止語リストを単一ファイル（check_neutrality.py）で一元管理し、ポータル記事・施設説明文のいずれにも同じ基準が適用されます。</p>
+          <ul class="case-check-list">
+            <li>禁止語チェックはpre-commitフックとビルド時の二重構成で自動実行（人手の確認に依存しない）</li>
+            <li>Geocoding品質はlatlng欠損監査スクリプトで継続モニタリング（地図に出ない施設をビルド前に検出）</li>
+            <li>薄いページ（正式IDなし）はビルド時に自動でnoindex＋sitemap除外が強制される設計</li>
+            <li>GitHub Actions（CI）による自動チェックで、push・PRのタイミングでも品質を検証</li>
+          </ul>
+          <p>この共通基盤と品質設計は、在宅クリニックナビ・訪問看護ステーションナビをはじめとする自社運営の医療・介護系ポータルを支えており、新たな業種・地域への横展開も同じ仕組みで進めています。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ⑤ 段階導入 ===== -->
+    <section class="section case-section" id="phase" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Phased Rollout</p>
+          <h2 class="section-title">段階導入の進め方</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>新業種・新地域へのポータル展開は、共通基盤が整っているとはいえ、データソースの選定・Geocoding精度の確認・SEO設計のカスタマイズなど、業種ごとの初期検証が必要です。一気にフル公開するのではなく、段階的に精度と範囲を広げる進め方を採っています。</p>
+          <ul class="case-check-list">
+            <li>Phase 1: 対象業種・データソース・掲載要件のヒアリング、地域SEOテンプレートの設計</li>
+            <li>Phase 2: configの作成、限定地域・限定件数でのビルド検証（Geocoding精度・中立性チェック確認）</li>
+            <li>Phase 3: 全国規模でのビルド・品質監査（latlng欠損・薄いページ除外・noindex設計の確認）</li>
+            <li>Phase 4: 本番公開・Search Console連携・SEO効果のモニタリングと改善サイクルへ</li>
+          </ul>
+          <p>GitHub PagesとCloudflareを組み合わせた静的配信構成により、高速表示とCDN配信を低コストで実現しています。GA4とSearch Consoleを組み込んだ分析基盤も共通化されており、ポータルが増えても運用コストが線形に増加しない設計を目指しています。</p>
+
+          <div class="case-inline-links">
+            <a href="/works.html">← 開発事例一覧に戻る</a>
+            <a href="/about.html">MDXについて →</a>
+            <a href="/index.html#contact">ご相談・お問い合わせ →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section case-section" id="faq" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">FAQ</p>
+          <h2 class="section-title">よくあるご質問</h2>
+        </div>
+        <div class="case-faq-list reveal" style="max-width: 800px; margin-inline: auto;">
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>他業種・他地域のポータルも作れますか？</summary>
+              <p class="case-faq-answer">はい、対応可能です。共通基盤（build_site.py）はconfig切り替えで業種・ドメインを切り替えられる設計です。47都道府県の地域SEOテンプレート（region_texts）も共通化されており、新業種への横展開に際してゼロから書き直す必要はありません。まずどのような施設・事業者情報を掲載したいかをヒアリングさせてください。</p>
+            </details>
+          </div>
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>掲載情報の品質はどう担保していますか？</summary>
+              <p class="case-faq-answer">複数の仕組みで品質を担保しています。Geocoding APIで全施設の緯度経度を付与し、latlng欠損監査スクリプトで地図品質を継続監視します。中立性チェック（check_neutrality.py）はgit commit時のpre-commitフックとビルド時の二重構成で禁止語の混入を防ぎます。また正式な施設IDを持たない薄いページはnoindexかつsitemap除外を強制し、サイト全体の評価を守る設計を採っています。</p>
+            </details>
+          </div>
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>既存サイトのSEO移行も相談できますか？</summary>
+              <p class="case-faq-answer">はい、ご相談いただけます。既存サイトからの移行では、URLの引き継ぎ設計・リダイレクト設定・Search Consoleへの再送信を含めたSEO移行計画をご提案します。共通基盤を使った静的サイト生成・GitHub Pages・Cloudflareの構成により、表示速度とインデックス効率の両立を目指します。まずは現状のサイト構成をヒアリングさせてください。</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section case-cta-section" id="cta">
+      <div class="container">
+        <h2 class="case-cta-heading">ポータルサイトの開発・運営について、<br>まずはお気軽にご相談ください。</h2>
+        <p class="case-cta-lead">「特定の業種・地域に特化したポータルを作りたい」「既存サイトの品質を改善したい」など、構想段階からご相談を歓迎します。</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+          <a href="/index.html#contact" class="btn btn--primary btn--lg">無料で相談する</a>
+          <a href="/works.html" class="btn btn--outline">開発事例一覧へ</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+            <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
+          </a>
+          <p class="footer-tagline">Apps, Automation &amp; Portals.</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul class="footer-nav-list">
+            <li><a href="/index.html#pillars">3本柱</a></li>
+            <li><a href="/index.html#services">対応領域</a></li>
+            <li><a href="/index.html#strengths">MDXの強み</a></li>
+            <li><a href="/works.html">開発事例</a></li>
+            <li><a href="/index.html#flow">支援の流れ</a></li>
+            <li><a href="/about.html">会社・代表</a></li>
+            <li><a href="/index.html#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <nav class="footer-policy-nav" aria-label="ポリシーナビゲーション">
+          <ul class="footer-policy-list">
+            <li><a href="/privacy.html">プライバシーポリシー</a></li>
+            <li><a href="/disclaimer.html">免責事項</a></li>
+            <li><a href="/careers.html">採用情報</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copy">
+          <small>&copy; <span id="footer-year"></span> MDX株式会社. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js?v=20260630"></script>
+</body>
+</html>
