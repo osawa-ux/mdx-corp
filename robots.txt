@@ -1,4 +1,44 @@
+# MDX株式会社 robots.txt
+# https://mdx-inc.co.jp/robots.txt
+
+# ===== 汎用設定（全クローラー） =====
 User-agent: *
 Allow: /
 
+# ===== 検索エンジン（インデックス・表示用） =====
+
+# Google（通常の検索インデックス）
+User-agent: Googlebot
+Allow: /
+
+# Bing（通常の検索インデックス）
+User-agent: Bingbot
+Allow: /
+
+# ===== 検索AI・Answer Engine（検索結果での引用・回答生成用） =====
+
+# OpenAI / ChatGPT 検索機能（SearchGPT / ChatGPT Browse 等）
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic Claude 検索機能
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity AI 検索
+User-agent: PerplexityBot
+Allow: /
+
+# ===== 学習系AI（モデル学習用データ収集） =====
+# 現時点ではデフォルト許可（ブロック方針は施主と別途協議）
+
+# OpenAI モデル学習クローラー
+User-agent: GPTBot
+Allow: /
+
+# Google AI 学習クローラー（Bard / Gemini 等のトレーニングデータ収集）
+User-agent: Google-Extended
+Allow: /
+
+# ===== サイトマップ =====
 Sitemap: https://mdx-inc.co.jp/sitemap.xml

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>医療機関向け レセプト算定支援システム 開発事例 | MDX株式会社</title>
+  <meta name="description" content="医療機関のレセプト算定漏れを仕組みで防ぐPython製チェックシステムの開発事例。17の算定ルール・466のテスト・Playwrightカルテ取得・AI二次判定を組み合わせ、最終判断は専門職が行う設計を採用。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="医療機関向け レセプト算定支援システム 開発事例 | MDX株式会社" />
+  <meta property="og:description" content="医療機関のレセプト算定漏れを仕組みで防ぐPython製チェックシステムの開発事例。最終判断は専門職が行う設計。" />
+  <meta property="og:site_name" content="MDX株式会社" />
+  <meta property="og:url" content="https://mdx-inc.co.jp/works/receipt-check.html" />
+  <meta property="og:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="医療機関向け レセプト算定支援システム 開発事例 | MDX株式会社" />
+  <meta name="twitter:description" content="医療機関のレセプト算定漏れを仕組みで防ぐPython製チェックシステムの開発事例。最終判断は専門職が行う設計。" />
+  <meta name="twitter:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <link rel="canonical" href="https://mdx-inc.co.jp/works/receipt-check.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=20260630" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MZTNZ1G68S');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "https://mdx-inc.co.jp/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "開発事例",
+        "item": "https://mdx-inc.co.jp/works.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "レセプト算定支援システム",
+        "item": "https://mdx-inc.co.jp/works/receipt-check.html"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "医療機関向け レセプト算定支援システム ― 算定漏れを仕組みで防ぐ開発事例",
+    "description": "医療機関のレセプト算定漏れを仕組みで防ぐPython製チェックシステムの開発事例。17の算定ルール・466のテスト・Playwrightカルテ取得・AI二次判定を組み合わせ、最終判断は専門職が行う設計を採用。",
+    "author": {
+      "@type": "Organization",
+      "name": "MDX株式会社",
+      "url": "https://mdx-inc.co.jp/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MDX株式会社",
+      "url": "https://mdx-inc.co.jp/",
+      "logo": "https://mdx-inc.co.jp/assets/ogp/ogp.png"
+    },
+    "datePublished": "2026-06-30",
+    "dateModified": "2026-06-30",
+    "about": {
+      "@type": "Service",
+      "name": "レセプト算定支援システム",
+      "serviceType": "医療機関向け業務自動化",
+      "provider": {
+        "@type": "Organization",
+        "name": "MDX株式会社"
+      }
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "同様の医療機関（在宅・外来問わず）に対応できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、対応可能です。在宅診療・外来クリニック・訪問看護ステーションなど、業態・規模に合わせてルールエンジンをカスタマイズします。現行の電子カルテ環境や算定ルールの範囲をヒアリングした上で、段階導入の計画をご提案します。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "AIが算定内容を自動で確定するのですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。AIによる判定は「被疑箇所の提示と根拠の補助」にとどまります。算定の可否・最終判断は必ず医師・医事スタッフなどの専門職が行う設計です。AIの結果をそのままレセプトに反映する仕組みにはなっていません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "導入の進め方を教えてください。",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "まず現状の電子カルテ環境・算定対象・ご要件をヒアリングします。その後、限定的な算定項目から段階的に導入し、テスト運用を経て対象範囲を広げる進め方を標準としています。患者情報の取り扱い方針の確認と、dry-runによる動作検証を必ず行います。"
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== works/receipt-check.html 固有スタイル ===== */
+    .case-hero {
+      background-color: var(--color-primary);
+      padding: calc(var(--header-height) + 56px) 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .case-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 65% 50%, rgba(14, 165, 233, 0.13) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .case-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .case-breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+    .case-breadcrumb a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+    }
+    .case-breadcrumb a:hover { color: rgba(255,255,255,0.75); }
+    .case-breadcrumb-sep { color: rgba(255,255,255,0.3); }
+    .case-hero-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background-color: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      padding: 3px 11px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .case-hero-heading {
+      font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+    }
+    .case-hero-summary {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.95;
+      max-width: 720px;
+      margin-bottom: 14px;
+    }
+    .case-hero-note {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    /* サブナビ */
+    .case-subnav {
+      background-color: var(--color-bg-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0;
+      position: sticky;
+      top: var(--header-height);
+      z-index: 90;
+    }
+    .case-subnav-list {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 0;
+    }
+    .case-subnav-list a {
+      display: block;
+      padding: 13px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color var(--transition-base), border-color var(--transition-base);
+    }
+    .case-subnav-list a:hover {
+      color: #fff;
+      border-bottom-color: var(--color-accent);
+    }
+
+    /* 本文セクション */
+    .case-section { background-color: var(--color-bg-sub); }
+    .case-section:nth-child(even) { background-color: var(--color-bg); }
+
+    .case-body {
+      max-width: 800px;
+      margin-inline: auto;
+    }
+    .case-body p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-text);
+      margin-bottom: 1.3em;
+    }
+    .case-body p:last-child { margin-bottom: 0; }
+
+    /* 技術ブロック */
+    .case-tech-grid {
+      display: grid;
+      gap: 20px;
+    }
+    @media (min-width: 640px) {
+      .case-tech-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .case-tech-item {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 20px 20px 18px;
+    }
+    .case-tech-item-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+    .case-tech-item-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .case-tech-item-desc {
+      font-size: 0.83rem;
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    /* 数値バッジ群 */
+    .case-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .case-stat {
+      background-color: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      border-radius: var(--radius-md);
+      padding: 14px 22px;
+      text-align: center;
+      min-width: 120px;
+    }
+    .case-stat-num {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .case-stat-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
+    .case-stat-note {
+      font-size: 0.72rem;
+      color: var(--color-text-light);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* AI注意書き */
+    .case-ai-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background-color: rgba(14, 165, 233, 0.06);
+      border: 1px solid rgba(14, 165, 233, 0.18);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin: 24px 0;
+      font-size: 0.85rem;
+      color: var(--color-text);
+      line-height: 1.75;
+    }
+    .case-ai-note strong {
+      color: var(--color-accent);
+    }
+
+    /* チェックリスト */
+    .case-check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .case-check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      line-height: 1.7;
+    }
+    .case-check-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--color-accent);
+      border-radius: 50%;
+      background-color: rgba(14, 165, 233, 0.12);
+      margin-top: 3px;
+      position: relative;
+    }
+    .case-check-list li::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* FAQ (details/summary アコーディオン) */
+    .case-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .case-faq-item {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .case-faq-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 22px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      transition: background-color var(--transition-base);
+    }
+    .case-faq-details summary::-webkit-details-marker { display: none; }
+    .case-faq-details summary::after {
+      content: '';
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 7l5 5 5-5' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: transform 0.25s ease;
+    }
+    .case-faq-details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    .case-faq-details summary:hover {
+      background-color: rgba(255,255,255,0.03);
+    }
+    .case-faq-answer {
+      padding: 0 22px 18px;
+      font-size: 0.87rem;
+      color: var(--color-text);
+      line-height: 1.85;
+    }
+
+    /* CTA */
+    .case-cta-section {
+      background-color: var(--color-primary);
+      text-align: center;
+    }
+    .case-cta-heading {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    .case-cta-lead {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.9;
+      margin-bottom: 32px;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .case-inline-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .case-inline-links a {
+      color: var(--color-accent);
+      font-size: 0.87rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .case-inline-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+        <span class="logo-text">MDX<span class="logo-sub">株式会社</span></span>
+      </a>
+      <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
+        <ul class="nav-list">
+          <li><a href="/index.html#pillars" class="nav-link">3本柱</a></li>
+          <li><a href="/index.html#strengths" class="nav-link">MDXの強み</a></li>
+          <li><a href="/index.html#services" class="nav-link">対応領域</a></li>
+          <li><a href="/works.html" class="nav-link">開発事例</a></li>
+          <li><a href="/index.html#flow" class="nav-link">支援の流れ</a></li>
+          <li><a href="/about.html" class="nav-link">会社・代表</a></li>
+          <li><a href="/index.html#contact" class="nav-link nav-link--cta">無料で相談する</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="case-hero">
+      <div class="case-hero-inner container">
+        <nav class="case-breadcrumb" aria-label="パンくずリスト">
+          <a href="/index.html">ホーム</a>
+          <span class="case-breadcrumb-sep" aria-hidden="true">›</span>
+          <a href="/works.html">開発事例</a>
+          <span class="case-breadcrumb-sep" aria-hidden="true">›</span>
+          <span>レセプト算定支援</span>
+        </nav>
+        <p class="case-hero-label">医療機関向け｜MDX Flow</p>
+        <h1 class="case-hero-heading">医療機関向け レセプト算定支援システム<br>― 算定漏れを仕組みで防ぐ開発事例</h1>
+        <p class="case-hero-summary">複雑な算定ルールと属人的な目視確認のために起きやすい「本来請求できた診療報酬の取りこぼし」を、Python製ルールエンジン＋AI二次チェックで根拠付きに検出し、専門職の確認を効率化する医療機関向けシステムの開発事例です。最終的な算定の可否判断は必ず専門職（医師・医事スタッフ）が行う、人間レビューを前提とした設計を採用しています。</p>
+        <p class="case-hero-note">※ 情報保護の観点から、医療機関名・スタッフ・患者情報は一切掲載していません。</p>
+      </div>
+    </section>
+
+    <!-- ===== ページ内サブナビ ===== -->
+    <nav class="case-subnav" aria-label="ページ内ナビゲーション">
+      <div class="container">
+        <ul class="case-subnav-list">
+          <li><a href="#background">背景・課題</a></li>
+          <li><a href="#approach">解決アプローチ</a></li>
+          <li><a href="#tech">技術と設計</a></li>
+          <li><a href="#safety">安全設計</a></li>
+          <li><a href="#phase">段階導入</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#cta">ご相談</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===== ① 背景・課題 ===== -->
+    <section class="section case-section" id="background" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Background</p>
+          <h2 class="section-title">背景と課題</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>医療機関のレセプト（診療報酬明細書）は、保険診療で実施した医療行為を正確に算定し、審査支払機関に請求するための書類です。算定ルールは複雑かつ頻繁に改定されるため、事務スタッフだけでは全件を精査することが難しく、「本来算定できるはずの項目が漏れてしまう」という課題が生じやすい構造にあります。</p>
+          <p>この課題に対して、従来は「経験豊富なスタッフによる目視確認」に頼るしかなく、人員体制・担当者の知識量によってチェック品質が変動するという属人性の問題がありました。また、患者情報を外部システムに送信することへの抵抗感から、クラウド型のソリューションを導入しにくい医療機関も少なくありません。</p>
+          <p>こうした背景のもと、次の3点を同時に解決できる仕組みが求められていました。</p>
+          <ul class="case-check-list">
+            <li>算定漏れのリスクを、担当者の経験値に依存せず仕組みで検出できること</li>
+            <li>患者情報がシステム外へ流出しない設計であること</li>
+            <li>最終判断は専門職が行い、AIや自動化が算定を確定させないこと</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ② 解決アプローチ ===== -->
+    <section class="section case-section" id="approach" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Approach</p>
+          <h2 class="section-title">解決アプローチ</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>当該医療機関の実務フローと算定要件を丁寧にヒアリングした上で、Pythonを用いた内製ルールエンジンを設計・実装しました。電子カルテからPlaywrightを使って診療情報を自動取得し、内製ルールエンジンで算定の被疑箇所を検出、さらにAIによる二次チェックで根拠の補強を行う——という多層構造のチェックフローを構築しています。</p>
+          <p>開発の起点となったのは「現場の要望を技術に変換する」という姿勢です。「どのような状況で算定漏れが起きやすいか」「スタッフはどこで迷うか」「情報をどの範囲で扱ってよいか」を現場と繰り返し確認しながら、ルールとフローを定義しました。</p>
+          <p>システムの出力は「算定の被疑箇所と、その根拠の提示」に限定されます。「この項目は算定可能である」という確定判断は一切行わず、あくまで専門職の確認を効率化する補助ツールとして設計されています。導入機関では、従来属人的になりがちだった算定チェックを仕組み化し、確認の抜け漏れを構造的に減らすことを狙いとしています。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ③ 技術と設計 ===== -->
+    <section class="section case-section" id="tech" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Technology</p>
+          <h2 class="section-title">技術と設計の工夫</h2>
+        </div>
+
+        <div class="case-stats reveal">
+          <div class="case-stat">
+            <span class="case-stat-num">17</span>
+            <span class="case-stat-label">実装済み算定ルール数</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">466</span>
+            <span class="case-stat-label">pytestテストケース数</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">月次</span>
+            <span class="case-stat-label">本番運用サイクル</span>
+          </div>
+        </div>
+        <p class="case-stat-note">※ ルール数・テスト数は2026年6月時点の実装値。運用継続によって順次拡張しています。</p>
+
+        <div class="case-tech-grid" style="margin-top: 32px;">
+
+          <div class="case-tech-item reveal">
+            <p class="case-tech-item-label">Rule Engine</p>
+            <h3 class="case-tech-item-title">Python内製ルールエンジン</h3>
+            <p class="case-tech-item-desc">算定ルールをPythonコードとして明示的に記述し、医療機関固有の要件にあわせてカスタマイズ可能な構造で実装。ルールの追加・変更がコードとして管理されるため、変更履歴の追跡と品質維持が容易です。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-1">
+            <p class="case-tech-item-label">Data Acquisition</p>
+            <h3 class="case-tech-item-title">Playwrightによるカルテ情報取得</h3>
+            <p class="case-tech-item-desc">既存の電子カルテシステムのUIから、Playwright（ブラウザ自動操作）を用いて診療情報を自動取得します。外部APIが提供されていないカルテシステムにも対応できる柔軟な設計です。取得は医療機関の管理下にあるローカル環境内で、正規のログイン権限の範囲で行います。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-2">
+            <p class="case-tech-item-label">AI Secondary Check</p>
+            <h3 class="case-tech-item-title">AI二次判定による根拠補強</h3>
+            <p class="case-tech-item-desc">ルールエンジンが検出した被疑箇所に対して、AI（大規模言語モデル）が算定根拠の補強情報を付与します。AIの判定はあくまで参考情報として提示され、算定の確定には使われません。</p>
+          </div>
+
+          <div class="case-tech-item reveal reveal--delay-3">
+            <p class="case-tech-item-label">Quality Assurance</p>
+            <h3 class="case-tech-item-title">pytestによる466件の自動テスト</h3>
+            <p class="case-tech-item-desc">ルールエンジンの動作を466件のpytestテストケースで継続的に検証しています。ルール追加・変更時のリグレッションを自動検出し、チェックロジックの品質を継続的に維持します。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ④ 安全設計 ===== -->
+    <section class="section case-section" id="safety" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Safety</p>
+          <h2 class="section-title">安全設計・PHI保護</h2>
+        </div>
+        <div class="case-body reveal">
+          <div class="case-ai-note">
+            <div>
+              <strong>医療×AIの基本原則:</strong> 本システムにおけるAIの役割は「算定の被疑箇所を根拠付きで提示する補助ツール」です。算定の可否・最終判断は必ず専門職（医師・医事スタッフ）が行います。AIの判定結果がそのままレセプトに反映されることはありません。
+            </div>
+          </div>
+          <p>患者情報（氏名・生年月日・診療内容等）は、システムの処理がすべて医療機関のローカル環境で完結する設計を採用しています。情報を外部サーバーへ送信する経路をアーキテクチャ上で排除し、PHI（保護対象保健情報）の流出リスクを構造的に抑制します。</p>
+          <ul class="case-check-list">
+            <li>患者情報の処理はローカル環境内で完結（外部送信経路なし）</li>
+            <li>AI二次判定の入出力は被疑根拠の補助に限定（算定確定には使わない）</li>
+            <li>チェック結果は「被疑箇所と根拠の提示」のみ——最終判断は専門職が行う</li>
+            <li>dry-runモード実装により、本番適用前の動作確認と安全検証が可能</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ⑤ 段階導入 ===== -->
+    <section class="section case-section" id="phase" style="background-color: var(--color-bg-sub);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Phased Rollout</p>
+          <h2 class="section-title">段階導入の進め方</h2>
+        </div>
+        <div class="case-body reveal">
+          <p>医療機関への導入は、現場への負担を最小化するために段階的に進めています。一度にすべての算定項目をカバーしようとするのではなく、「最もインパクトが大きく、かつ検出精度を確認しやすい算定項目」から開始し、実運用の中で対象範囲を拡張するアプローチを採っています。</p>
+          <ul class="case-check-list">
+            <li>Phase 1: ヒアリング・要件定義（現行の算定フロー・情報取扱い方針の確認）</li>
+            <li>Phase 2: 優先算定項目の実装とdry-run検証（本番データでの動作確認）</li>
+            <li>Phase 3: 限定的な本番運用開始・フィードバック収集</li>
+            <li>Phase 4: 対象算定項目の段階的拡張・ルールの継続改善</li>
+          </ul>
+          <p>月次のレセプト提出サイクルに合わせてシステムを運用し、実務フローへの定着を確認しながら改善を重ねています。</p>
+
+          <div class="case-inline-links">
+            <a href="/works.html">← 開発事例一覧に戻る</a>
+            <a href="/about.html">MDXについて →</a>
+            <a href="/index.html#contact">ご相談・お問い合わせ →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section case-section" id="faq" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">FAQ</p>
+          <h2 class="section-title">よくあるご質問</h2>
+        </div>
+        <div class="case-faq-list reveal" style="max-width: 800px; margin-inline: auto;">
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>同様の医療機関（在宅・外来問わず）に対応できますか？</summary>
+              <p class="case-faq-answer">はい、対応可能です。在宅診療・外来クリニック・訪問看護ステーションなど、業態・規模に合わせてルールエンジンをカスタマイズします。現行の電子カルテ環境や算定ルールの範囲をヒアリングした上で、段階導入の計画をご提案します。まずはご相談ください。</p>
+            </details>
+          </div>
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>AIが算定内容を自動で確定するのですか？</summary>
+              <p class="case-faq-answer">いいえ。AIによる判定は「被疑箇所の提示と根拠の補助」にとどまります。算定の可否・最終判断は必ず医師・医事スタッフなどの専門職が行う設計です。AIの結果をそのままレセプトに反映する仕組みにはなっていません。この「人間レビューを前提とした設計」はシステムの根幹であり、変更しない方針です。</p>
+            </details>
+          </div>
+
+          <div class="case-faq-item">
+            <details class="case-faq-details">
+              <summary>導入の進め方を教えてください。</summary>
+              <p class="case-faq-answer">まず現状の電子カルテ環境・算定対象・ご要件をヒアリングします。その後、限定的な算定項目から段階的に導入し、dry-runによる動作検証を行った上で本番運用を開始する進め方を標準としています。患者情報の取り扱い方針の確認も、導入前に必ず行います。</p>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section case-cta-section" id="cta">
+      <div class="container">
+        <h2 class="case-cta-heading">レセプト算定の課題について、<br>まずはお気軽にご相談ください。</h2>
+        <p class="case-cta-lead">「似た課題を抱えている」「自院の電子カルテで動くか確認したい」など、構想段階でのご相談も歓迎します。</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+          <a href="/index.html#contact" class="btn btn--primary btn--lg">無料で相談する</a>
+          <a href="/works.html" class="btn btn--outline">開発事例一覧へ</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+            <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
+          </a>
+          <p class="footer-tagline">Apps, Automation &amp; Portals.</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul class="footer-nav-list">
+            <li><a href="/index.html#pillars">3本柱</a></li>
+            <li><a href="/index.html#services">対応領域</a></li>
+            <li><a href="/index.html#strengths">MDXの強み</a></li>
+            <li><a href="/works.html">開発事例</a></li>
+            <li><a href="/index.html#flow">支援の流れ</a></li>
+            <li><a href="/about.html">会社・代表</a></li>
+            <li><a href="/index.html#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <nav class="footer-policy-nav" aria-label="ポリシーナビゲーション">
+          <ul class="footer-policy-list">
+            <li><a href="/privacy.html">プライバシーポリシー</a></li>
+            <li><a href="/disclaimer.html">免責事項</a></li>
+            <li><a href="/careers.html">採用情報</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copy">
+          <small>&copy; <span id="footer-year"></span> MDX株式会社. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js?v=20260630"></script>
+</body>
+</html>

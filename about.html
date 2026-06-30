@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>会社案内・創業者メッセージ | MDX株式会社 — 現場発のプロダクト開発</title>
+  <meta name="description" content="MDX株式会社の会社概要と創業者メッセージ。在宅医療・診療所運営の最前線に立ちながら「世の中に足りない」と感じたものを自ら開発・製品化する、当事者発のITプロダクト開発会社です。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="会社案内・創業者メッセージ | MDX株式会社" />
+  <meta property="og:description" content="MDX株式会社の会社概要と創業者メッセージ。医療現場の当事者として、現場で本当に必要なものを自ら開発・製品化します。" />
+  <meta property="og:site_name" content="MDX株式会社" />
+  <meta property="og:url" content="https://mdx-inc.co.jp/about.html" />
+  <meta property="og:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="会社案内・創業者メッセージ | MDX株式会社" />
+  <meta name="twitter:description" content="MDX株式会社の会社概要と創業者メッセージ。医療現場の当事者として、現場で本当に必要なものを自ら開発・製品化します。" />
+  <meta name="twitter:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
+  <link rel="canonical" href="https://mdx-inc.co.jp/about.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=20260630" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MZTNZ1G68S');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MDX株式会社",
+    "url": "https://mdx-inc.co.jp/",
+    "logo": "https://mdx-inc.co.jp/assets/ogp/ogp.png",
+    "description": "アプリ開発・業務自動化・ポータルサイト開発の3本柱で、中小企業・BtoB事業者の業務課題を解決するITパートナーです。医療現場の当事者として、現場で本当に必要なものを自ら開発・製品化します。",
+    "foundingDate": "2023-06",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "神奈川県",
+      "addressLocality": "横浜市都筑区",
+      "streetAddress": "川和町2330-2",
+      "addressCountry": "JP"
+    },
+    "email": "info@mdx-inc.co.jp",
+    "knowsAbout": ["アプリ開発", "業務自動化", "ポータルサイト開発", "医療DX"],
+    "sameAs": []
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "https://mdx-inc.co.jp/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "会社案内・創業者メッセージ",
+        "item": "https://mdx-inc.co.jp/about.html"
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== about.html 固有スタイル ===== */
+    .about-hero {
+      background-color: var(--color-primary);
+      padding: calc(var(--header-height) + 56px) 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 40%, rgba(14, 165, 233, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .about-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .about-hero-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 14px;
+    }
+    .about-hero-heading {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+    }
+    .about-hero-lead {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.95;
+      max-width: 680px;
+    }
+
+    /* メッセージ */
+    .message-section { background-color: var(--color-bg-sub); }
+    .message-body {
+      max-width: 760px;
+      margin-inline: auto;
+    }
+    .message-body p {
+      font-size: 0.97rem;
+      line-height: 2;
+      color: var(--color-text);
+      margin-bottom: 1.4em;
+    }
+    .message-body p:last-child { margin-bottom: 0; }
+    .message-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background-color: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .message-signature {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.88rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+    }
+
+    /* 強み */
+    .about-strengths-grid {
+      display: grid;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .about-strengths-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .about-strength-card {
+      background-color: var(--color-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 28px 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-strength-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .about-strength-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      margin-bottom: 10px;
+    }
+    .about-strength-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f5f7fa;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .about-strength-desc {
+      font-size: 0.87rem;
+      color: var(--color-text);
+      line-height: 1.85;
+    }
+
+    /* 会社概要テーブル */
+    .about-company-section { background-color: var(--color-bg-sub); }
+    .about-company-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .about-company-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .about-company-table th,
+    .about-company-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.75;
+    }
+    .about-company-table th {
+      width: 160px;
+      min-width: 120px;
+      font-weight: 700;
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+    .about-company-table td {
+      color: var(--color-text);
+    }
+    .about-company-table a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+    .about-company-table a:hover {
+      text-decoration: underline;
+    }
+
+    /* CTA */
+    .about-cta-section {
+      background-color: var(--color-primary);
+      text-align: center;
+    }
+    .about-cta-heading {
+      font-size: clamp(1.2rem, 3vw, 1.65rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    .about-cta-lead {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.9;
+      margin-bottom: 32px;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .about-cta-lead + * { margin-inline: auto; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+        <span class="logo-text">MDX<span class="logo-sub">株式会社</span></span>
+      </a>
+      <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
+        <ul class="nav-list">
+          <li><a href="/index.html#pillars" class="nav-link">3本柱</a></li>
+          <li><a href="/index.html#strengths" class="nav-link">MDXの強み</a></li>
+          <li><a href="/index.html#services" class="nav-link">対応領域</a></li>
+          <li><a href="/works.html" class="nav-link">開発事例</a></li>
+          <li><a href="/index.html#flow" class="nav-link">支援の流れ</a></li>
+          <li><a href="/about.html" class="nav-link">会社・代表</a></li>
+          <li><a href="/index.html#contact" class="nav-link nav-link--cta">無料で相談する</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="about-hero">
+      <div class="about-hero-inner container">
+        <p class="about-hero-eyebrow">About MDX</p>
+        <h1 class="about-hero-heading">現場で「足りない」と感じたものを、<br>自ら形にして世に出す。</h1>
+        <p class="about-hero-lead">MDX株式会社は、在宅医療・診療所運営の最前線に立ちながら「世の中に足りない」と感じたプロダクトを、当事者として自ら設計・開発する会社です。医療現場のドメイン知識と実装力を組み合わせ、中小企業・BtoB事業者が本当に必要とする仕組みを、現場理解に基づいて届けます。</p>
+      </div>
+    </section>
+
+    <!-- ===== 創業者メッセージ ===== -->
+    <section class="section message-section" id="message">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Message</p>
+          <h2 class="section-title">創業者メッセージ</h2>
+        </div>
+        <div class="message-body reveal">
+          <p class="message-label">現場で「足りない」に気づいたところから</p>
+          <p>在宅医療の現場に立つ中で、私たちはひとつの現実に気づきました。訪問診療という選択肢が、本当に必要としている方々に、ほとんど知られていない——ということです。</p>
+          <p>医師として目の前の患者さんに向き合うだけでは、届く範囲には限りがあります。前線で頑張るだけでは足りない。本当に必要だったのは、訪問診療を世の中に知ってもらう「仕組み」でした。</p>
+          <p>その想いから生まれたのが、在宅医療を地域から探せるポータル（在宅クリニックナビ など）です。そして同じ姿勢で、現場の繰り返し業務を仕組みに変えるアプリ開発・業務自動化にも取り組んでいます。</p>
+          <p>MDX株式会社は、在宅医療・診療所運営の最前線で「世の中に足りない」と感じたものを、自ら形にして世に出すために生まれた会社です。現場を知る当事者として設計し、自分たちで使い続けて磨いた仕組みを、同じ課題を持つ事業者の皆さまへ届けています。</p>
+          <div class="message-signature">
+            MDX株式会社<br>
+            創業者・医師 大澤 基
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 専門性・強み ===== -->
+    <section class="section" id="about-strengths">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Strengths</p>
+          <h2 class="section-title">MDXの専門性と強み</h2>
+          <p class="section-lead">医療現場発のドメイン知識と実装力を組み合わせ、現場が本当に使える仕組みを届けます。</p>
+        </div>
+        <div class="about-strengths-grid">
+
+          <div class="about-strength-card reveal">
+            <p class="about-strength-num">01</p>
+            <h3 class="about-strength-title">医療現場のドメイン知識</h3>
+            <p class="about-strength-desc">在宅医療・診療所運営の実務から得た知識をプロダクト設計に直接反映します。患者情報の保護・算定ルールの複雑さ・スタッフ負担の構造など、現場固有の制約を踏まえた設計が可能です。</p>
+          </div>
+
+          <div class="about-strength-card reveal reveal--delay-1">
+            <p class="about-strength-num">02</p>
+            <h3 class="about-strength-title">自社実運用で磨いた仕組み</h3>
+            <p class="about-strength-desc">開発したシステムを自社事業で先行運用し、実務の中で課題を発見・改善します。「開発して納品して終わり」ではなく、自分たちが使い続けるプロダクトとして磨き上げた上で展開します。</p>
+          </div>
+
+          <div class="about-strength-card reveal reveal--delay-2">
+            <p class="about-strength-num">03</p>
+            <h3 class="about-strength-title">安全設計を組み込む実装力</h3>
+            <p class="about-strength-desc">医療情報の厳格な保護要件を満たす設計（患者情報の閉域処理・人間レビュー前提・フェイルセーフ）を、技術実装として担保します。セキュリティと事業推進を両立した仕組みを構築します。</p>
+          </div>
+
+          <div class="about-strength-card reveal reveal--delay-3">
+            <p class="about-strength-num">04</p>
+            <h3 class="about-strength-title">小さく始めて確かめながら進む</h3>
+            <p class="about-strength-desc">医療現場の特性上、大きな変化を一度に求めると現場の負担が大きくなりがちです。段階的な導入・検証・改善を繰り返す進め方を標準とし、現場への負担を最小化しながら定着を支援します。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 会社概要 ===== -->
+    <section class="section about-company-section" id="company">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Company</p>
+          <h2 class="section-title">会社概要</h2>
+        </div>
+        <div class="about-company-table-wrap reveal">
+          <table class="about-company-table">
+            <tbody>
+              <tr>
+                <th scope="row">会社名</th>
+                <td>MDX株式会社</td>
+              </tr>
+              <tr>
+                <th scope="row">代表者</th>
+                <td>大澤 直子</td>
+              </tr>
+              <tr>
+                <th scope="row">創業者</th>
+                <td>大澤 基（医師）</td>
+              </tr>
+              <tr>
+                <th scope="row">所在地</th>
+                <td>神奈川県横浜市都筑区川和町2330-2</td>
+              </tr>
+              <tr>
+                <th scope="row">資本金</th>
+                <td>500万円</td>
+              </tr>
+              <tr>
+                <th scope="row">設立</th>
+                <td>2023年6月</td>
+              </tr>
+              <tr>
+                <th scope="row">事業内容</th>
+                <td>SCS事業 / ポータルサイトの企画・運営 / IT・AI活用支援 / 業務改善・デジタル基盤整備</td>
+              </tr>
+              <tr>
+                <th scope="row">お問い合わせ</th>
+                <td><a href="mailto:info@mdx-inc.co.jp">info@mdx-inc.co.jp</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section about-cta-section" id="cta">
+      <div class="container">
+        <h2 class="about-cta-heading">医療・業務現場の課題を、<br>一緒に整理しませんか？</h2>
+        <p class="about-cta-lead">「何から着手すべきか分からない」という段階でも構いません。現状のヒアリングをもとに、課題整理からご一緒します。</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+          <a href="/index.html#contact" class="btn btn--primary btn--lg">無料で相談する</a>
+          <a href="/works.html" class="btn btn--outline">開発事例を見る</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="logo" aria-label="MDX株式会社 トップへ">
+            <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
+          </a>
+          <p class="footer-tagline">Apps, Automation &amp; Portals.</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul class="footer-nav-list">
+            <li><a href="/index.html#pillars">3本柱</a></li>
+            <li><a href="/index.html#services">対応領域</a></li>
+            <li><a href="/index.html#strengths">MDXの強み</a></li>
+            <li><a href="/works.html">開発事例</a></li>
+            <li><a href="/index.html#flow">支援の流れ</a></li>
+            <li><a href="/about.html">会社・代表</a></li>
+            <li><a href="/index.html#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <nav class="footer-policy-nav" aria-label="ポリシーナビゲーション">
+          <ul class="footer-policy-list">
+            <li><a href="/privacy.html">プライバシーポリシー</a></li>
+            <li><a href="/disclaimer.html">免責事項</a></li>
+            <li><a href="/careers.html">採用情報</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copy">
+          <small>&copy; <span id="footer-year"></span> MDX株式会社. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js?v=20260630"></script>
+</body>
+</html>
