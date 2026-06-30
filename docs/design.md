@@ -120,6 +120,28 @@ Customers → Cases → Flow(支援の流れ) → Company(会社情報) → **FA
 
 ---
 
+## 7.5 SEO / LLMO 設計（2026-06-30 Phase 1 実装）
+
+競合・SEO・LLMO 3軸の調査（subagent並列）に基づく方針。詳細根拠は調査ログ参照。
+
+**アーキテクチャ**: ハブ＆スポーク（トピッククラスター）。`works.html`=ハブ、`/works/{slug}.html`=個別事例（スポーク）。**厚い事例のみ個別化**（薄い量産はサイト評価を下げるため禁止）。サブディレクトリ配下はCSS/JS/canonical/OGPを**ルート絶対パス**で参照。
+
+**SEO**: 各ページ固有 title/description・自己参照canonical・パンくず・OGP・画像width/height/alt・sitemap全件。JSON-LD は `Organization`(共通)＋`Service`＋ページ毎に `BreadcrumbList`＋`TechArticle`(事例)＋`FAQPage`。
+
+**LLMO**: `/llms.txt`（会社要約＋サービス＋事例リンク、事実と数値のみ）。robots.txt で検索系AIクローラ（OAI-SearchBot/Claude-SearchBot/PerplexityBot）を Allow、学習系（GPTBot/Google-Extended）は現状Allow（ブロックは要施主協議）。各ページ冒頭100字を「業種×課題×手法×成果」の倒立ピラミッド完結文に。`dateModified` を入れ四半期更新。
+
+**E-E-A-T（施主決定）**: about.html で「**創業者＝在宅医療の現役医師（大澤 基）**」を打ち出す（医療DXの最強E-E-A-T）。**会社概要の代表者欄は登記通り「大澤 直子（代表取締役）」を維持**し、創業者行として大澤 基（医師）を併記。個別事例は「医療機関向け」匿名フレーム。
+
+**成果数値の方針**: 実測値のみ測定方法つきで掲載。無い場合は捏造せず「狙い」を定性で記述。技術的事実（ルール数/テスト数）は出典あれば可。収益/価格は非掲載。
+
+## 7.6 Phase 2 計画（横展開・未着手）
+
+- 個別ページ追加（厚い順）: ポータル共通基盤（ジオコーディング品質の技術ストーリー）／訪問看護指示書・主治医意見書チェック／資料→記事自動化／統合労務SaaS（税・決済の具体は除外）／SCS
+- works.html を一覧フィルタ付きハブに昇格、各スポークと双方向内部リンク
+- サービスのピラーページ（/services/medical-dx 等）は任意で後日
+- 各事例 OGP個別画像・WebP化、Search Console でインデックス確認→薄いページは noindex 判断
+- **個別ページは手書き散文のみ**（repo設定ファイルにPHI/スタッフ名/secrets実在＝ダンプ禁止）。配布前に2段レビュー必須。
+
 ## 8. 今後の調整ポイント / TODO
 
 - [ ] カウントアップの実機発火を確認（or 撤去判断）
