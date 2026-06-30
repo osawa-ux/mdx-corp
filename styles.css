@@ -7,18 +7,23 @@
    CSS カスタムプロパティ
    ----------------------------------------- */
 :root {
-  --color-primary: #1a2744;
-  --color-primary-light: #243460;
-  --color-accent: #0ea5e9;
-  --color-accent-dark: #0284c7;
-  --color-bg: #ffffff;
-  --color-bg-sub: #f5f7fa;
-  --color-bg-dark: #1a2744;
-  --color-text: #1e293b;
-  --color-text-light: #64748b;
-  --color-border: #e2e8f0;
+  /* ネイビーテーマ用カラー */
+  --color-primary: #0f1a30;            /* 深いネイビー（ヘッダー/フッター/Hero背景） */
+  --color-primary-light: #16263f;      /* サーフェス（カード等） */
+  --color-accent: #0ea5e9;             /* シアン（アクセント1色） */
+  --color-accent-dark: #0284c7;        /* シアン濃い側 */
+  --color-bg: #0f1a30;                 /* ベース背景（深いネイビー） */
+  --color-bg-sub: #13203a;             /* セクション交互の差し色（やや明るいネイビー） */
+  --color-bg-dark: #0b1424;            /* 最暗部（必要時） */
+  --color-text: #e6e8ee;               /* 本文（明るいグレー） */
+  --color-text-light: #9aacc4;         /* 補足テキスト（青み寄りの中間色） */
+  --color-border: rgba(255, 255, 255, 0.08); /* 薄い白系ボーダー */
   --color-success: #10b981;
   --color-error: #ef4444;
+
+  /* サーフェス（カード面） */
+  --color-surface: #16263f;
+  --color-surface-hover: #1c3050;
 
   --font-main: 'Noto Sans JP', sans-serif;
 
@@ -30,9 +35,9 @@
   --radius-md: 8px;
   --radius-lg: 12px;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.10);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
 
   --transition-base: 0.2s ease;
 
@@ -119,10 +124,13 @@ button {
     background-color var(--transition-base),
     color var(--transition-base),
     border-color var(--transition-base),
-    box-shadow var(--transition-base);
+    box-shadow var(--transition-base),
+    transform 0.18s ease;
   white-space: nowrap;
   cursor: pointer;
   min-height: 48px; /* タッチターゲット確保 */
+  position: relative;
+  overflow: hidden;
 }
 
 .btn--primary {
@@ -131,11 +139,36 @@ button {
   border: 2px solid var(--color-accent);
 }
 
+/* 光沢スイープ（CTAボタン） */
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.45s ease;
+  pointer-events: none;
+}
+
+.btn--primary:hover::after,
+.btn--primary:focus-visible::after {
+  left: 120%;
+}
+
 .btn--primary:hover,
 .btn--primary:focus-visible {
   background-color: var(--color-accent-dark);
   border-color: var(--color-accent-dark);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.35);
+  transform: translateY(-1px);
 }
 
 .btn--outline {
@@ -148,6 +181,7 @@ button {
 .btn--outline:focus-visible {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: #fff;
+  transform: translateY(-1px);
 }
 
 .btn--lg {
@@ -175,12 +209,34 @@ button {
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: 10px;
+  /* 出現時にラベルが左から伸びる下線演出 */
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.section-label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  transition: transform 0.4s ease 0.15s;
+  transform-origin: center;
+}
+
+/* section-header が is-visible になったときに下線を伸ばす */
+.section-header.is-visible .section-label::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 .section-title {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  color: var(--color-primary);
+  color: #f5f7fa;
   line-height: 1.4;
   letter-spacing: 0.02em;
 }
@@ -202,12 +258,17 @@ button {
   right: 0;
   z-index: 100;
   height: var(--header-height);
-  background-color: var(--color-primary);
-  transition: box-shadow var(--transition-base);
+  background-color: rgba(15, 26, 48, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: box-shadow var(--transition-base), background-color var(--transition-base);
 }
 
 .site-header.is-scrolled {
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(15, 26, 48, 0.96);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .header-inner {
@@ -321,9 +382,10 @@ button {
   top: var(--header-height);
   left: 0;
   right: 0;
-  background-color: var(--color-primary);
+  background-color: rgba(15, 26, 48, 0.97);
   padding: 16px 0 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .global-nav.is-open .nav-list {
@@ -355,14 +417,34 @@ button {
   overflow: hidden;
 }
 
+/* ゆっくり動くグラデーション光のにじみ */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 70% 50%, rgba(14, 165, 233, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 50%);
+    radial-gradient(ellipse at 70% 50%, rgba(14, 165, 233, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.09) 0%, transparent 50%);
   pointer-events: none;
+  animation: hero-glow 14s ease-in-out infinite alternate;
+}
+
+@keyframes hero-glow {
+  0%   {
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(14, 165, 233, 0.16) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.09) 0%, transparent 50%);
+  }
+  50%  {
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(14, 165, 233, 0.20) 0%, transparent 65%),
+      radial-gradient(ellipse at 30% 70%, rgba(14, 165, 233, 0.11) 0%, transparent 55%);
+  }
+  100% {
+    background:
+      radial-gradient(ellipse at 75% 55%, rgba(14, 165, 233, 0.14) 0%, transparent 58%),
+      radial-gradient(ellipse at 15% 85%, rgba(14, 165, 233, 0.08) 0%, transparent 48%);
+  }
 }
 
 .hero-inner {
@@ -391,6 +473,22 @@ button {
   letter-spacing: 0.02em;
   margin-bottom: 20px;
 }
+
+/* Hero 見出しの各行 stagger 表示（JS が span.hero-line を生成） */
+.hero-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.hero-content.hero-loaded .hero-line {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-content.hero-loaded .hero-line:nth-child(1) { transition-delay: 0.05s; }
+.hero-content.hero-loaded .hero-line:nth-child(2) { transition-delay: 0.18s; }
 
 .hero-sub {
   font-size: clamp(0.95rem, 2vw, 1.05rem);
@@ -449,7 +547,7 @@ button {
   width: 140px;
   height: 140px;
   background-color: var(--color-accent);
-  opacity: 0.15;
+  opacity: 0.18;
   top: 0;
   right: 0;
   border-radius: var(--radius-lg);
@@ -458,8 +556,8 @@ button {
 .graphic-block--2 {
   width: 90px;
   height: 90px;
-  background-color: #fff;
-  opacity: 0.1;
+  background-color: var(--color-accent);
+  opacity: 0.10;
   bottom: 0;
   left: 0;
   border-radius: var(--radius-lg);
@@ -469,7 +567,7 @@ button {
   width: 60px;
   height: 60px;
   border: 2px solid var(--color-accent);
-  opacity: 0.3;
+  opacity: 0.35;
   bottom: 30px;
   right: 20px;
   border-radius: var(--radius-md);
@@ -479,9 +577,9 @@ button {
    信頼バナー（Hero直下）
    ----------------------------------------- */
 .trust-banner {
-  background-color: var(--color-bg-sub);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding: 32px 0;
 }
 
@@ -534,7 +632,7 @@ button {
 .about-lead {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #f5f7fa;
   line-height: 1.8;
   margin-bottom: 16px;
 }
@@ -575,14 +673,14 @@ button {
 }
 .case-card {
   padding: 28px;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
 }
 .case-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #f5f7fa;
   margin-bottom: 12px;
   padding-left: 14px;
   border-left: 3px solid var(--color-accent);
@@ -618,7 +716,8 @@ button {
   align-items: center;
   gap: 8px;
   padding: 28px 40px;
-  background-color: var(--color-bg-sub);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
   min-width: 160px;
   flex: 1;
@@ -628,7 +727,7 @@ button {
 .number-value {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-accent);
   line-height: 1;
 }
 
@@ -656,14 +755,16 @@ button {
   gap: 20px;
   align-items: flex-start;
   padding: 24px;
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--transition-base);
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
 .strength-item:hover {
   box-shadow: var(--shadow-md);
+  border-color: rgba(14, 165, 233, 0.25);
 }
 
 .strength-icon {
@@ -673,7 +774,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(14, 165, 233, 0.08);
+  background-color: rgba(14, 165, 233, 0.12);
   border-radius: var(--radius-md);
   color: var(--color-accent);
 }
@@ -681,7 +782,7 @@ button {
 .strength-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #f5f7fa;
   margin-bottom: 6px;
   line-height: 1.4;
 }
@@ -706,9 +807,9 @@ button {
 
 .service-card {
   padding: 32px;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: var(--radius-lg);
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
   transition: box-shadow var(--transition-base), border-color var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -733,7 +834,7 @@ button {
 .service-number {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-border);
+  color: rgba(255, 255, 255, 0.1);
   line-height: 1;
   margin-bottom: 12px;
   letter-spacing: -0.02em;
@@ -742,7 +843,7 @@ button {
 .service-title {
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #f5f7fa;
   margin-bottom: 4px;
   line-height: 1.4;
 }
@@ -765,7 +866,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 16px;
 }
 
@@ -807,9 +908,9 @@ button {
   align-items: flex-start;
   gap: 12px;
   padding: 20px 24px;
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   font-size: 0.925rem;
   font-weight: 500;
   color: var(--color-text);
@@ -824,7 +925,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(14, 165, 233, 0.08);
+  background-color: rgba(14, 165, 233, 0.12);
   border-radius: 50%;
   color: var(--color-accent);
   margin-top: 1px;
@@ -844,14 +945,14 @@ button {
 }
 
 .customers-cta .btn--primary {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .customers-cta .btn--primary:hover {
-  background-color: var(--color-primary-light);
-  border-color: var(--color-primary-light);
-  box-shadow: 0 4px 12px rgba(26, 39, 68, 0.2);
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
 }
 
 /* -----------------------------------------
@@ -904,13 +1005,13 @@ button {
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 6px rgba(14, 165, 233, 0.15);
+  box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 6px rgba(14, 165, 233, 0.3);
 }
 
 .flow-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #f5f7fa;
   margin-bottom: 6px;
   padding-top: 14px;
   line-height: 1.4;
@@ -926,7 +1027,8 @@ button {
   max-width: 700px;
   margin-inline: auto;
   padding: 20px 24px;
-  background-color: var(--color-bg-sub);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-left: 3px solid var(--color-accent);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-size: 0.9rem;
@@ -966,7 +1068,7 @@ button {
 .company-table th {
   width: 160px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #f5f7fa;
   white-space: nowrap;
   background-color: transparent;
 }
@@ -988,7 +1090,8 @@ button {
   margin-inline: auto;
   margin-bottom: 36px;
   padding: 20px 24px;
-  background-color: var(--color-bg-sub);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: var(--radius-md);
   font-size: 0.9rem;
   color: var(--color-text-light);
@@ -1053,7 +1156,7 @@ button {
 .required {
   font-size: 0.7rem;
   font-weight: 700;
-  background-color: var(--color-primary);
+  background-color: var(--color-accent);
   color: #fff;
   padding: 2px 6px;
   border-radius: 3px;
@@ -1064,7 +1167,7 @@ button {
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-text-light);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 2px 6px;
   border-radius: 3px;
 }
@@ -1077,8 +1180,8 @@ button {
   font-family: var(--font-main);
   font-size: 0.95rem;
   color: var(--color-text);
-  background-color: var(--color-bg);
-  border: 1.5px solid var(--color-border);
+  background-color: #1c3050;      /* ネイビーサーフェス（フォーム入力欄） */
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
   line-height: 1.6;
@@ -1089,7 +1192,7 @@ button {
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-  color: #b8c4cf;
+  color: #4e6380;                 /* ネイビー系プレースホルダー */
 }
 
 .form-input:focus,
@@ -1154,11 +1257,11 @@ button {
 .form-error-general {
   margin-top: 12px;
   padding: 14px 18px;
-  background-color: #fff5f5;
-  border: 1px solid #fecaca;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.35);
   border-radius: var(--radius-md);
   font-size: 0.875rem;
-  color: #b91c1c;
+  color: #fca5a5;
   line-height: 1.7;
   text-align: center;
 }
@@ -1206,7 +1309,7 @@ button {
 .success-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #f5f7fa;
   margin-bottom: 12px;
 }
 
@@ -1373,7 +1476,7 @@ button {
     flex: 1;
     max-width: 340px;
     padding: 0 24px;
-    border-right: 1px solid var(--color-border);
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
   }
 
   .trust-banner-item:last-child {
@@ -1476,3 +1579,514 @@ button {
 .fade-in--delay-2 { transition-delay: 0.2s; }
 .fade-in--delay-3 { transition-delay: 0.3s; }
 .fade-in--delay-4 { transition-delay: 0.4s; }
+
+/* -----------------------------------------
+   3本柱セクション
+   ----------------------------------------- */
+.pillars {
+  background-color: var(--color-bg-sub);
+}
+
+.pillars-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.pillar-card {
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+  position: relative;
+}
+
+.pillar-card:hover {
+  box-shadow: 0 14px 40px rgba(14, 165, 233, 0.18);
+  border-color: rgba(14, 165, 233, 0.35);
+  transform: translateY(-6px);
+}
+
+/* 上部アクセントライン */
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.pillar-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* モバイル（hover が使えないデバイス）ではラインを常に表示 */
+@media (hover: none) {
+  .pillar-card::before {
+    transform: scaleX(1);
+  }
+}
+
+.pillar-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(14, 165, 233, 0.12);
+  border-radius: var(--radius-md);
+  color: var(--color-accent);
+  margin-bottom: 16px;
+  transition: transform 0.35s ease, background-color 0.3s ease;
+}
+
+.pillar-card:hover .pillar-icon {
+  transform: scale(1.12) rotate(-4deg);
+  background-color: rgba(14, 165, 233, 0.18);
+}
+
+.pillar-brand {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 6px;
+}
+
+.pillar-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f5f7fa;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.pillar-sub {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  font-style: italic;
+  margin-bottom: 14px;
+  line-height: 1.6;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.pillar-desc {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.85;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.pillar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.pillar-tags li {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  background-color: rgba(14, 165, 233, 0.07);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+.pillar-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color var(--transition-base), gap var(--transition-base);
+}
+
+.pillar-cta::after {
+  content: '→';
+  font-size: 1em;
+  transition: transform var(--transition-base);
+}
+
+.pillar-cta:hover {
+  color: var(--color-accent-dark);
+}
+
+.pillar-cta:hover::after {
+  transform: translateX(4px);
+}
+
+@media (min-width: 768px) {
+  .pillars-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* -----------------------------------------
+   ロゴカルーセル枠（CSS animation, JS不要）
+   ----------------------------------------- */
+.carousel-section {
+  padding: 28px 0;
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.carousel-label {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #0f1a30 12%,
+    #0f1a30 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #0f1a30 12%,
+    #0f1a30 88%,
+    transparent 100%
+  );
+}
+
+.carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  /* 2セット分を並べて translateX -50% で無限ループ */
+  animation: carousel-scroll 22s linear infinite;
+  width: max-content;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes carousel-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-item {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-light);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  padding: 6px 40px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  opacity: 0.55;
+  transition: opacity var(--transition-base);
+}
+
+.carousel-item:hover {
+  opacity: 1;
+}
+
+/* -----------------------------------------
+   FAQ アコーディオン（details/summary, JS不要）
+   ----------------------------------------- */
+.faq {
+  background-color: var(--color-bg-sub);
+}
+
+.faq-list {
+  max-width: 760px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.faq-item:has(.faq-details[open]) {
+  border-color: rgba(14, 165, 233, 0.3);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-details {
+  width: 100%;
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f5f7fa;
+  cursor: pointer;
+  list-style: none;
+  line-height: 1.5;
+  transition: background-color var(--transition-base);
+  user-select: none;
+}
+
+/* Chrome/Safari の三角形アイコン非表示 */
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: '+';
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  line-height: 1;
+  transition: transform var(--transition-base);
+}
+
+.faq-details[open] .faq-question::after {
+  transform: rotate(45deg);
+}
+
+.faq-question:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.faq-answer {
+  padding: 0 24px 20px;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  line-height: 1.9;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 16px;
+  margin: 0;
+}
+
+/* =========================================
+   動的演出 — 追加分
+   ========================================= */
+
+/* -----------------------------------------
+   JS 無効フォールバック（.no-js 時は reveal/hero-content/hero-line を即可視化）
+   ----------------------------------------- */
+.no-js .reveal,
+.no-js .hero-content,
+.no-js .hero-line {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* -----------------------------------------
+   スクロール進行バー
+   ----------------------------------------- */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  z-index: 200;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* -----------------------------------------
+   ヘッダー scrolled 状態（引き締め）
+   ----------------------------------------- */
+.site-header.scrolled {
+  height: calc(var(--header-height) - 8px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* -----------------------------------------
+   Hero コンテンツ フェードイン（初期ロード）
+   ----------------------------------------- */
+.hero-content {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.hero-content.hero-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -----------------------------------------
+   Hero 装飾ブロック 浮遊アニメ（振幅を大きめに）
+   ----------------------------------------- */
+@keyframes float-1 {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-16px); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(11px); }
+}
+
+@keyframes float-3 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-10px) rotate(6deg); }
+}
+
+.graphic-block--1 {
+  animation: float-1 7s ease-in-out infinite;
+}
+
+.graphic-block--2 {
+  animation: float-2 5.5s ease-in-out infinite 0.8s;
+}
+
+.graphic-block--3 {
+  animation: float-3 8s ease-in-out infinite 1.4s;
+}
+
+/* -----------------------------------------
+   スクロール連動フェードイン（.reveal）
+   ----------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger 用の遅延 */
+.reveal--delay-1  { transition-delay: 0.07s; }
+.reveal--delay-2  { transition-delay: 0.14s; }
+.reveal--delay-3  { transition-delay: 0.21s; }
+.reveal--delay-4  { transition-delay: 0.28s; }
+.reveal--delay-5  { transition-delay: 0.35s; }
+.reveal--delay-6  { transition-delay: 0.42s; }
+
+/* -----------------------------------------
+   reduced-motion: 全アニメ無効化
+   ----------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* ヒーロー背景グロー停止 */
+  .hero::before {
+    animation: none;
+  }
+
+  /* 浮遊アニメ停止 */
+  .graphic-block--1,
+  .graphic-block--2,
+  .graphic-block--3 {
+    animation: none;
+  }
+
+  /* カルーセル停止 */
+  .carousel-track {
+    animation: none;
+  }
+
+  /* スクロール進行バー非表示 */
+  #scroll-progress-bar {
+    display: none;
+  }
+
+  /* Hero ロード時フェード: 即座に表示 */
+  .hero-content {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Hero 見出し行 stagger 無効 */
+  .hero-line {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-content.hero-loaded .hero-line {
+    transition-delay: 0s;
+  }
+
+  /* reveal: 即座に最終状態 */
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* section-label 下線: 即座に表示 */
+  .section-label::after {
+    transform: translateX(-50%) scaleX(1);
+    transition: none;
+  }
+
+  /* ホバー移動停止 */
+  .pillar-card:hover {
+    transform: none;
+  }
+
+  .pillar-card .pillar-icon {
+    transition: none;
+  }
+
+  .pillar-card:hover .pillar-icon {
+    transform: none;
+    background-color: rgba(14, 165, 233, 0.12);
+  }
+
+  /* アクセントライン: 常に表示 */
+  .pillar-card::before {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  /* ボタン移動停止 */
+  .btn--primary:hover,
+  .btn--primary:focus-visible,
+  .btn--outline:hover,
+  .btn--outline:focus-visible {
+    transform: none;
+  }
+
+  /* ボタン光沢スイープ停止 */
+  .btn--primary::after {
+    display: none;
+  }
+}

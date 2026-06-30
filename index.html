@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="no-js">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.classList.remove('no-js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MDX株式会社 | 事業と現場を理解するITパートナー — 医療・介護DX・ポータル運営・IT/AI活用支援</title>
-  <meta name="description" content="MDX株式会社は、医療・介護DX支援・ポータルサイト運営・IT/AI活用支援・業務改善・データ活用・SCS事業の6領域で、中小企業や医療・介護事業者の業務課題を解決するBtoB企業です。現場の業務理解と継続的な伴走支援が強みです。お気軽にご相談ください。" />
+  <title>MDX株式会社 | アプリ開発・業務自動化・ポータルサイト開発 — 現場の繰り返しを、仕組みに変える。</title>
+  <meta name="description" content="MDX株式会社は、アプリ開発（MDX App）・業務自動化（MDX Flow）・ポータルサイト開発（MDX Portal）の3本柱で、中小企業・BtoB事業者の業務課題を解決するITパートナーです。現場理解と運用定着まで一貫して支援します。" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="MDX株式会社 | 事業と現場を理解するITパートナー — 医療・介護DX・ポータル運営・IT/AI活用支援" />
-  <meta property="og:description" content="MDX株式会社は、医療・介護DX支援・ポータルサイト運営・IT/AI活用支援・業務改善・データ活用・SCS事業の6領域で、中小企業や医療・介護事業者の業務課題を解決するBtoB企業です。現場の業務フローを理解した上で、導入から運用・定着まで一貫して支援します。まずはお気軽にご相談ください。" />
+  <meta property="og:title" content="MDX株式会社 | アプリ開発・業務自動化・ポータルサイト開発" />
+  <meta property="og:description" content="MDX株式会社は、アプリ開発（MDX App）・業務自動化（MDX Flow）・ポータルサイト開発（MDX Portal）の3本柱で、中小企業・BtoB事業者の業務課題を解決するITパートナーです。現場理解と運用定着まで一貫して支援します。" />
   <meta property="og:site_name" content="MDX株式会社" />
   <meta property="og:url" content="https://mdx-inc.co.jp/" />
   <meta property="og:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MDX株式会社 | 事業と現場を理解するITパートナー — 医療・介護DX・ポータル運営・IT/AI活用支援" />
-  <meta name="twitter:description" content="MDX株式会社は、医療・介護DX支援・ポータルサイト運営・IT/AI活用支援・業務改善・データ活用・SCS事業の6領域で、中小企業や医療・介護事業者の業務課題を解決するBtoB企業です。現場の業務フローを理解した上で、導入から運用・定着まで一貫して支援します。まずはお気軽にご相談ください。" />
+  <meta name="twitter:title" content="MDX株式会社 | アプリ開発・業務自動化・ポータルサイト開発" />
+  <meta name="twitter:description" content="MDX株式会社は、アプリ開発（MDX App）・業務自動化（MDX Flow）・ポータルサイト開発（MDX Portal）の3本柱で、中小企業・BtoB事業者の業務課題を解決するITパートナーです。現場理解と運用定着まで一貫して支援します。" />
   <meta name="twitter:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
   <link rel="canonical" href="https://mdx-inc.co.jp/" />
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -22,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260630" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -37,7 +38,7 @@
     "name": "MDX株式会社",
     "url": "https://mdx-inc.co.jp/",
     "logo": "https://mdx-inc.co.jp/assets/ogp/ogp.png",
-    "description": "医療・介護DX支援・ポータルサイト運営・IT/AI活用支援・業務改善・データ活用・SCS事業の6領域で、中小企業や医療・介護事業者の業務課題を解決するBtoB企業です。",
+    "description": "アプリ開発・業務自動化・ポータルサイト開発の3本柱で、中小企業・BtoB事業者の業務課題を解決するITパートナーです。",
     "foundingDate": "2023-06",
     "address": {
       "@type": "PostalAddress",
@@ -61,13 +62,12 @@
       </a>
       <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
         <ul class="nav-list">
-          <li><a href="#about" class="nav-link">会社概要</a></li>
+          <li><a href="#pillars" class="nav-link">3本柱</a></li>
           <li><a href="#strengths" class="nav-link">MDXの強み</a></li>
-          <li><a href="#services" class="nav-link">主要事業</a></li>
-          <li><a href="#customers" class="nav-link">想定顧客</a></li>
+          <li><a href="#services" class="nav-link">対応領域</a></li>
           <li><a href="#flow" class="nav-link">支援の流れ</a></li>
           <li><a href="#company" class="nav-link">会社情報</a></li>
-          <li><a href="#contact" class="nav-link nav-link--cta">お問い合わせ</a></li>
+          <li><a href="#contact" class="nav-link nav-link--cta">無料で相談する</a></li>
         </ul>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="global-nav">
@@ -84,21 +84,13 @@
     <section class="hero" id="top">
       <div class="hero-inner container">
         <div class="hero-content">
-          <p class="hero-eyebrow">BtoBテクノロジーパートナー</p>
-          <h1 class="hero-heading">事業と現場を理解する、<br>ITパートナー。</h1>
-          <p class="hero-sub">医療・介護DX・ポータル運営・IT/AI活用支援を通じて、<br class="pc-br">現場で機能する仕組みを設計・実装・運用まで一貫して支えます。</p>
+          <p class="hero-eyebrow">Apps, Automation &amp; Portals.</p>
+          <h1 class="hero-heading">現場の繰り返しを、<br>仕組みに変える。</h1>
+          <p class="hero-sub">アプリ開発・業務自動化・ポータルサイト開発の3本柱で、<br class="pc-br">貴社の業務課題を実装から運用定着まで一貫して解決します。</p>
           <div class="hero-actions">
-            <a href="#services" class="btn btn--primary">事業内容を見る</a>
-            <a href="#contact" class="btn btn--outline">お問い合わせ</a>
+            <a href="#contact" class="btn btn--primary">無料で相談する</a>
+            <a href="#pillars" class="btn btn--outline">事業内容を見る</a>
           </div>
-          <ul class="hero-tags" aria-label="対応領域">
-            <li>医療・介護DX</li>
-            <li>ポータル運営</li>
-            <li>IT・AI活用</li>
-            <li>業務改善</li>
-            <li>データ活用</li>
-            <li>SCS事業</li>
-          </ul>
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-graphic">
@@ -143,6 +135,120 @@
       </div>
     </section>
 
+    <!-- ===== 3本柱 ===== -->
+    <section class="section pillars" id="pillars">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Our Services</p>
+          <h2 class="section-title">MDXの3本柱</h2>
+          <p class="section-lead">繰り返し発生する業務課題を、継続して使える仕組みへ変えます。</p>
+        </div>
+        <div class="pillars-grid">
+
+          <!-- MDX App -->
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="4" width="24" height="28" rx="4" stroke="currentColor" stroke-width="2"/>
+                <rect x="11" y="9" width="14" height="3" rx="1.5" fill="currentColor" opacity="0.4"/>
+                <rect x="11" y="15" width="10" height="3" rx="1.5" fill="currentColor" opacity="0.4"/>
+                <rect x="11" y="21" width="8" height="3" rx="1.5" fill="currentColor" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="pillar-brand">MDX App</div>
+            <h3 class="pillar-title">アプリ開発</h3>
+            <p class="pillar-sub">「紙やExcelでは限界」と感じている事業者向け</p>
+            <p class="pillar-desc">現場の業務フローに合わせたWebアプリ・管理システムを要件定義から実装・保守まで一貫して提供します。既成ツールで対応できない業務課題も、カスタム開発で解決します。</p>
+            <ul class="pillar-tags" aria-label="対応領域">
+              <li>業務管理システム</li>
+              <li>フォーム・ワークフロー</li>
+              <li>医療・介護DX</li>
+              <li>データ活用</li>
+            </ul>
+            <a href="#contact" class="pillar-cta">詳細・ご相談</a>
+          </article>
+
+          <!-- MDX Flow -->
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="2"/>
+                <circle cx="27" cy="18" r="4" stroke="currentColor" stroke-width="2"/>
+                <circle cx="9" cy="27" r="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M13 9h6a4 4 0 014 4v1M13 27h6a4 4 0 004-4v-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="pillar-brand">MDX Flow</div>
+            <h3 class="pillar-title">業務自動化</h3>
+            <p class="pillar-sub">「同じ作業を毎日繰り返している」と感じている事業者向け</p>
+            <p class="pillar-desc">AI・自動化技術を現場で実際に使える形に落とし込みます。「導入したが使われていない」を防ぐため、定着支援まで責任を持って伴走します。</p>
+            <ul class="pillar-tags" aria-label="対応領域">
+              <li>AI活用・PoC支援</li>
+              <li>業務フロー自動化</li>
+              <li>定型作業の効率化</li>
+              <li>SCS事業</li>
+            </ul>
+            <a href="#contact" class="pillar-cta">詳細・ご相談</a>
+          </article>
+
+          <!-- MDX Portal -->
+          <article class="pillar-card">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="6" width="28" height="24" rx="3" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 12h28" stroke="currentColor" stroke-width="2"/>
+                <circle cx="9" cy="9" r="1.5" fill="currentColor" opacity="0.5"/>
+                <circle cx="14" cy="9" r="1.5" fill="currentColor" opacity="0.5"/>
+                <rect x="9" y="17" width="18" height="2.5" rx="1.25" fill="currentColor" opacity="0.4"/>
+                <rect x="9" y="22" width="12" height="2.5" rx="1.25" fill="currentColor" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="pillar-brand">MDX Portal</div>
+            <h3 class="pillar-title">ポータルサイト開発</h3>
+            <p class="pillar-sub">「Web経由の集客・情報発信を整備したい」事業者向け</p>
+            <p class="pillar-desc">業界・地域に特化したポータルサイトを企画から開発・SEO・運営改善まで一貫して支援します。自社で複数のポータルを運営してきた知見を活かします。</p>
+            <ul class="pillar-tags" aria-label="対応領域">
+              <li>業界特化ポータル</li>
+              <li>SEO・集客設計</li>
+              <li>掲載基盤構築</li>
+              <li>運営継続支援</li>
+            </ul>
+            <a href="#contact" class="pillar-cta">詳細・ご相談</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ロゴカルーセル枠 ===== -->
+    <!--
+      TODO: 実際の導入企業ロゴが揃ったら、.carousel-track 内の各 .carousel-item を
+      実ロゴ画像（<img src="..." alt="企業名">）に差し替えてください。
+      2セット同じ内容を並べることで無限ループが成立します（CSSアニメーション方式）。
+      ロゴ画像の推奨サイズ: 高さ 40px、幅 auto（グレースケール推奨）
+    -->
+    <div class="carousel-section" aria-label="運営ポータル">
+      <div class="container">
+        <p class="carousel-label">MDX運営ポータル（自社実績）</p>
+      </div>
+      <div class="carousel-viewport" aria-hidden="true">
+        <div class="carousel-track">
+          <!-- セット1 -->
+          <span class="carousel-item">在宅クリニックナビ</span>
+          <span class="carousel-item">訪問看護ステーションナビ</span>
+          <span class="carousel-item">訪問歯科ナビ</span>
+          <span class="carousel-item">居宅介護支援ナビ</span>
+          <span class="carousel-item">相続税理士ナビ</span>
+          <!-- セット2（無限ループ用の複製） -->
+          <span class="carousel-item">在宅クリニックナビ</span>
+          <span class="carousel-item">訪問看護ステーションナビ</span>
+          <span class="carousel-item">訪問歯科ナビ</span>
+          <span class="carousel-item">居宅介護支援ナビ</span>
+          <span class="carousel-item">相続税理士ナビ</span>
+        </div>
+      </div>
+    </div>
+
     <!-- ===== ABOUT ===== -->
     <section class="section about" id="about">
       <div class="container">
@@ -151,13 +257,13 @@
           <h2 class="section-title">会社概要</h2>
         </div>
         <div class="about-body">
-          <p class="about-lead">MDX株式会社は、SCS事業・ポータルサイト運営・IT/AI活用支援を通じて、中小企業や医療・介護事業者の業務と事業の前進を支えるBtoB企業です。</p>
+          <p class="about-lead">MDX株式会社は、アプリ開発（MDX App）・業務自動化（MDX Flow）・ポータルサイト開発（MDX Portal）の3本柱を軸に、中小企業やBtoB事業者の業務と事業の前進を支えるITパートナーです。</p>
           <p class="about-text">技術導入を目的とせず、現場の業務フローを理解した上で、実際に使える仕組みを設計・導入します。運用や定着まで見据えた継続的な支援を大切にしています。</p>
         </div>
         <div class="about-numbers">
           <div class="number-item">
-            <span class="number-value">4</span>
-            <span class="number-label">専門領域</span>
+            <span class="number-value">3</span>
+            <span class="number-label">事業の柱</span>
           </div>
           <div class="number-item">
             <span class="number-value">B2B</span>
@@ -279,9 +385,9 @@
     <section class="section services" id="services">
       <div class="container">
         <div class="section-header">
-          <p class="section-label">Services</p>
-          <h2 class="section-title">主要事業</h2>
-          <p class="section-lead">6つの領域で、貴社の業務課題と事業推進を支援します。</p>
+          <p class="section-label">Coverage</p>
+          <h2 class="section-title">対応領域</h2>
+          <p class="section-lead">3本柱を通じて、以下の6領域の業務課題に対応します。</p>
         </div>
         <div class="services-grid">
 
@@ -585,6 +691,64 @@
       </div>
     </section>
 
+    <!-- ===== FAQ ===== -->
+    <section class="section faq" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">FAQ</p>
+          <h2 class="section-title">よくあるご質問</h2>
+        </div>
+        <dl class="faq-list">
+
+          <div class="faq-item">
+            <dt>
+              <details class="faq-details">
+                <summary class="faq-question">まだ課題が整理できていない段階でも相談できますか？</summary>
+                <dd class="faq-answer">はい、歓迎しています。「何から手をつければよいか分からない」という段階からのご相談が多くあります。現状のヒアリングをもとに、課題整理からご一緒することが可能です。</dd>
+              </details>
+            </dt>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <details class="faq-details">
+                <summary class="faq-question">小規模な案件でも対応していただけますか？</summary>
+                <dd class="faq-answer">はい、対応しています。大規模な開発案件に限らず、特定の業務フローの改善や、小さな自動化ツールの導入など、小さなご相談から承っています。</dd>
+              </details>
+            </dt>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <details class="faq-details">
+                <summary class="faq-question">費用はどのくらいかかりますか？</summary>
+                <dd class="faq-answer">ご相談内容・規模・期間によって異なります。まずはヒアリングの上、内容に応じたご提案をいたします。予算感もあわせてお伝えいただけると、よりご提案しやすくなります。</dd>
+              </details>
+            </dt>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <details class="faq-details">
+                <summary class="faq-question">導入後のサポートはありますか？</summary>
+                <dd class="faq-answer">はい。導入して終わりではなく、運用・定着まで伴走することを大切にしています。保守・継続改善のご相談も、導入後にお気軽にご連絡ください。</dd>
+              </details>
+            </dt>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <details class="faq-details">
+                <summary class="faq-question">進め方・スケジュールはどのように決まりますか？</summary>
+                <dd class="faq-answer">ヒアリング後、現状整理・課題把握を経てご提案いたします。ご要望や事業の状況に合わせて、スモールスタートで始めることも可能です。</dd>
+              </details>
+            </dt>
+          </div>
+
+        </dl>
+      </div>
+    </section>
+
     <!-- ===== CONTACT ===== -->
     <section class="section contact" id="contact">
       <div class="container">
@@ -672,12 +836,12 @@
           <a href="#" class="logo" aria-label="MDX株式会社 トップへ">
             <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
           </a>
-          <p class="footer-tagline">事業と現場を理解するITパートナー</p>
+          <p class="footer-tagline">Apps, Automation &amp; Portals.</p>
         </div>
         <nav class="footer-nav" aria-label="フッターナビゲーション">
           <ul class="footer-nav-list">
-            <li><a href="#about">会社概要</a></li>
-            <li><a href="#services">主要事業</a></li>
+            <li><a href="#pillars">3本柱</a></li>
+            <li><a href="#services">対応領域</a></li>
             <li><a href="#strengths">MDXの強み</a></li>
             <li><a href="#flow">支援の流れ</a></li>
             <li><a href="#company">会社情報</a></li>
@@ -700,6 +864,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260630"></script>
 </body>
 </html>

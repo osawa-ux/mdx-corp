@@ -243,6 +243,229 @@
 
 
 // =============================================
+// ヘッダー scrolled クラス + スクロール進行バー
+// =============================================
+(function initScrollProgress() {
+  // 進行バー要素を動的生成
+  var bar = document.createElement('div');
+  bar.id = 'scroll-progress-bar';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+
+  var header = document.getElementById('site-header');
+  var ticking = false;
+
+  function update() {
+    var scrollY = window.scrollY;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docH > 0 ? (scrollY / docH) * 100 : 0;
+    bar.style.width = pct.toFixed(1) + '%';
+
+    // scrolled クラス（既存の is-scrolled に加えて scrolled も付与）
+    if (header) {
+      header.classList.toggle('scrolled', scrollY > 60);
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  update();
+})();
+
+
+// =============================================
+// Hero 見出し stagger（行ごとに span.hero-line を付与）
+// =============================================
+(function initHeroHeadingStagger() {
+  // reduced-motion ならスキップ
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var heading = document.querySelector('.hero-heading');
+  if (!heading) return;
+
+  // innerHTML を改行（<br>）で分割して span.hero-line でラップ
+  var html = heading.innerHTML;
+  // <br> / <br/> / <br /> を区切り文字として分割
+  var parts = html.split(/<br\s*\/?>/i);
+  if (parts.length < 2) return; // 改行がなければスキップ
+
+  heading.innerHTML = parts.map(function (part, i) {
+    return '<span class="hero-line">' + part + '</span>';
+  }).join('');
+})();
+
+
+// =============================================
+// Hero コンテンツ 初期フェードイン
+// =============================================
+(function initHeroLoad() {
+  var heroContent = document.querySelector('.hero-content');
+  if (!heroContent) return;
+
+  // reduced-motion ならスキップ（hero-line も即表示）
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    heroContent.classList.add('hero-loaded');
+    heroContent.querySelectorAll('.hero-line').forEach(function (el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    return;
+  }
+
+  // 次フレームで付与することで transition が発火する
+  window.requestAnimationFrame(function () {
+    window.requestAnimationFrame(function () {
+      heroContent.classList.add('hero-loaded');
+    });
+  });
+})();
+
+
+// =============================================
+// スクロール連動フェードイン（IntersectionObserver + stagger）
+// =============================================
+(function initReveal() {
+  // 対象要素にクラスを付与する処理
+  function addRevealClasses() {
+    // セクション見出し
+    document.querySelectorAll('.section-header').forEach(function (el) {
+      el.classList.add('reveal');
+    });
+
+    // グループ単位でstagger付与するヘルパー
+    function staggerGroup(selector) {
+      document.querySelectorAll(selector).forEach(function (el, i) {
+        el.classList.add('reveal');
+        var delay = i % 6; // 最大delay-6まで
+        if (delay > 0) el.classList.add('reveal--delay-' + delay);
+      });
+    }
+
+    staggerGroup('.pillar-card');
+    staggerGroup('.service-card');
+    staggerGroup('.case-card');
+    staggerGroup('.strength-item');
+    staggerGroup('.flow-item');
+    staggerGroup('.issue-item');
+    staggerGroup('.number-item');
+    staggerGroup('.faq-item');
+    staggerGroup('.trust-banner-item');
+  }
+
+  // reduced-motion の場合: クラスだけ付けて即 is-visible にして終了
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    addRevealClasses();
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+
+  // IntersectionObserver 非対応ブラウザのフォールバック
+  if (!('IntersectionObserver' in window)) {
+    addRevealClasses();
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+
+  addRevealClasses();
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -24px 0px' }
+  );
+
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    observer.observe(el);
+  });
+})();
+
+
+// =============================================
+// 数値カウントアップ（about-numbers の数字のみ）
+// threshold を高め（0.25）にして確実に発火
+// =============================================
+(function initCountUp() {
+  // reduced-motion の場合は何もしない（値はそのまま表示）
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  // 数字のみのテキストを持つ .number-value を対象にする
+  var candidates = document.querySelectorAll('.number-value');
+  var targets = [];
+
+  candidates.forEach(function (el) {
+    var text = el.textContent.trim();
+    var num = parseFloat(text);
+    // NaN（"B2B" や "継続" 等）は除外
+    if (!isNaN(num) && String(num) === text) {
+      targets.push({ el: el, end: num, animated: false });
+    }
+  });
+
+  if (!targets.length) return;
+
+  function runCountUp(el, end) {
+    var start = 0;
+    var duration = 900; // ms
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      // easeOutQuad
+      var eased = 1 - (1 - progress) * (1 - progress);
+      var current = Math.round(start + (end - start) * eased);
+      el.textContent = current;
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        el.textContent = end;
+      }
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
+  // threshold 0.25 + rootMargin なし = 要素の25%が viewport に入った時点で発火
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        var data = targets.find(function (t) { return t.el === entry.target; });
+        if (!data || data.animated) return;
+
+        data.animated = true;
+        observer.unobserve(entry.target);
+        runCountUp(data.el, data.end);
+      });
+    },
+    { threshold: 0.25, rootMargin: '0px 0px 0px 0px' }
+  );
+
+  targets.forEach(function (t) { observer.observe(t.el); });
+})();
+
+
+// =============================================
 // スムーススクロール（固定ヘッダー分のオフセット補正）
 // =============================================
 (function initSmoothScroll() {
