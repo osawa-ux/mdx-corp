@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260630" />
+  <link rel="stylesheet" href="styles.css?v=20260701" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -272,22 +272,24 @@
     }
 
     .works-effect-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      position: relative;
+      padding-left: 14px;
       font-size: 0.85rem;
       color: var(--color-text);
       line-height: 1.7;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .works-effect-list li::before {
       content: '';
-      flex-shrink: 0;
+      position: absolute;
+      left: 0;
+      top: 0.62em;
       width: 6px;
       height: 6px;
       background-color: var(--color-accent);
       border-radius: 50%;
-      margin-top: 7px;
     }
 
     /* 事例グリッド */

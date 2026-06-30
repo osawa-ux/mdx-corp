@@ -4,30 +4,30 @@
 
 ## サービス
 
-- MDX App（アプリ開発）: 現場の業務フローに合わせたWebアプリ・管理システムを要件定義から実装・保守まで一貫して提供。https://mdx-inc.co.jp/#pillars
-- MDX Flow（業務自動化）: AI・自動化技術を現場で使える形に落とし込み、定着まで伴走。送信・確定などの最終判断は人間が行う設計を標準とする。https://mdx-inc.co.jp/#pillars
-- MDX Portal（ポータルサイト開発）: 業界・地域特化ポータルを企画から開発・SEO・運営改善まで一貫して支援。自社で複数ポータルを運営してきた知見を活かす。https://mdx-inc.co.jp/#pillars
+- [MDX App（アプリ開発）](https://mdx-inc.co.jp/#pillars): 現場の業務フローに合わせたWebアプリ・管理システムを要件定義から実装・保守まで一貫して提供。
+- [MDX Flow（業務自動化）](https://mdx-inc.co.jp/#pillars): AI・自動化技術を現場で使える形に落とし込み、定着まで伴走。送信・確定などの最終判断は人間が行う設計を標準とする。
+- [MDX Portal（ポータルサイト開発）](https://mdx-inc.co.jp/#pillars): 業界・地域特化ポータルを企画から開発・SEO・運営改善まで一貫して支援。自社で複数ポータルを運営してきた知見を活かす。
 
 ## 開発事例
 
-- 開発事例一覧（アプリ開発・業務自動化・ポータル開発）: https://mdx-inc.co.jp/works.html
-- 医療機関向け レセプト算定支援システム（Python製ルールエンジン＋AI二次チェック・最終判断は専門職）: https://mdx-inc.co.jp/works/receipt-check.html
-- 業界特化ポータルの共通生成基盤と自社運営ポータル群（在宅クリニックナビ他5ポータル）: https://mdx-inc.co.jp/works.html#works-portal
-- 公的文書（主治医意見書等）の記載内容チェック自動化: https://mdx-inc.co.jp/works.html#works-flow
-- 中小企業向け統合労務SaaS（romubase・開発中）: https://mdx-inc.co.jp/works.html#works-app
+- [開発事例一覧](https://mdx-inc.co.jp/works.html): アプリ開発・業務自動化・ポータル開発の3本柱にわたる取り組みを課題・解決・技術・効果の形式で紹介。
+- [医療機関向け レセプト算定支援システム](https://mdx-inc.co.jp/works/receipt-check.html): Python製ルールエンジン＋AI二次チェックで算定漏れの被疑箇所を根拠付きに提示。最終判断は専門職が行う設計。
+- [業界特化ポータルの共通生成基盤と自社運営ポータル群](https://mdx-inc.co.jp/works.html#works-portal): 在宅クリニックナビ他5ポータルを同一基盤で運営。
+- [公的文書（主治医意見書等）の記載内容チェック自動化](https://mdx-inc.co.jp/works.html#works-flow): PDFを取り込み記載漏れ・不一致を重要度付きで検出。
+- [中小企業向け統合労務SaaS（romubase・開発中）](https://mdx-inc.co.jp/works.html#works-app): 雇用契約書を起点に勤怠・給与・社保へ自動派生する一気通貫SaaS。
 
 ## 自社運営ポータル
 
-- 在宅クリニックナビ（訪問診療クリニック検索）: https://zaitakuclinic-navi.com/
-- 訪問看護ステーションナビ: https://kango.zaitaku-navi.com/
-- 居宅介護支援ナビ: https://care.zaitaku-navi.com/
-- 訪問歯科ナビ: https://shika.zaitaku-navi.com/
-- 相続税理士ナビ: https://www.souzoku-zeirishi-navi.com/
+- [在宅クリニックナビ](https://zaitakuclinic-navi.com/): 訪問診療クリニックを地域から検索できるポータル。
+- [訪問看護ステーションナビ](https://kango.zaitaku-navi.com/): 全国の訪問看護ステーション検索ポータル。
+- [居宅介護支援ナビ](https://care.zaitaku-navi.com/): 居宅介護支援事業所（ケアマネジャー）検索ポータル。
+- [訪問歯科ナビ](https://shika.zaitaku-navi.com/): 訪問歯科診療に対応する歯科診療所の検索ポータル。
+- [相続税理士ナビ](https://www.souzoku-zeirishi-navi.com/): 相続に強い税理士事務所の検索ポータル。
 
 ## 会社情報
 
-- 会社・代表メッセージ: https://mdx-inc.co.jp/about.html
-- お問い合わせ・無料相談: https://mdx-inc.co.jp/#contact
+- [会社・創業者メッセージ](https://mdx-inc.co.jp/about.html): 会社概要と、在宅医療の現場から生まれた創業の背景。
+- [お問い合わせ・無料相談](https://mdx-inc.co.jp/#contact): 構想段階のご相談も歓迎。
 - メールアドレス: info@mdx-inc.co.jp
 - 所在地: 神奈川県横浜市都筑区川和町2330-2
 - 設立: 2023年6月
