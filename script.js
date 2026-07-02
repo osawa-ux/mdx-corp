@@ -29,6 +29,7 @@
     hamburger.setAttribute('aria-expanded', 'false');
     hamburger.setAttribute('aria-label', 'メニューを開く');
     nav.classList.remove('is-open');
+    document.body.style.overflow = ''; // スクロールロック解除
   }
 
   function openMenu() {
@@ -36,6 +37,7 @@
     hamburger.setAttribute('aria-expanded', 'true');
     hamburger.setAttribute('aria-label', 'メニューを閉じる');
     nav.classList.add('is-open');
+    document.body.style.overflow = 'hidden'; // スクロールロック（2026-07-02: メニュー開中の背景スクロール防止）
   }
 
   hamburger.addEventListener('click', function () {

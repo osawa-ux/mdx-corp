@@ -382,7 +382,7 @@ button {
   top: var(--header-height);
   left: 0;
   right: 0;
-  background-color: rgba(15, 26, 48, 0.97);
+  background-color: #0f1a30; /* 不透明化(2026-07-02): 背景透け対策。rgba(0.97)から変更 */
   padding: 16px 0 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -482,12 +482,19 @@ button {
   transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
+/* LCP改善(2026-07-02): 第1行（LCP要素）は初期から即描画。render delay 823ms → 0ms 狙い */
+.hero-line:first-child {
+  opacity: 1;
+  transform: translateY(0);
+  transition: none; /* 第1行はアニメなし・即描画 */
+}
+
 .hero-content.hero-loaded .hero-line {
   opacity: 1;
   transform: translateY(0);
 }
 
-.hero-content.hero-loaded .hero-line:nth-child(1) { transition-delay: 0.05s; }
+/* 第1行はdelay不要（既に即表示）。第2行以降にstagger */
 .hero-content.hero-loaded .hero-line:nth-child(2) { transition-delay: 0.18s; }
 
 .hero-sub {
@@ -1157,7 +1164,7 @@ button {
   font-size: 0.7rem;
   font-weight: 700;
   background-color: var(--color-accent);
-  color: #fff;
+  color: #0b1424; /* AA修正済み(2026-07-02): #0ea5e9背景で約6.44:1。白(2.77:1)から変更 */
   padding: 2px 6px;
   border-radius: 3px;
   letter-spacing: 0.04em;
@@ -1759,9 +1766,8 @@ button {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-light);
+  color: #8fa3c0; /* AA修正済み(2026-07-02): #0f1a30背景で約6.99:1 */
   margin-bottom: 16px;
-  opacity: 0.7;
 }
 
 .carousel-viewport {
@@ -1803,17 +1809,16 @@ button {
 .carousel-item {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--color-text-light);
+  color: #8fa3c0; /* AA修正済み(2026-07-02): #0f1a30背景で約6.99:1 */
   letter-spacing: 0.04em;
   white-space: nowrap;
   padding: 6px 40px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
-  opacity: 0.55;
-  transition: opacity var(--transition-base);
+  transition: color var(--transition-base);
 }
 
 .carousel-item:hover {
-  opacity: 1;
+  color: #e6e8ee;
 }
 
 /* -----------------------------------------
