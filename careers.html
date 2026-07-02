@@ -34,15 +34,16 @@
     .careers-main { padding-top: var(--header-height); min-height: 100vh; }
 
     /* Hero */
-    .careers-hero { background-color: var(--color-primary); padding: 64px 0 56px; text-align: center; }
+    .careers-hero { background-color: var(--color-bg-dark); padding: 64px 0 56px; text-align: center; }
     .careers-hero-title { font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 700; color: #fff; letter-spacing: 0.04em; line-height: 1.5; }
     .careers-hero-sub { margin-top: 12px; font-size: 0.95rem; color: rgba(255,255,255,0.6); }
 
     /* Section common */
     .careers-section { max-width: 800px; margin-inline: auto; padding: 56px 24px 0; }
     .careers-section:last-of-type { padding-bottom: 80px; }
+    /* ダークテーマ（2026-06-30）以降、--color-primary は背景色。見出しは明色を直接指定 */
     .careers-section-title {
-      font-size: 1.15rem; font-weight: 700; color: var(--color-primary);
+      font-size: 1.15rem; font-weight: 700; color: #f5f7fa;
       margin-bottom: 20px; padding-left: 14px;
       border-left: 3px solid var(--color-accent); line-height: 1.5;
     }
@@ -71,7 +72,7 @@
       letter-spacing: 0.06em; margin-bottom: 8px;
     }
     .careers-highlight-value {
-      font-size: 1.05rem; font-weight: 700; color: var(--color-primary); line-height: 1.6;
+      font-size: 1.05rem; font-weight: 700; color: #f5f7fa; line-height: 1.6;
     }
 
     /* List */
@@ -90,7 +91,7 @@
     /* Feature blocks */
     .careers-feature { margin-top: 28px; }
     .careers-feature-title {
-      font-size: 0.95rem; font-weight: 700; color: var(--color-primary);
+      font-size: 0.95rem; font-weight: 700; color: #f5f7fa;
       margin-bottom: 8px;
     }
 
@@ -99,7 +100,7 @@
     .careers-table { width: 100%; border-collapse: collapse; font-size: 0.925rem; }
     .careers-table th {
       background: var(--color-bg-sub); padding: 14px 18px; text-align: left;
-      font-weight: 700; color: var(--color-primary); white-space: nowrap;
+      font-weight: 700; color: #f5f7fa; white-space: nowrap;
       border-bottom: 1px solid var(--color-border); width: 140px; vertical-align: top;
     }
     .careers-table td {
@@ -115,14 +116,15 @@
       background: var(--color-bg-sub); border-radius: var(--radius-lg);
       padding: 20px; font-size: 0.9rem; color: var(--color-text); line-height: 1.7;
     }
-    .careers-fit-item strong { color: var(--color-primary); }
+    .careers-fit-item strong { color: #f5f7fa; }
     @media (max-width: 600px) {
       .careers-fit-grid { grid-template-columns: 1fr; }
     }
 
     /* Message box */
     .careers-message-box {
-      margin-top: 40px; padding: 32px; background: var(--color-primary);
+      margin-top: 40px; padding: 32px; background: var(--color-surface);
+      border: 1px solid var(--color-border);
       border-radius: var(--radius-lg); color: #fff; text-align: center;
     }
     .careers-message-box p {
