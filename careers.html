@@ -140,6 +140,57 @@
 
     /* Back */
     .careers-back { text-align: center; margin-top: 56px; }
+
+    /* Hero updated date */
+    .careers-hero-updated {
+      margin-top: 10px; font-size: 0.78rem; color: rgba(255,255,255,0.4);
+    }
+
+    /* Selection flow */
+    .careers-flow-list {
+      list-style: none; padding: 0; margin-top: 20px;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .careers-flow-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 0; border-bottom: 1px solid var(--color-border);
+    }
+    .careers-flow-item:first-child { border-top: 1px solid var(--color-border); }
+    .careers-flow-step {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+      background: var(--color-accent); color: #0b1424; /* accent上の白はAA未満(2.77)のため濃紺 */
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em;
+    }
+    .careers-flow-text {
+      font-size: 0.925rem; color: var(--color-text); line-height: 1.7;
+      padding-top: 6px;
+    }
+
+    /* Careers FAQ */
+    .careers-faq-list { margin-top: 8px; }
+    .careers-faq-item { border-bottom: 1px solid var(--color-border); }
+    .careers-faq-item:first-child { border-top: 1px solid var(--color-border); }
+    .careers-faq-item dt { list-style: none; }
+    .careers-faq-details { padding: 0; }
+    .careers-faq-question {
+      display: flex; align-items: center; gap: 10px;
+      padding: 16px 4px; cursor: pointer;
+      font-size: 0.925rem; font-weight: 700; color: #f5f7fa;
+      list-style: none; line-height: 1.6;
+    }
+    .careers-faq-question::-webkit-details-marker { display: none; }
+    .careers-faq-question::before {
+      content: 'Q'; flex-shrink: 0;
+      width: 24px; height: 24px; border-radius: 4px;
+      background: var(--color-accent); color: #fff;
+      font-size: 0.78rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .careers-faq-answer {
+      display: block; padding: 4px 4px 18px 34px;
+      font-size: 0.9rem; color: var(--color-text); line-height: 1.85;
+    }
   </style>
 </head>
 <body>
@@ -155,6 +206,7 @@
           <li><a href="index.html#about" class="nav-link">会社概要</a></li>
           <li><a href="index.html#services" class="nav-link">主要事業</a></li>
           <li><a href="index.html#company" class="nav-link">会社情報</a></li>
+          <li><a href="careers.html" class="nav-link" aria-current="page">採用情報</a></li>
           <li><a href="index.html#contact" class="nav-link nav-link--cta">お問い合わせ</a></li>
         </ul>
       </nav>
@@ -173,6 +225,7 @@
       <div class="container">
         <h1 class="careers-hero-title">AIと業務改善で、<br>仕事の"当たり前"を変える。</h1>
         <p class="careers-hero-sub">IT・業務改善人材 募集中｜正社員</p>
+        <p class="careers-hero-updated">最終更新日：2026年7月2日</p>
       </div>
     </div>
 
@@ -214,7 +267,7 @@
           <p class="careers-highlight-value">デュアルモニター<br>標準装備</p>
         </div>
       </div>
-      <p class="careers-text" style="margin-top:20px;">新しいツールややり方を試しやすい環境です。AIツールについては、実務の中で使いながら習得できるため、Claude Codeの経験がなくても問題ありません。</p>
+      <p class="careers-text" style="margin-top:20px;">AIツール（Claude / Gemini）を日常業務で使用しています。新しいツールややり方を試しやすい環境で、Claude Code の経験がなくても実務の中で使いながら習得できます。</p>
     </div>
 
     <!-- ===== FEATURES ===== -->
@@ -333,6 +386,92 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <!-- ===== SELECTION FLOW ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">選考の流れ</h2>
+      <ol class="careers-flow-list">
+        <li class="careers-flow-item">
+          <span class="careers-flow-step">01</span>
+          <span class="careers-flow-text">応募フォーム送信</span>
+        </li>
+        <li class="careers-flow-item">
+          <span class="careers-flow-step">02</span>
+          <span class="careers-flow-text">書類確認・ご連絡</span>
+        </li>
+        <li class="careers-flow-item">
+          <span class="careers-flow-step">03</span>
+          <span class="careers-flow-text">面談（回数・形式は選考の中でご案内します）</span>
+        </li>
+        <li class="careers-flow-item">
+          <span class="careers-flow-step">04</span>
+          <span class="careers-flow-text">内定</span>
+        </li>
+      </ol>
+      <p class="careers-text" style="margin-top:20px;">選考に進む前の、カジュアルなご相談や見学も歓迎しています。</p>
+    </div>
+
+    <!-- ===== FAQ ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">よくある質問</h2>
+      <dl class="careers-faq-list">
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">AIツールの経験がなくても応募できますか？</summary>
+              <dd class="careers-faq-answer">はい。AIツールの使用経験は不要です。業務ごとのマニュアルが整備されており、実務の中で使いながら習得できます。</dd>
+            </details>
+          </dt>
+        </div>
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">IT業界の経験は必須ですか？</summary>
+              <dd class="careers-faq-answer">IT業界での実務経験（年数不問）を必須条件としています。元SE・社内SE・ITサポート・ヘルプデスクなどの経験を歓迎します。</dd>
+            </details>
+          </dt>
+        </div>
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">入社後はどのように業務を覚えますか？</summary>
+              <dd class="careers-faq-answer">最初からすべてをお任せするのではなく、マニュアルをもとに段階的に業務の範囲を広げていきます。</dd>
+            </details>
+          </dt>
+        </div>
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">どんなツールを使いますか？</summary>
+              <dd class="careers-faq-answer">Claude Code / Gemini / Google Workspace などを日常的に使用します。デュアルモニターを標準装備しています。</dd>
+            </details>
+          </dt>
+        </div>
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">応募前に話を聞くことはできますか？</summary>
+              <dd class="careers-faq-answer">はい。カジュアルなご相談や見学も歓迎しています。応募フォームにその旨をご記入ください。</dd>
+            </details>
+          </dt>
+        </div>
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">勤務地・勤務時間を教えてください。</summary>
+              <dd class="careers-faq-answer">勤務地は神奈川県横浜市都筑区、勤務時間は 9:00〜18:00（休憩 13:00〜14:00）、土日祝休みです。</dd>
+            </details>
+          </dt>
+        </div>
+
+      </dl>
     </div>
 
     <!-- ===== MESSAGE ===== -->

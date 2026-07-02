@@ -1,7 +1,7 @@
 # MDX株式会社 サイト デザインガイド / 意思決定記録
 
-最終更新: 2026-06-30
-対象: `index.html` / `styles.css` / `script.js`（トップページ）
+最終更新: 2026-07-02（採用強化 P1 実装: トップ採用導線追加・careers.html 選考フロー/FAQ/AI訴求充足・§7.7 追加）
+対象: `index.html` / `careers.html` / `styles.css` / `script.js`（トップページ）
 公開: GitHub Pages（https://mdx-inc.co.jp）
 
 このドキュメントは、2026-06-30 のデザインupdate（トップを3本柱主役へ刷新＋動的演出＋紺基調ダークテーマ化）の
@@ -14,6 +14,7 @@
 - **アプリ開発・業務自動化・ポータルサイト開発の「3本柱」を全面に押し出す**（旧: 6領域を並列に並べ柱がぼやけていた）。
 - BtoB（中小企業・医療/介護事業者）の信頼を得つつ、先進性・テック感を出す。
 - 静的サイト（HTML/CSS/JS、依存ライブラリなし）の制約内で実現する。
+- **求職者（採用）を第2オーディエンスとする**。採用力強化のため、トップページからの採用導線・careers.html のコンテンツ充足（選考フロー・FAQ・AI環境訴求）を継続的に整備する。
 
 ---
 
@@ -77,7 +78,7 @@ placeholder・カルーセル文字は装飾用途で低めだが許容。純黒
 
 Header(sticky) → Hero → trust-banner → **3本柱(#pillars: MDX App/Flow/Portal)** → ロゴカルーセル(自社運営ポータル) →
 About(会社概要・数値) → Philosophy → Strengths → Approach → **対応領域(#services: 旧6領域)** → 運営ポータル →
-Customers → Cases → Flow(支援の流れ) → Company(会社情報) → **FAQ(`<details>`)** → Contact(フォーム) → Footer
+Customers → Cases → Flow(支援の流れ) → Company(会社情報) → **FAQ(`<details>`)** → **Recruit(採用情報 #recruit)** → Contact(フォーム) → Footer
 
 ---
 
@@ -117,6 +118,7 @@ Customers → Cases → Flow(支援の流れ) → Company(会社情報) → **FA
 - 医療表現は節度を保ち、MDXは **IT/DX企業**として表現（3本柱を主役、医療・介護は対応領域の一つ）。
 - SEO/OGP/JSON-LD/GA4(G-MZTNZ1G68S)/Formspree(xreydklq)/favicon は非破壊で維持。
 - アセット参照に `?v=YYYYMMDD` を付与（再訪ユーザーの旧キャッシュ対策）。**デザイン変更時はこの版数を更新する**。
+- **カラートークンの意味を変更するときは、全 HTML（サブページ埋め込み style 含む）の `var(--color-*)` 使用箇所を横断 grep して確認する**（2026-07-02 careers.html 視覚崩壊事故の再発防止）。
 
 ---
 
@@ -142,6 +144,29 @@ Customers → Cases → Flow(支援の流れ) → Company(会社情報) → **FA
 - 各事例 OGP個別画像・WebP化、Search Console でインデックス確認→薄いページは noindex 判断
 - **個別ページは手書き散文のみ**（repo設定ファイルにPHI/スタッフ名/secrets実在＝ダンプ禁止）。配布前に2段レビュー必須。
 
+## 7.7 採用（Recruit）設計（2026-07-02 P1 実装）
+
+### 情報アーキテクチャ
+「会社を知る → 人を知る → 環境を知る → 採用について」の4ブロック型を目標とする。
+P1 では次を実装済み: トップ採用導線（nav + Recruit セクション）・選考フロー・FAQ・最終更新日表示・AI環境訴求文の整理（募集要項テーブルの基本項目は従来から掲載済み・P1 では無変更）。
+
+### 差別化訴求
+AI活用環境（Claude / Gemini を日常業務で使用）を第一級の採用訴求とする。「全スタッフが使用」「会社が用意（費用負担）」の明示は施主の事実確認後に強化する（根拠のない全数量化・貸与主張は書かない。2026-07-02 ファクトレビュー指摘）。
+IT業界経験者を必須としつつ、AIツール未経験でも実務の中で習得できる環境を明示する。
+
+### ガード
+- 実績数値は実測のみ・時点明記
+- スタッフ実名・写真は本人同意必須
+- 医療・クリニック・患者表現は不使用（IT/DX企業として表現）
+- 未確定の待遇（賞与・試用期間・リモート可否・年間休日・募集期限）は決定まで掲載しない
+
+### P2 計画
+- 職種ごと 1 URL 化（/careers/ ハブ&スポーク）
+- JobPosting JSON-LD 実装（必須6項目: title / description / datePosted / validThrough / hiringOrganization / jobLocation。datePosted・validThrough・勤務地詳細住所は施主決定待ち）
+- Indeed は 2025-07 以降クローリング縮小のため engage 併用を検討
+
+---
+
 ## 8. 今後の調整ポイント / TODO
 
 - [ ] カウントアップの実機発火を確認（or 撤去判断）
@@ -149,3 +174,10 @@ Customers → Cases → Flow(支援の流れ) → Company(会社情報) → **FA
 - [ ] お問い合わせ種別セレクトに MDX App/Flow/Portal を追加検討
 - [ ] 各3本柱の個別詳細ページ（現状はトップ内アンカー）
 - [ ] reduced-motion 実機（OS設定ON）での停止確認
+- [ ] 採用: JobPosting JSON-LD 実装（datePosted・validThrough・勤務地詳細住所は施主決定後）
+- [ ] 採用: engage 併用判断（Indeed 2025-07 以降縮小対応）
+- [ ] 採用: 「数字で見るMDX」追加（実測値のみ・時点明記）
+- [ ] 採用: 社員インタビュー（本人同意必須）
+- [ ] 採用: 採用専用 OGP 画像の作成
+- [ ] 採用: 未確定待遇項目（賞与・試用期間・リモート可否・年間休日・募集期限）の施主決定後に掲載追加
+- [ ] 採用: 施主確認後に文言強化 — 「全スタッフが AI ツール使用」「会社が用意（費用負担）」の事実確認 / 面談の回数・形式 / 書類確認の返信目安
