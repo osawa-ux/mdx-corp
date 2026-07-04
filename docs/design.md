@@ -1,6 +1,16 @@
+---
+design_signoff: 2026-07-02
+---
+
 # MDX株式会社 サイト デザインガイド / 意思決定記録
 
-最終更新: 2026-07-02（求人特化パッケージ: テンプレ統一・求人SEO/LLMO仕上げ・品質修正 LCP/コントラスト/モバイルメニュー・design.md 更新）
+> **design_signoff**: 2026-07-02 施主（院長）検収済（主目的=採用の施主決定＋紺基調ダークテーマの意思決定記録に基づく。loop-engineering P1c の検収記録。方針転換時は再検収＝日付更新）
+
+> **継承宣言**: 本書は vault `70_SOP/design-base.md`（第1層: a11y・レイアウト・フォーム安全・破壊操作の UI 普遍原則）を継承する第2層サイト固有 design である（vault path は `python ~/.claude/skills/_shared/resolve_vault.py --join "70_SOP/design-base.md"` で解決し、絶対パスは書かない）。本サイトは医療サービス提供サイトではない（コーポレート＋採用）ため、design-base の医療入力ミス低減章は適用対象外。ただし a11y・フォーム安全（Contact フォーム）・破壊操作の各章は適用する。安全系（a11y / フォーム安全）が本書と矛盾した場合は design-base を優先する。
+>
+> **正本の勝敗**: トークン・実装の正本は実コード（`styles.css` の CSS custom properties）。本書は意思決定記録＋解説であり、値が食い違った場合はコードが勝ち、本書を追従更新する。
+
+最終更新: 2026-07-04（継承宣言・正本宣言追記）（2026-07-02: 求人特化パッケージ: テンプレ統一・求人SEO/LLMO仕上げ・品質修正 LCP/コントラスト/モバイルメニュー・design.md 更新）
 対象: `index.html` / `careers.html` / `styles.css` / `script.js`（トップページ）
 公開: GitHub Pages（https://mdx-inc.co.jp）
 
