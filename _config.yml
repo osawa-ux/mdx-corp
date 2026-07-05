@@ -1,0 +1,12 @@
+# GitHub Pages (Jekyll) 設定
+#
+# 本サイトは静的HTMLだが GitHub Pages 既定の Jekyll ビルダーで配信される。
+# docs/ は内部用の ADR / 設計ドキュメント。docs/decisions/adr-template.md の
+# front matter にあるプレースホルダ日付 (date: YYYY-MM-DD) を theme layout の
+# date フィルタが評価して "Invalid Date" 例外を投げ、サイト全体が build 不能に
+# なるため、docs/ を build 対象外にする。
+#
+# Jekyll を有効なまま (=.nojekyll を置かない) にすることで、Jekyll 既定の
+# ドットファイル除外が効き、.env.example / .gitignore 等が公開されない。
+exclude:
+  - docs/
