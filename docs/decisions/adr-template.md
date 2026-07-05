@@ -1,7 +1,8 @@
 ---
 status: proposed        # proposed | rejected | accepted | deprecated | superseded by NNNN
-date: YYYY-MM-DD
+date: 1970-01-01        # ← 決定日(YYYY-MM-DD)に置換。非日付を入れると GitHub Pages(Jekyll) の date フィルタが build を落とす（2026-07-05 mdx-corp 障害）ため valid な仮日付にしている
 decision-makers: 院長   # regulated 決定は人間の承認者を必ず記録（監査可能性）
+published: false        # このテンプレ自体は決定記録でないため公開しない（コピーして実 ADR を作成）。実 ADR では削除するか true に
 ---
 # NNNN: <決定を表す短いタイトル>
 
