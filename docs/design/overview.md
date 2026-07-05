@@ -1,6 +1,7 @@
 # mdx-corp 設計 overview
 
 > 意思決定の正本は `docs/decisions/`（本書は生きた設計図＝随時更新可）
+> 既存の設計メモ: [`../design.md`](../design.md)（本 overview 導入以前からの正本。統合までは併読）
 
 ## システム概要
 

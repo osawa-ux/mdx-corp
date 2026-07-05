@@ -3,7 +3,7 @@
 MDX株式会社 静的コーポレートサイト
 
 - repo: `mdx-corp`
-- project: `cross`
+- project: `mdx-corp`
 - domain: `mdx-inc.co.jp`
 - sister sites: (なし)
 
@@ -54,7 +54,7 @@ python ~/.claude/skills/_shared/resolve_vault.py --join "10_Daily/..."      # �
 
 現行 vault 体系（`00_Inbox` / `10_Daily` / `20_Projects` / `30_Areas` / `40_Resources` / `40_Strategy` / `50_Research` / `60_Decisions` / `60_Meetings` / `70_SOP` / `80_Templates` / `90_Scripts` / `99_Archive`）から、この repo で参照頻度が高いもの:
 
-- `20_Projects/cross/index.md` — この repo の現在地・重要論点
+- `20_Projects/mdx-corp/index.md` — この repo の現在地・重要論点
 - `30_Areas/` — 領域・継続テーマ（開発運用原則 等）
 - `40_Strategy/` 配下の関連ノート（共通基盤 / SEO / ドメイン / 収益化）
 - `40_Resources/` — 共通リソース・参照資料
@@ -120,7 +120,7 @@ source of truth は Obsidian `30_Areas/能力カタログ.md`（索引兼台帳�
 | 保存先 | 役割 | この repo での書き方 |
 |---|---|---|
 | `10_Daily/YYYY-MM-DD.md` | 時系列インデックス | **3〜8 行の短文ログ**。作業 / 判断 / 変更 / 残TODO / 関連。詳細は Project / SOP へリンク |
-| `20_Projects/cross/index.md` | この repo の現在地 | 状態変化・節目（deploy / push / 仕様変更）・未解決 TODO・関連 commit / docs |
+| `20_Projects/mdx-corp/index.md` | この repo の現在地 | 状態変化・節目（deploy / push / 仕様変更）・未解決 TODO・関連 commit / docs |
 | `70_SOP/` `30_Areas/` | 再利用可能ルール | この repo で確立した手順で他 repo にも展開できるもの |
 
 「迷ったら残す。ただし詳細は最小限。Daily に詳細を蓄積させない」が原則。
@@ -136,10 +136,12 @@ source of truth は Obsidian `30_Areas/能力カタログ.md`（索引兼台帳�
 ### mdx-corp で保存優先度が高いテーマ
 
 以下は「他 repo に横展開できる」「過去判断を後から辿る必要が出る」テーマ。
-**長文化したら Daily ではなく `20_Projects/cross/index.md` または SOP に
+**長文化したら Daily ではなく `20_Projects/mdx-corp/index.md` または SOP に
 書く**。
 
-1. (テーマ未指定 — repo 実態に合わせて 3〜6 個に具体化すること)
+1. サイト構成・SEO / 構造化データ方針の変更
+2. 問い合わせフォーム・公開設定（GitHub Pages / CNAME）の変更判断
+3. 6 事業領域の記載方針
 
 ### 保存しないもの（この repo の例）
 
@@ -167,7 +169,7 @@ Obsidian 記録判断: Daily短文ログ / Project更新 / SOP昇格 / 記録な
 
 ```
 - Daily 追記: 10_Daily/YYYY-MM-DD.md / 要約: <1行>
-- Project 更新: 20_Projects/cross/index.md / 要約: <1行>
+- Project 更新: 20_Projects/mdx-corp/index.md / 要約: <1行>
 - SOP 昇格: 70_SOP/<sop>.md / 要約: <1行>
 ```
 
