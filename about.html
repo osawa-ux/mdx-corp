@@ -256,6 +256,43 @@
       margin-inline: auto;
     }
     .about-cta-lead + * { margin-inline: auto; }
+    /* 情報戦略部 */
+    .infostrat-body { max-width: 860px; margin: 0 auto; }
+    .infostrat-desc {
+      color: var(--color-text-light);
+      line-height: 1.95;
+      font-size: 1rem;
+      text-align: center;
+      margin: 0 auto 34px;
+      max-width: 760px;
+    }
+    .infostrat-desc strong { color: var(--color-text); font-weight: 700; }
+    .infostrat-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 720px) {
+      .infostrat-points { grid-template-columns: 1fr; }
+    }
+    .infostrat-point {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
+      text-align: center;
+    }
+    .infostrat-point .k {
+      display: block;
+      color: var(--color-accent);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .infostrat-point h3 { color: var(--color-text); font-size: 1rem; margin: 0 0 6px; }
+    .infostrat-point p { color: var(--color-text-light); font-size: 0.85rem; margin: 0; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -350,6 +387,25 @@
             <p class="about-strength-desc">医療現場の特性上、大きな変化を一度に求めると現場の負担が大きくなりがちです。段階的な導入・検証・改善を繰り返す進め方を標準とし、現場への負担を最小化しながら定着を支援します。</p>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 情報戦略部 ===== -->
+    <section class="section about-infostrat-section" id="info-strategy">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Information Strategy</p>
+          <h2 class="section-title">現場に、実装するチームがいる。</h2>
+          <p class="section-lead">MDX のプロダクトを設計・実装・運用しているのは、在宅医療の現場に根ざした「情報戦略部」です。</p>
+        </div>
+        <div class="infostrat-body">
+          <p class="infostrat-desc reveal"><strong>元SE・元国家公務員など多様な経歴</strong>のメンバーが、クリニック運営の実務と並行して、ポータルの構築・運営／院内システム開発／AI活用・データ整理を日常的に手がけています。「現場を知る人間が、自分たちで使う道具をつくる」——外注では届かない現場適合と運用定着を、この体制が支えています。</p>
+          <div class="infostrat-points">
+            <div class="infostrat-point reveal"><span class="k">Career</span><h3>多様な経歴</h3><p>元SE・元国家公務員 等</p></div>
+            <div class="infostrat-point reveal reveal--delay-1"><span class="k">Hands-on</span><h3>現場実務と実装を兼務</h3><p>使う人が、つくる。</p></div>
+            <div class="infostrat-point reveal reveal--delay-2"><span class="k">AI Native</span><h3>AIを標準運用</h3><p>Claude・Gemini を日常業務で</p></div>
+          </div>
         </div>
       </div>
     </section>
