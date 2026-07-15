@@ -832,3 +832,34 @@ html { scroll-behavior: smooth; scroll-padding-top: var(--edt-header-h); }
   }
   #scroll-progress-bar { display: none; }
 }
+
+/* ============================================================
+   NAVY + CYAN テーマ上書き（2026-07-15・「この間まで＝現状サイト配色」へ戻す）
+   既存トークンを末尾で上書き。ダーク基調ゆえ text 用途の green は明るいシアンに。
+   ============================================================ */
+:root {
+  --edt-page:        #0f1a30;
+  --edt-page-sub:    #13203a;
+  --edt-card:        #16263f;
+  --edt-line:        #22364f;
+  --edt-ink:         #f5f7fa;
+  --edt-body:        #e6e8ee;
+  --edt-muted:       #9aacc4;
+  --edt-faint:       #6b7f9c;
+  --edt-green:       #2aa7e8;   /* accent = cyan（ボタン地・強調・境界） */
+  --edt-green-dark:  #6cc5f2;   /* text/hover 用の明るいシアン（ダーク地で可読） */
+  --edt-green-tint:  #17324a;   /* チップ/ノードの地（濃紺） */
+  --edt-green-line:  #2a4a66;
+  --edt-amber:       #e0a94a;
+  --edt-amber-text:  #e6b968;
+  --edt-shadow-card: 0 1px 2px rgba(0,0,0,.30), 0 10px 26px rgba(0,0,0,.40);
+}
+/* シアン地の CTA は白文字だと AA 未達 → 濃紺文字に */
+.btn--primary   { color: #04263a; }
+.nav-link--cta  { color: #04263a !important; }
+/* 必須バッジ：シアン地白文字が AA 未達 → 濃紺チップに */
+.required       { background: #0b1424 !important; color: #fff !important; }
+/* ヘッダー背景がハードコード warm rgba のままだった → navy 半透明に上書き（2026-07-15 navy化の追補） */
+.site-header { background-color: rgba(15, 26, 48, 0.88) !important; }
+.site-header.is-scrolled,
+.site-header.scrolled { background-color: rgba(15, 26, 48, 0.97) !important; }
