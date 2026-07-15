@@ -19,6 +19,21 @@ design_signoff: 2026-07-02
 
 ---
 
+## 0. 2026-07-15 editorial 刷新（go-live 済・院長承認）
+
+> 2026-07-02 施主検収以降の**方針転換の追従記録**。院長プレビュー承認のうえ 2026-07-15 に本番公開済み（master `a855bac` / GitHub Pages・`mdx-inc.co.jp` live 確認済）。**design_signoff 更新: 2026-07-15**。
+
+- **トップを「物語主役の editorial LP」へ刷新**（旧: 分節の多い B2B ダーク → 新: 当事者発ストーリー・情報圧縮）。`index.html` 全面刷新＋homepage 専用 `styles.editorial.css` 新規（他ページは `styles.css` 継続・動的演出/アニメは editorial 側 `.reveal` に集約）。
+- **カラー基調＝紺 `#0f1a30`＋シアン `#0ea5e9` は不変**（§4 のトークン有効。warm 案は検討過程で不採用・`--edt-*` を styles.editorial.css 末尾で紺+シアンに上書き）。
+- **新 IA（ヘッダー/フッター・全10ページ統一）**: 事業`#pillars` / 運営ポータル`#portals` / 会社`#company` / FAQ`#faq` / お問い合わせ`#contact` / 採用情報`/careers.html`。**旧アンカー `#strengths`/`#services`/`#flow` は廃止**（§5 旧構成は superseded）。
+- **新トップ構成**: Header → Hero(物語・「最終判断は人間」引用・現場の痛み→仕組み→運営定着) → 運営ポータル proof → 3本柱`#pillars` → 採用`#recruit` → 会社概要`#company` → FAQ`#faq` → お問い合わせ`#contact` → Footer。
+- **運営ポータルは医療・介護4件のみ**（在宅クリニック/訪問看護/訪問歯科/居宅介護支援）。**相続税理士ナビは物語一貫性のため非掲出**（院長決定）。
+- **about.html に「情報戦略部」セクション追加**（「MDXの専門性と強み」直後）: 元SE・元国家公務員など多様な経歴の当事者=実装チームを集合的に訴求（**氏名非掲載**・SE採用配慮で「医療事務や」削除）。
+- E-E-A-T（創業者=現役在宅医 大澤 基／代表=大澤 直子）は §7.5 のまま維持。SEO/JSON-LD/meta/GA4/Formspree 保持。
+- コミット鎖: `7086e50`→`15dd084`→`d96cbff`→`a855bac`。残: 削除セクションの長尾KW減を Search Console 観察／他ページの editorial 化は任意の別タスク。
+
+---
+
 ## 1. 目的
 
 - **アプリ開発・業務自動化・ポータルサイト開発の「3本柱」を全面に押し出す**（旧: 6領域を並列に並べ柱がぼやけていた）。
@@ -86,6 +101,8 @@ placeholder は装飾用途で低めだが許容。カルーセル文字（.caro
 ---
 
 ## 5. セクション構成（index.html）
+
+> **⚠️ 2026-07-15 superseded**: 下記は editorial 刷新**前**の旧トップ構成。現行トップの構成は **§0（2026-07-15 editorial 刷新）** を参照。以下は履歴として残置。
 
 Header(sticky) → Hero → trust-banner → **3本柱(#pillars: MDX App/Flow/Portal)** → ロゴカルーセル(自社運営ポータル) →
 About(会社概要・数値) → Philosophy → Strengths → Approach → **対応領域(#services: 旧6領域)** → 運営ポータル →
