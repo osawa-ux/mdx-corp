@@ -629,12 +629,14 @@ html { scroll-behavior: smooth; scroll-padding-top: var(--edt-header-h); }
    ----------------------------------------- */
 .contact-guide {
   max-width: 720px;
+  margin-inline: auto;
   margin-bottom: 28px;
   font-size: 0.92rem;
   color: var(--edt-body);
   line-height: 1.9;
+  text-align: center;
 }
-.contact-guide-list { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.contact-guide-list { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; width: fit-content; margin-left: auto; margin-right: auto; text-align: left; }
 .contact-guide-list li {
   padding-left: 18px;
   position: relative;
@@ -649,7 +651,7 @@ html { scroll-behavior: smooth; scroll-padding-top: var(--edt-header-h); }
   font-weight: 800;
 }
 
-.contact-form { max-width: 640px; }
+.contact-form { max-width: 640px; margin-inline: auto; }
 .form-group { margin-bottom: 20px; }
 .form-label {
   display: block;
