@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>採用情報 | MDX株式会社 — 横浜市都筑区のAI×業務改善 IT人材募集</title>
-  <meta name="description" content="MDX株式会社（横浜市都筑区）では、AIツール（Claude / Gemini）を活用した業務改善・DX推進を担うIT人材を募集しています。元SE・IT業界経験者歓迎。未経験でも取り組める環境とマニュアルを整備しています。" />
+  <meta name="description" content="MDX株式会社（横浜市都筑区）のIT・業務改善スタッフ募集。Claude / Gemini を会社支給し全員が日常業務で使用。自社プロダクトの開発・運用まで自社オフィスで完結し、客先常駐・派遣はありません。元SE・社内SE歓迎（IT実務経験必須・AIツール経験は不問）。年間休日130日。" />
   <link rel="canonical" href="https://mdx-inc.co.jp/careers.html" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="採用情報 | MDX株式会社 — 横浜市都筑区のAI×業務改善 IT人材募集" />
-  <meta property="og:description" content="MDX株式会社（横浜市都筑区）では、AIツール（Claude / Gemini）を活用した業務改善・DX推進を担うIT人材を募集しています。元SE・IT業界経験者歓迎。未経験でも取り組める環境とマニュアルを整備しています。" />
+  <meta property="og:description" content="MDX株式会社（横浜市都筑区）のIT・業務改善スタッフ募集。Claude / Gemini を会社支給し全員が日常業務で使用。自社プロダクトの開発・運用まで自社オフィスで完結し、客先常駐・派遣はありません。元SE・社内SE歓迎（IT実務経験必須・AIツール経験は不問）。年間休日130日。" />
   <meta property="og:site_name" content="MDX株式会社" />
   <meta property="og:url" content="https://mdx-inc.co.jp/careers.html" />
   <meta property="og:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="採用情報 | MDX株式会社 — 横浜市都筑区のAI×業務改善 IT人材募集" />
-  <meta name="twitter:description" content="MDX株式会社（横浜市都筑区）では、AIツール（Claude / Gemini）を活用した業務改善・DX推進を担うIT人材を募集しています。元SE・IT業界経験者歓迎。未経験でも取り組める環境とマニュアルを整備しています。" />
+  <meta name="twitter:description" content="MDX株式会社（横浜市都筑区）のIT・業務改善スタッフ募集。Claude / Gemini を会社支給し全員が日常業務で使用。自社プロダクトの開発・運用まで自社オフィスで完結し、客先常駐・派遣はありません。元SE・社内SE歓迎（IT実務経験必須・AIツール経験は不問）。年間休日130日。" />
   <meta name="twitter:image" content="https://mdx-inc.co.jp/assets/ogp/ogp.png" />
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -55,7 +55,7 @@
     "@context": "https://schema.org/",
     "@type": "JobPosting",
     "title": "IT・業務改善スタッフ",
-    "description": "<p>AIツール（Claude / Gemini）を活用しながら、業務の整理・改善・標準化を進めるポジションです。業務フローの整理・可視化、マニュアルの作成・更新、データ整理・情報の構造化、ITツールの導入・運用サポート、社内の業務に関する課題抽出と改善提案を担当します。IT業界での実務経験（年数不問）が必須条件です。AIツールの使用経験は不要で、実務の中で習得できます。客先常駐（SES）・労働者派遣はなく、現在の就業場所は横浜市都筑区の自社オフィスのみです。</p>",
+    "description": "<p>AIツール（Claude / Gemini）を活用しながら、業務の整理・改善・標準化を進めるポジションです。業務フローの整理・可視化、マニュアルの作成・更新、データ整理・情報の構造化、ITツールの導入・運用サポート、社内の業務に関する課題抽出と改善提案を担当します。IT業界での実務経験（年数不問）が必須条件です。AIツールの使用経験は不要で、実務の中で習得できます。適性・ご希望に応じて、Python 等を用いた自動化ツールの開発・保守を担当いただく場合もあります。客先常駐（SES）・労働者派遣はなく、現在の就業場所は横浜市都筑区の自社オフィスのみです。</p>",
     "datePosted": "2026-07-02",
     "employmentType": "FULL_TIME",
     "hiringOrganization": {
@@ -115,9 +115,14 @@
     .careers-intro p + p { margin-top: 14px; }
 
     /* Highlight cards */
+    /* 2026-07-22: カード4枚化に伴い auto-fit(220px) から 2x2 固定へ。
+       .careers-section の内容幅 752px では auto-fit が3列までしか組めず4枚目が孤立するため */
     .careers-highlights {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: grid; grid-template-columns: 1fr 1fr;
       gap: 20px; margin-top: 24px;
+    }
+    @media (max-width: 600px) {
+      .careers-highlights { grid-template-columns: 1fr; }
     }
     .careers-highlight-card {
       background: var(--color-bg-sub); border-radius: var(--radius-lg);
@@ -305,7 +310,9 @@
         <li>データ整理・情報の構造化</li>
         <li>ITツールの導入・運用サポート</li>
         <li>社内の業務に関する課題抽出と改善提案</li>
+        <li>適性・ご希望に応じて、Python 等を用いた自動化ツールの開発・保守</li>
       </ul>
+      <p class="careers-text" style="margin-top:16px;">どこまで手を動かすかは固定していません。業務の整理・標準化に寄せることも、自動化ツールや自社プロダクトの実装まで担うこともできる、<strong>「整理する側」と「作る側」のどちらにも寄せられるポジション</strong>です。</p>
     </div>
 
     <!-- ===== ENVIRONMENT ===== -->
@@ -313,19 +320,38 @@
       <h2 class="careers-section-title">働く環境</h2>
       <div class="careers-highlights">
         <div class="careers-highlight-card">
-          <p class="careers-highlight-label">TOOL</p>
-          <p class="careers-highlight-value">Claude / Gemini を<br>日常的に使用</p>
+          <p class="careers-highlight-label">AI NATIVE</p>
+          <p class="careers-highlight-value">Claude / Gemini<br>会社支給・全員が日常使用</p>
         </div>
         <div class="careers-highlight-card">
-          <p class="careers-highlight-label">SUPPORT</p>
-          <p class="careers-highlight-value">Claude Code 未経験OK<br>マニュアル完備</p>
+          <p class="careers-highlight-label">PRODUCT</p>
+          <p class="careers-highlight-value">自社プロダクトが<br>本番稼働中</p>
         </div>
         <div class="careers-highlight-card">
-          <p class="careers-highlight-label">ENVIRONMENT</p>
-          <p class="careers-highlight-value">デュアルモニター<br>標準装備</p>
+          <p class="careers-highlight-label">HOLIDAY</p>
+          <p class="careers-highlight-value">年間休日130日<br>土日祝＋年末年始</p>
+        </div>
+        <div class="careers-highlight-card">
+          <p class="careers-highlight-label">WORK STYLE</p>
+          <p class="careers-highlight-value">客先常駐なし<br>自社オフィスで完結</p>
         </div>
       </div>
-      <p class="careers-text" style="margin-top:20px;">AIツール（Claude / Gemini）は会社が用意し、全スタッフが日常業務で使用しています。新しいツールややり方を試しやすい環境で、Claude Code の経験がなくても実務の中で使いながら習得できます。</p>
+      <p class="careers-text" style="margin-top:20px;">AIツール（Claude / Gemini）は会社が用意し、全スタッフが日常業務で使用しています。開発・自動化の実務では Claude Code も使っています。新しいツールややり方を試しやすく、Claude Code の経験がなくても実務の中で使いながら習得できます（業務ごとのマニュアルを整備しています）。</p>
+    </div>
+
+    <!-- ===== TECH ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">技術環境と、私たちが作っているもの</h2>
+      <p class="careers-text">当社は受託した案件だけでなく、<strong>自社で企画・運営しているプロダクトを持っています</strong>。業界特化ポータル群や社内向けの業務自動化ツールは実際に本番稼働しており、自分たちで使い続けながら改善しています。中小企業向けの統合労務SaaS（romubase）は現在開発中で、これから立ち上げていくフェーズです。<strong>稼働中プロダクトの改善と、0→1 の立ち上げの両方があります。</strong></p>
+      <div class="careers-feature">
+        <p class="careers-feature-title">主に扱う技術</p>
+        <p class="careers-text">Python / TypeScript / Next.js / React Native（Expo）/ Supabase / Playwright / GitHub Actions / 各種 API 連携（Gmail・Search Console・Stripe ほか）／静的サイトジェネレーター（内製）</p>
+      </div>
+      <div class="careers-feature">
+        <p class="careers-feature-title">設計で大事にしていること</p>
+        <p class="careers-text">送信・確定などの重要な操作は必ず人間が最終判断するゲートを残す、認証情報を自動化ツールに渡さない、機微情報のフィルタは fail-close にする——といった安全側に倒す設計を標準にしています。CI 上での自動チェックや pre-commit ガードで、ルールを文書ではなく仕組みとして担保しています。</p>
+      </div>
+      <p class="careers-text" style="margin-top:16px;">実際に作ったものは開発事例ページで公開しています（ポータル基盤・業務自動化・SaaS 開発の事例）。→ <a href="/works.html" style="color:var(--color-accent);">開発事例を見る</a></p>
     </div>
 
     <!-- ===== FEATURES ===== -->
@@ -380,7 +406,7 @@
 
     <!-- ===== WHY NO EXPERIENCE OK ===== -->
     <div class="careers-section">
-      <h2 class="careers-section-title">未経験でも取り組める理由</h2>
+      <h2 class="careers-section-title">AIツールが未経験でも取り組める理由</h2>
       <ul class="careers-list">
         <li>業務ごとにマニュアルが整備されている</li>
         <li>AIツールは実務の中で習得可能</li>
@@ -435,7 +461,11 @@
             </tr>
             <tr>
               <th>業務内容</th>
-              <td>AIツールを活用した業務改善 / 業務フロー整理 / マニュアル作成 / データ整理 / ITツール導入・運用<br><span style="font-size:0.85rem;color:var(--color-text-light);">変更の範囲：会社の定める業務全般</span></td>
+              <td>AIツールを活用した業務改善 / 業務フロー整理 / マニュアル作成 / データ整理 / ITツール導入・運用 / 適性に応じた自動化ツールの開発・保守<br><span style="font-size:0.85rem;color:var(--color-text-light);">変更の範囲：会社の定める業務全般</span></td>
+            </tr>
+            <tr>
+              <th>キャリアパス</th>
+              <td>業務改善・標準化を中心に進める道と、自動化ツール・自社プロダクトの開発に軸足を移す道の両方を想定しています<br><span style="font-size:0.85rem;color:var(--color-text-light);">入社時に固定せず、適性とご希望に応じて広げていきます（あらかじめ決まったコース制度があるわけではありません）</span></td>
             </tr>
             <tr>
               <th>受動喫煙防止対策</th>
@@ -451,7 +481,7 @@
             </tr>
             <tr>
               <th>歓迎条件</th>
-              <td>SE・社内SE・ITサポートの実務経験<br>業務フロー設計やマニュアル整備の経験<br>AIツールの活用経験（未経験でもOK）</td>
+              <td>SE・社内SE・ITサポートの実務経験<br>業務フロー設計やマニュアル整備の経験<br>Python 等を用いた自動化スクリプト・ツール開発の経験<br>AIツールの活用経験（未経験でもOK）</td>
             </tr>
           </tbody>
         </table>
@@ -537,6 +567,15 @@
             <details class="careers-faq-details">
               <summary class="careers-faq-question">勤務地・勤務時間を教えてください。</summary>
               <dd class="careers-faq-answer">勤務地は神奈川県横浜市都筑区川和町2330-2、勤務時間は 9:00〜18:00（休憩 13:00〜14:00）です。休日は土日祝と年末年始（12月29日〜1月3日）ほか会社カレンダーによる休日で、年間休日130日です。</dd>
+            </details>
+          </dt>
+        </div>
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">コードを書く業務はありますか？</summary>
+              <dd class="careers-faq-answer">あります。ただし全員に必須ではありません。業務の整理・標準化を中心に進めていただくこともできますし、ご自身で実装できる方には Python 等を用いた自動化ツールや自社プロダクトの開発・保守まで担っていただけます。入社時に固定せず、適性とご希望に応じて範囲を広げていく前提です。なお業務の起点はあくまで現場の課題整理で、開発の比重は時期・案件・ご本人の適性によって変わります。面談の際に、どちらに寄せたいかをお聞かせください。</dd>
             </details>
           </dt>
         </div>
