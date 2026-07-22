@@ -30,7 +30,7 @@
 - [採用情報](https://mdx-inc.co.jp/careers.html): IT・業務改善スタッフ（正社員）を募集中。
 - 勤務地: 神奈川県横浜市都筑区川和町2330-2（自社オフィス。客先常駐・派遣なし）
 - 職種: IT・業務改善スタッフ（正社員）
-- 働く環境: Claude / Gemini を全スタッフが日常業務で使用。開発・自動化では Claude Code も使用。Claude Code 未経験OK・業務ごとのマニュアルを整備。技術: Python / TypeScript / Next.js / Supabase / Playwright / GitHub Actions。
+- 働く環境: Claude Code / Gemini を会社支給し、全スタッフが日常業務で使用。Claude Code 未経験OK・業務ごとのマニュアルを整備。技術: Python / TypeScript / Next.js / Supabase / Playwright / GitHub Actions。
 - 応募条件: IT業界での実務経験（年数不問）。AIツール未経験でも実務の中で習得可能。
 
 ## 会社情報
