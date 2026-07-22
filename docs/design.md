@@ -190,7 +190,7 @@ IT業界経験者を必須としつつ、AIツール未経験でも実務の中�
 
 ### P2: JobPosting 構造化データ（2026-07-02 実装済）
 - careers.html に JobPosting JSON-LD を実装。**現状1職種のため careers.html 自体が「1求人1URL」の個別ページ**（Google要件充足）。複数職種化する際に /careers/ ハブ&スポークへ分割する。
-- 実装値: title=IT・業務改善スタッフ / datePosted=2026-07-02（ページ可視の最終更新日と一致・内容大幅更新時に更新）/ employmentType=FULL_TIME / baseSalary=月給30〜35万円 / jobLocation=〒224-0057 横浜市都筑区川和町2330（2026-07-02 施主go）
+- 実装値: title=IT・業務改善スタッフ / datePosted=2026-07-02（**掲載日**。ページ可視は「掲載日／最終更新日」を併記し、datePosted は掲載日に固定＝鮮度偽装を避ける）/ employmentType=FULL_TIME / baseSalary=月給30〜35万円 / jobLocation=〒224-0057 横浜市都筑区川和町2330-2（**2026-07-22 施主go で 2330 → 2330-2 に訂正**。登記住所および index/about/works/privacy の会社概要と一致）
 - **validThrough は意図的に省略**（募集期限未定。Google公式「期限がない・不明な場合は含めない」に準拠。募集終了時はページから JobPosting を削除する）
 - 構造化データの値は必ずページ可視テキストと一致させる（Google要件）
 - Indeed は 2025-07 以降クローリング縮小のため engage 併用を検討（未着手）
