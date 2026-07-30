@@ -8,5 +8,15 @@
 #
 # Jekyll を有効なまま (=.nojekyll を置かない) にすることで、Jekyll 既定の
 # ドットファイル除外が効き、.env.example / .gitignore 等が公開されない。
+#
+# 2026-07-30 追加: 内部用ドキュメント・スクリプトが会社公式ドメインで
+# 配信されていた（https://mdx-inc.co.jp/CLAUDE.md 等が HTTP 200）ため、
+# サイト表示に不要な内部ファイルを build 対象外にする。
+# repo は public のため GitHub 上では引き続き閲覧可能（それは許容）。
+# 公式ドメイン配下で配信しない、が本 exclude の目的。
 exclude:
   - docs/
+  - CLAUDE.md
+  - README.md
+  - tools/
+  - requirements.txt
