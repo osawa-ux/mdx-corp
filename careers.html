@@ -203,8 +203,9 @@
     .careers-back { text-align: center; margin-top: 56px; }
 
     /* Hero updated date */
+    /* 2026-08-03: axe の color-contrast(WCAG AA 4.5:1) を満たすため 0.4 → 0.72 へ */
     .careers-hero-updated {
-      margin-top: 10px; font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      margin-top: 10px; font-size: 0.78rem; color: rgba(255,255,255,0.72);
     }
 
     /* Selection flow */
@@ -270,8 +271,12 @@
     .careers-doubt-q {
       font-size: 0.9rem; font-weight: 700; color: #f5f7fa; line-height: 1.6;
     }
-    .careers-doubt-q::before {
-      content: '？'; color: var(--color-accent); margin-right: 6px;
+    /* 本文リンクは色だけで示さない（WCAG 1.4.1 link-in-text-block 対策・下線を併用） */
+    .careers-text a,
+    .careers-doubt-a a,
+    .careers-ai-card-role a,
+    .careers-know-list a {
+      text-decoration: underline; text-underline-offset: 2px;
     }
     .careers-doubt-a {
       margin-top: 10px; font-size: 0.875rem; color: var(--color-text); line-height: 1.85;
