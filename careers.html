@@ -252,6 +252,128 @@
       display: block; padding: 4px 4px 18px 34px;
       font-size: 0.9rem; color: var(--color-text); line-height: 1.85;
     }
+
+    /* ===== 2026-08-03 追加分（このページ内で完結） ===== */
+
+    /* 応募前の不安を打ち消す 3 カード */
+    .careers-doubts {
+      max-width: 800px; margin-inline: auto; padding: 40px 24px 0;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    @media (max-width: 700px) {
+      .careers-doubts { grid-template-columns: 1fr; }
+    }
+    .careers-doubt-card {
+      background: var(--color-bg-sub); border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border); padding: 20px;
+    }
+    .careers-doubt-q {
+      font-size: 0.9rem; font-weight: 700; color: #f5f7fa; line-height: 1.6;
+    }
+    .careers-doubt-q::before {
+      content: '？'; color: var(--color-accent); margin-right: 6px;
+    }
+    .careers-doubt-a {
+      margin-top: 10px; font-size: 0.875rem; color: var(--color-text); line-height: 1.85;
+    }
+    .careers-doubt-badge {
+      display: inline-block; margin-bottom: 10px; padding: 3px 10px;
+      border-radius: 999px; background: rgba(14, 165, 233, 0.14);
+      color: var(--color-accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+    }
+
+    /* AI が入っている業務 */
+    .careers-ai-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;
+    }
+    @media (max-width: 700px) {
+      .careers-ai-grid { grid-template-columns: 1fr; }
+    }
+    .careers-ai-card {
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); padding: 20px;
+    }
+    .careers-ai-card-title {
+      font-size: 0.925rem; font-weight: 700; color: #f5f7fa; line-height: 1.6;
+    }
+    .careers-ai-card-role {
+      margin-top: 10px; font-size: 0.85rem; color: var(--color-text-light); line-height: 1.8;
+    }
+    .careers-ai-card-role strong { color: var(--color-accent); font-weight: 700; }
+
+    /* ナレッジ共有 */
+    .careers-know-list {
+      list-style: none; padding: 0; margin-top: 16px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    @media (max-width: 700px) {
+      .careers-know-list { grid-template-columns: 1fr; }
+    }
+    .careers-know-list li {
+      background: var(--color-bg-sub); border-radius: var(--radius-md, 8px);
+      padding: 14px 16px; font-size: 0.875rem; color: var(--color-text); line-height: 1.75;
+    }
+    .careers-know-list li strong { display: block; color: #f5f7fa; margin-bottom: 4px; }
+
+    /* ページ途中のインライン CTA */
+    .careers-inline-cta {
+      max-width: 800px; margin: 40px auto 0; padding: 24px;
+      background: linear-gradient(135deg, rgba(14,165,233,0.12), rgba(14,165,233,0.04));
+      border: 1px solid rgba(14,165,233,0.28); border-radius: var(--radius-lg);
+      text-align: center;
+    }
+    .careers-inline-cta p {
+      font-size: 0.9rem; color: var(--color-text); line-height: 1.8; margin-bottom: 14px;
+    }
+    .careers-inline-cta-buttons {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+
+    /* 選考フローのステップ表示 */
+    .careers-flow-list--steps { counter-reset: none; }
+    .careers-flow-list--steps .careers-flow-item { position: relative; }
+    .careers-flow-hint {
+      display: block; margin-top: 4px;
+      font-size: 0.82rem; color: var(--color-text-light); line-height: 1.7;
+    }
+
+    /* FAQ の目次とグループ */
+    .careers-faq-nav {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px;
+    }
+    .careers-faq-nav a {
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid var(--color-border); background: var(--color-bg-sub);
+      color: var(--color-text); font-size: 0.82rem; text-decoration: none;
+    }
+    .careers-faq-nav a:hover { border-color: var(--color-accent); color: var(--color-accent); }
+    .careers-faq-group-title {
+      font-size: 0.9rem; font-weight: 700; color: var(--color-accent);
+      margin: 28px 0 10px; letter-spacing: 0.03em; scroll-margin-top: 90px;
+    }
+    .careers-faq-group-title:first-of-type { margin-top: 0; }
+
+    /* モバイル固定 CTA */
+    .careers-sticky-cta { display: none; }
+    @media (max-width: 700px) {
+      .careers-sticky-cta {
+        display: flex; gap: 10px;
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+        padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(11, 20, 36, 0.96);
+        border-top: 1px solid var(--color-border);
+      }
+      .careers-sticky-cta a {
+        flex: 1; text-align: center; padding: 12px 8px;
+        border-radius: var(--radius-md, 8px);
+        font-size: 0.85rem; font-weight: 700; text-decoration: none; line-height: 1.4;
+      }
+      .careers-sticky-cta .is-primary { background: var(--color-accent); color: #fff; }
+      .careers-sticky-cta .is-ghost {
+        border: 1px solid var(--color-border); color: var(--color-text);
+      }
+      .careers-main { padding-bottom: 76px; }
+    }
   </style>
 </head>
 <body>
@@ -288,7 +410,8 @@
       <div class="container">
         <h1 class="careers-hero-title">AIと業務改善で、<br>仕事の"当たり前"を変える。</h1>
         <p class="careers-hero-sub">IT・業務改善スタッフ 募集中｜正社員</p>
-        <p class="careers-hero-updated">掲載日：2026年7月2日／最終更新日：2026年7月22日</p>
+        <p class="careers-hero-sub">現役の在宅医が創業し、自社の医療現場の課題を自分たちで解いている会社です。</p>
+        <p class="careers-hero-updated">掲載日：2026年7月2日／最終更新日：2026年8月3日</p>
       </div>
     </div>
 
@@ -298,6 +421,26 @@
       <p>多くの現場では、非効率な作業や属人化した業務がまだ数多く残っています。私たちはそれらを一つひとつ整理し、AIやITツールを活用することで、よりスムーズで持続可能な仕組みに変えていくことを目指しています。</p>
       <p>そのために必要なのは、「特別な技術」だけではなく、目の前の業務をより良くしたいという視点と、実際に手を動かして改善していく力です。</p>
     </div>
+
+    <!-- ===== 応募前の不安（FAQ の要点を先出し） ===== -->
+    <div class="careers-doubts">
+      <div class="careers-doubt-card">
+        <p class="careers-doubt-badge">AI 未経験 OK</p>
+        <p class="careers-doubt-q">AIツールを使ったことがなくても大丈夫？</p>
+        <p class="careers-doubt-a">はい。AIツールの使用経験は応募条件にありません。業務ごとのマニュアルを整備しており、実務の中で使いながら習得できます。</p>
+      </div>
+      <div class="careers-doubt-card">
+        <p class="careers-doubt-badge">コードは必須ではない</p>
+        <p class="careers-doubt-q">コードが書けないと厳しい？</p>
+        <p class="careers-doubt-a">全員に必須ではありません。業務の整理・標準化を中心に進めることもできます（IT業界での実務経験は応募条件です・年数不問）。</p>
+      </div>
+      <div class="careers-doubt-card">
+        <p class="careers-doubt-badge">常駐なし</p>
+        <p class="careers-doubt-q">客先常駐や派遣はある？</p>
+        <p class="careers-doubt-a">ありません。労働者派遣事業・客先常駐（SES）は行っておらず、就業場所は横浜市都筑区の自社オフィスのみです。</p>
+      </div>
+    </div>
+    <p class="careers-text" style="max-width:800px;margin:14px auto 0;padding:0 24px;font-size:0.85rem;color:var(--color-text-light);">ほかの疑問は<a href="#faq" style="color:var(--color-accent);">よくある質問</a>にまとめています。</p>
 
     <!-- ===== JOB DESCRIPTION ===== -->
     <div class="careers-section">
@@ -339,6 +482,42 @@
       <p class="careers-text" style="margin-top:20px;">AIツール（Claude Code / Gemini）は会社が用意し、<strong>全スタッフが日常業務で使用しています</strong>。一部の担当者だけが試しているのではなく、開発も業務改善も日々この環境の上で動いています。新しいツールややり方を試しやすく、Claude Code の経験がなくても実務の中で使いながら習得できます（業務ごとのマニュアルを整備しています）。</p>
     </div>
 
+    <!-- ===== AI が入っている業務 ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">AIは「試している」段階ではなく、業務の中に入っています</h2>
+      <p class="careers-text">当社が AI を使っているのは、社内のデモや実験ではありません。医療現場の実務そのものを、自分たちで作った仕組みで回しています。下記はいずれも<strong>本番稼働中</strong>で、開発事例ページで内容を公開しているものです。</p>
+      <div class="careers-ai-grid">
+        <div class="careers-ai-card">
+          <p class="careers-ai-card-title">レセプト算定漏れチェック</p>
+          <p class="careers-ai-card-role">算定ルールをコードで表現し、カルテを自動取得して漏れの候補を検出。<strong>最終判断は必ず人が行う</strong>設計です。<a href="/works/receipt-check.html" style="color:var(--color-accent);">事例を見る</a></p>
+        </div>
+        <div class="careers-ai-card">
+          <p class="careers-ai-card-title">医療書類のチェック</p>
+          <p class="careers-ai-card-role">書類の作成漏れ・記載の不備を仕組みで検出し、担当者の確認に回します。<a href="/works/medical-docs-check.html" style="color:var(--color-accent);">事例を見る</a></p>
+        </div>
+        <div class="careers-ai-card">
+          <p class="careers-ai-card-title">ポータルの生成基盤</p>
+          <p class="careers-ai-card-role">全国規模の施設情報を、1 つの内製ジェネレーターから複数ポータルへ生成。品質監査も自動で回します。<a href="/works/portal-platform.html" style="color:var(--color-accent);">事例を見る</a></p>
+        </div>
+        <div class="careers-ai-card">
+          <p class="careers-ai-card-title">コンテンツ制作のパイプライン</p>
+          <p class="careers-ai-card-role">記事や動画の制作工程を分解し、AI が担える部分を組み込んで運用しています。<a href="/works/content-pipeline.html" style="color:var(--color-accent);">事例を見る</a></p>
+        </div>
+      </div>
+      <p class="careers-text" style="margin-top:18px;">このポジションでは、こうした仕組みを<strong>使う側・直す側・増やす側</strong>のいずれにも関わります。業務フローの整理やマニュアルの更新から入り、適性とご希望に応じて自動化ツールの開発まで範囲を広げられます。</p>
+
+      <div class="careers-feature" style="margin-top:24px;">
+        <p class="careers-feature-title">引き継ぎは「人に聞く」より先に「検索できる」</p>
+        <p class="careers-text">属人化を減らすため、業務の手順や判断の経緯をテキストで残し、AI から検索・参照できる形で共有しています。前任者の記憶に頼らず、必要な情報に自分でたどり着ける状態を標準にしています。</p>
+        <ul class="careers-know-list">
+          <li><strong>業務ごとのマニュアル</strong>手順を文書化し、変わったらその場で更新します</li>
+          <li><strong>判断の記録</strong>なぜそう決めたかを残し、後から辿れるようにします</li>
+          <li><strong>共通のルール</strong>安全に関わる決まりは、文書ではなく仕組みで守ります</li>
+          <li><strong>AI からの参照</strong>これらを Claude Code / Gemini から引ける形で置いています</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- ===== TECH ===== -->
     <div class="careers-section">
       <h2 class="careers-section-title">技術環境と、私たちが作っているもの</h2>
@@ -352,6 +531,15 @@
         <p class="careers-text">送信・確定などの重要な操作は必ず人間が最終判断するゲートを残す、認証情報を自動化ツールに渡さない、機微情報のフィルタは fail-close にする——といった安全側に倒す設計を標準にしています。CI 上での自動チェックや pre-commit ガードで、ルールを文書ではなく仕組みとして担保しています。</p>
       </div>
       <p class="careers-text" style="margin-top:16px;">実際に作ったものは開発事例ページで公開しています（ポータル基盤・業務自動化・SaaS 開発の事例）。→ <a href="/works.html" style="color:var(--color-accent);">開発事例を見る</a></p>
+    </div>
+
+    <!-- ===== 途中 CTA（1） ===== -->
+    <div class="careers-inline-cta">
+      <p>ここまでで気になった方へ。応募の前に、話を聞くだけでも構いません。</p>
+      <div class="careers-inline-cta-buttons">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--primary" target="_blank" rel="noopener">応募フォームへ</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--outline" target="_blank" rel="noopener">カジュアル面談・見学を希望する</a>
+      </div>
     </div>
 
     <!-- ===== FEATURES ===== -->
@@ -506,21 +694,36 @@
       </div>
     </div>
 
+    <!-- ===== 途中 CTA（2） ===== -->
+    <div class="careers-inline-cta">
+      <p>条件をご確認いただけましたか。ご不明な点は、面談の場でお答えします。</p>
+      <div class="careers-inline-cta-buttons">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--primary" target="_blank" rel="noopener">応募フォームへ</a>
+        <a href="#faq" class="btn btn--outline">よくある質問を見る</a>
+      </div>
+    </div>
+
     <!-- ===== SELECTION FLOW ===== -->
     <div class="careers-section">
       <h2 class="careers-section-title">選考の流れ</h2>
-      <ol class="careers-flow-list">
+      <ol class="careers-flow-list careers-flow-list--steps">
         <li class="careers-flow-item">
           <span class="careers-flow-step">01</span>
-          <span class="careers-flow-text">応募フォーム送信</span>
+          <span class="careers-flow-text">応募フォーム送信
+            <span class="careers-flow-hint">履歴書の事前提出は不要です。フォームに自己紹介・ご経歴・志望動機をご記入ください。</span>
+          </span>
         </li>
         <li class="careers-flow-item">
           <span class="careers-flow-step">02</span>
-          <span class="careers-flow-text">書類確認・ご連絡</span>
+          <span class="careers-flow-text">書類確認・ご連絡
+            <span class="careers-flow-hint">内容を確認のうえ、ご記入いただいた連絡先へご返信します。</span>
+          </span>
         </li>
         <li class="careers-flow-item">
           <span class="careers-flow-step">03</span>
-          <span class="careers-flow-text">面談（1回・オンライン可）</span>
+          <span class="careers-flow-text">面談（1回・オンライン可）
+            <span class="careers-flow-hint">「整理する側」と「作る側」のどちらに寄せたいかを、この場でお聞かせください。</span>
+          </span>
         </li>
         <li class="careers-flow-item">
           <span class="careers-flow-step">04</span>
@@ -531,8 +734,16 @@
     </div>
 
     <!-- ===== FAQ ===== -->
-    <div class="careers-section">
+    <div class="careers-section" id="faq">
       <h2 class="careers-section-title">よくある質問</h2>
+      <nav class="careers-faq-nav" aria-label="よくある質問の目次">
+        <a href="#faq-ai">AIツール・技術環境</a>
+        <a href="#faq-work">仕事内容・必要なスキル</a>
+        <a href="#faq-style">働き方・勤務条件</a>
+        <a href="#faq-apply">応募・選考</a>
+      </nav>
+
+      <h3 class="careers-faq-group-title" id="faq-ai">AIツール・技術環境について</h3>
       <dl class="careers-faq-list">
 
         <div class="careers-faq-item">
@@ -543,6 +754,20 @@
             </details>
           </dt>
         </div>
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">どんなツールを使いますか？</summary>
+              <dd class="careers-faq-answer">Claude Code / Gemini / Google Workspace などを日常的に使用します。デュアルモニターを標準装備しています。</dd>
+            </details>
+          </dt>
+        </div>
+
+      </dl>
+
+      <h3 class="careers-faq-group-title" id="faq-work">仕事内容・必要なスキルについて</h3>
+      <dl class="careers-faq-list">
 
         <div class="careers-faq-item">
           <dt>
@@ -565,35 +790,22 @@
         <div class="careers-faq-item">
           <dt>
             <details class="careers-faq-details">
-              <summary class="careers-faq-question">どんなツールを使いますか？</summary>
-              <dd class="careers-faq-answer">Claude Code / Gemini / Google Workspace などを日常的に使用します。デュアルモニターを標準装備しています。</dd>
+              <summary class="careers-faq-question">コードを書く業務はありますか？</summary>
+              <dd class="careers-faq-answer">あります。ただし全員に必須ではありません。業務の整理・標準化を中心に進めていただくこともできますし、ご自身で実装できる方には Python 等を用いた自動化ツールや自社プロダクトの開発・保守まで担っていただけます。入社時に固定せず、適性とご希望に応じて範囲を広げていく前提です。なお業務の起点はあくまで現場の課題整理で、開発の比重は時期・案件・ご本人の適性によって変わります。面談の際に、どちらに寄せたいかをお聞かせください。</dd>
             </details>
           </dt>
         </div>
 
-        <div class="careers-faq-item">
-          <dt>
-            <details class="careers-faq-details">
-              <summary class="careers-faq-question">応募前に話を聞くことはできますか？</summary>
-              <dd class="careers-faq-answer">はい。カジュアルなご相談や見学も歓迎しています。応募フォームにその旨をご記入ください。</dd>
-            </details>
-          </dt>
-        </div>
+      </dl>
+
+      <h3 class="careers-faq-group-title" id="faq-style">働き方・勤務条件について</h3>
+      <dl class="careers-faq-list">
 
         <div class="careers-faq-item">
           <dt>
             <details class="careers-faq-details">
               <summary class="careers-faq-question">勤務地・勤務時間を教えてください。</summary>
               <dd class="careers-faq-answer">勤務地は神奈川県横浜市都筑区川和町2330-2、勤務時間は 9:00〜18:00（休憩 13:00〜14:00）です。休日は土日祝と年末年始（12月29日〜1月3日）ほか会社カレンダーによる休日で、年間休日130日です。</dd>
-            </details>
-          </dt>
-        </div>
-
-        <div class="careers-faq-item">
-          <dt>
-            <details class="careers-faq-details">
-              <summary class="careers-faq-question">コードを書く業務はありますか？</summary>
-              <dd class="careers-faq-answer">あります。ただし全員に必須ではありません。業務の整理・標準化を中心に進めていただくこともできますし、ご自身で実装できる方には Python 等を用いた自動化ツールや自社プロダクトの開発・保守まで担っていただけます。入社時に固定せず、適性とご希望に応じて範囲を広げていく前提です。なお業務の起点はあくまで現場の課題整理で、開発の比重は時期・案件・ご本人の適性によって変わります。面談の際に、どちらに寄せたいかをお聞かせください。</dd>
             </details>
           </dt>
         </div>
@@ -617,6 +829,28 @@
         </div>
 
       </dl>
+
+      <h3 class="careers-faq-group-title" id="faq-apply">応募・選考について</h3>
+      <dl class="careers-faq-list">
+
+        <div class="careers-faq-item">
+          <dt>
+            <details class="careers-faq-details">
+              <summary class="careers-faq-question">応募前に話を聞くことはできますか？</summary>
+              <dd class="careers-faq-answer">はい。カジュアルなご相談や見学も歓迎しています。応募フォームにその旨をご記入ください。</dd>
+            </details>
+          </dt>
+        </div>
+
+      </dl>
+
+      <div class="careers-inline-cta" style="margin-top:32px;">
+        <p>ここに答えが見つからなかった点は、面談やご相談の場でお答えします。</p>
+        <div class="careers-inline-cta-buttons">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--primary" target="_blank" rel="noopener">応募フォームへ</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--outline" target="_blank" rel="noopener">まず話を聞いてみる</a>
+        </div>
+      </div>
     </div>
 
     <!-- ===== MESSAGE ===== -->
@@ -642,6 +876,12 @@
     </div>
 
   </main>
+
+  <!-- ===== モバイル固定 CTA ===== -->
+  <div class="careers-sticky-cta" aria-label="応募の導線">
+    <a class="is-ghost" href="#faq">よくある質問</a>
+    <a class="is-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" target="_blank" rel="noopener">応募・相談する</a>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
