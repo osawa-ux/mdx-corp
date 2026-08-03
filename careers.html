@@ -287,6 +287,27 @@
       color: var(--color-accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
     }
 
+    /* 1日の流れ */
+    .careers-day {
+      list-style: none; padding: 0; margin-top: 20px;
+      border-left: 2px solid rgba(14,165,233,0.35); padding-left: 20px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .careers-day li { position: relative; }
+    .careers-day li::before {
+      content: ''; position: absolute; left: -27px; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--color-accent);
+    }
+    .careers-day-time {
+      display: block; font-size: 0.8rem; font-weight: 700;
+      color: var(--color-accent); letter-spacing: 0.04em;
+    }
+    .careers-day-task {
+      display: block; margin-top: 3px;
+      font-size: 0.9rem; color: var(--color-text); line-height: 1.8;
+    }
+
     /* AI が入っている業務 */
     .careers-ai-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;
@@ -485,6 +506,47 @@
         </div>
       </div>
       <p class="careers-text" style="margin-top:20px;">AIツール（Claude Code / Gemini）は会社が用意し、<strong>全スタッフが日常業務で使用しています</strong>。一部の担当者だけが試しているのではなく、開発も業務改善も日々この環境の上で動いています。新しいツールややり方を試しやすく、Claude Code の経験がなくても実務の中で使いながら習得できます（業務ごとのマニュアルを整備しています）。</p>
+    </div>
+
+    <!-- ===== 1日の流れ ===== -->
+    <div class="careers-section">
+      <h2 class="careers-section-title">1日の流れ</h2>
+      <p class="careers-text">勤務時間は 9:00〜18:00（休憩 13:00〜14:00）です。1日の過ごし方の一例をご紹介します。</p>
+      <ul class="careers-day">
+        <li>
+          <span class="careers-day-time">9:00</span>
+          <span class="careers-day-task">出勤</span>
+        </li>
+        <li>
+          <span class="careers-day-time">9:00 〜 10:30</span>
+          <span class="careers-day-task">メール確認、タスク整理、各部署からの依頼確認</span>
+        </li>
+        <li>
+          <span class="careers-day-time">10:30 〜 12:00</span>
+          <span class="careers-day-task">業務フロー改善・マニュアル作成、AIツールを用いた業務効率化対応</span>
+        </li>
+        <li>
+          <span class="careers-day-time">13:00 〜 14:00</span>
+          <span class="careers-day-task">お昼休憩</span>
+        </li>
+        <li>
+          <span class="careers-day-time">14:00 〜 15:00</span>
+          <span class="careers-day-task">データ集計・分析、ITツール運用サポート</span>
+        </li>
+        <li>
+          <span class="careers-day-time">15:00 〜 17:30</span>
+          <span class="careers-day-task">各部署との連携・改善施策の実行、書類作成 等</span>
+        </li>
+        <li>
+          <span class="careers-day-time">17:30 〜 18:00</span>
+          <span class="careers-day-task">進捗整理、翌日の準備</span>
+        </li>
+        <li>
+          <span class="careers-day-time">18:00</span>
+          <span class="careers-day-task">退勤</span>
+        </li>
+      </ul>
+      <p class="careers-text" style="margin-top:16px;font-size:0.85rem;color:var(--color-text-light);">※ 時間配分は日によって変わります。上記は一例です。</p>
     </div>
 
     <!-- ===== AI が入っている業務 ===== -->
