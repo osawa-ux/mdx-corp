@@ -2127,12 +2127,12 @@ button {
   margin-right: -8px;
 }
 
-/* P3-1: フッターリンクのタップ高さを WCAG 2.2 の 24px 下限より上に */
+/* P3-1: フッターリンクのタップ高さ 44px（院内正本 44x44・2026-08-13 決定。WCAG 2.2 の 24px 下限ではなく正本に合わせる） */
 .footer-nav-list a,
 .footer-policy-list a {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
+  min-height: 44px;
 }
 
 /* P1-1: フッターの電話番号（用途限定） */
@@ -2140,7 +2140,7 @@ button {
 .footer-contact a {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
+  min-height: 44px;
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -2166,7 +2166,7 @@ button {
 /* P3-2/P3-1 追補（2026-08-13 実測フィードバック） */
 /* <small> の縮小で 10.4px になっていたコピーライト行を 12px 以上に戻す */
 .footer-copy small { font-size: 1em; }
-/* ロゴリンクのタップ高さ（WCAG 2.2 の 24px 下限を満たす） */
+/* ロゴリンクのタップ高さ 44px（院内正本 44x44） */
 .logo { display: inline-flex; align-items: center; min-height: 44px; }
 /* 同意チェックボックスを 24x24 に */
 .form-consent-check input[type="checkbox"] { width: 24px; height: 24px; }
