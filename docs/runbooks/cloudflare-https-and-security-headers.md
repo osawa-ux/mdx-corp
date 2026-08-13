@@ -1,5 +1,11 @@
 # Runbook: HTTPS 強制とセキュリティヘッダの付与（Cloudflare + GitHub Pages）
 
+> ✅ **2026-08-13 実施済み**（API 経由）。以降は「設定を変える・切り戻す・再現する」ときの手順として使う。
+> 実施後の実測: `curl -sI http://mdx-inc.co.jp/` → **301** ／ セキュリティヘッダ **4 本すべて付与** ／
+> トップ 200・404 は 404 のまま・リダイレクト 1 回（ループなし）／
+> GA・Cloudflare beacon・Google Fonts はいずれも読み込み継続・console エラー 0 件。
+> 作成された ruleset id: `012b1531d46e4f729b33270320a34fea`（rule 名 `security-headers`）。
+
 - 対象: `mdx-inc.co.jp`（GitHub Pages 配信 / Cloudflare 経由）
 - 起点: 2026-08-13 サイトレビュー P0-1・P0-2
 - 実施者: 人間（Cloudflare ダッシュボード操作）
@@ -142,24 +148,34 @@ Transform Rules の該当ルールを **無効化（トグル OFF）** する。
 - 他（ADMIN / WORKERS / TURNSTILE / ROMUBASE）… このゾーンにはアクセス不可
 - `CF_TOKEN_NAVI_REDIRECT` … トークン自体が無効（`Invalid API Token`）
 
-API で完了させたい場合は、Cloudflare ダッシュボードの
-**My Profile → API Tokens** で、`mdx-inc.co.jp` ゾーンに対して
-**Zone Settings: Edit** と **Zone Transform Rules (Config Rules): Edit** を持つトークンを用意する。
-用意できたら次の 2 リクエストで完了する:
+API で完了させるには、`mdx-inc.co.jp` ゾーンに対して
+**Zone Settings: Edit**（権限グループ id `3030687196b94b638145a3953da2b699`）と
+**Zone Transform Rules: Edit**（`0ac90a90249747bca6b047d97f0803e9`）を持つトークンが要る。
+
+2026-08-13 の実施では、`CF_API_TOKEN_ADMIN`（= `browser-ops-admin-2026-07-31`・**API Tokens Write** 保有）で
+**このゾーン限定・上記2権限だけの一時トークンを発行 → 適用 → 即削除**した。
+永続トークンを増やさずに済むので、再実施時もこの方式を推奨する（削除は `finally` で必ず実行し、
+削除後に `/user/tokens` を再取得して残存 0 件を確認すること）。
+
+実行する 2 リクエスト:
 
 ```
 PATCH /client/v4/zones/{zone_id}/settings/always_use_https
       {"value":"on"}
 
 PUT   /client/v4/zones/{zone_id}/rulesets/phases/http_response_headers_transform/entrypoint
-      {"name":"default","kind":"zone","phase":"http_response_headers_transform",
-       "rules":[{"description":"security-headers","expression":"true","action":"rewrite","enabled":true,
-                 "action_parameters":{"headers":{
-                   "Strict-Transport-Security":{"operation":"set","value":"max-age=31536000; includeSubDomains"},
-                   "X-Content-Type-Options":{"operation":"set","value":"nosniff"},
-                   "Referrer-Policy":{"operation":"set","value":"strict-origin-when-cross-origin"},
-                   "Content-Security-Policy":{"operation":"set","value":"frame-ancestors 'self'"}}}}]}
+      {"description":"...","rules":[{"description":"security-headers","expression":"true",
+        "action":"rewrite","enabled":true,
+        "action_parameters":{"headers":{
+          "Strict-Transport-Security":{"operation":"set","value":"max-age=31536000; includeSubDomains"},
+          "X-Content-Type-Options":{"operation":"set","value":"nosniff"},
+          "Referrer-Policy":{"operation":"set","value":"strict-origin-when-cross-origin"},
+          "Content-Security-Policy":{"operation":"set","value":"frame-ancestors 'self'"}}}}]}
 ```
+
+⚠ **entrypoint への PUT に `name` / `kind` / `phase` を含めてはいけない。**
+含めると `invalid JSON: unknown field "kind"` で失敗する（2026-08-13 に実際に踏んだ）。
+受け付けるのは `description` と `rules` のみ。
 
 ---
 
