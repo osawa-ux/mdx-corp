@@ -8,6 +8,27 @@
 
 ---
 
+## 前提（2026-08-13 に API で実測して確定した構成）
+
+- zone id: `167c4e7b6d0ee2eb9b8a3d1ec1677914`
+- apex `mdx-inc.co.jp` の A レコード 4 本は **GitHub Pages の IP を指し、かつ `proxied=true`（オレンジ雲）**
+- 訪問者向けの TLS は **Cloudflare 側で終端**している（実測: issuer = Let's Encrypt / subject = CN=mdx-inc.co.jp ＝ Cloudflare Universal SSL）
+- SSL/TLS モードは **`full`**（Flexible ではない）
+
+この構成から来る、実施前に知っておくべき 2 点:
+
+1. **GitHub Pages の「Enforce HTTPS」は ON にできない（この構成では不要）。**
+   proxied のため GitHub 側が独自証明書を発行できず、API は
+   `404 The certificate does not exist yet` を返す（2026-08-13 実測）。
+   訪問者から見た HTTPS は Cloudflare が担保しているので実害はない。
+   **したがって P0-1 は Cloudflare の Always Use HTTPS 一本で決まる。**
+2. **SSL/TLS モードが `full` であることが Always Use HTTPS の前提。**
+   ここが `flexible` だと、Cloudflare→オリジンが HTTP になり
+   GitHub Pages 側が HTTPS へ返すため **リダイレクトループになる**。
+   実施前に必ずモードを確認すること（現状 `full` なのでループしない）。
+
+---
+
 ## 0. 実施前の実測（before を残す）
 
 ```bash
@@ -18,28 +39,27 @@ curl -sI http://mdx-inc.co.jp/ | head -3
 curl -sI https://mdx-inc.co.jp/ | grep -iE 'strict-transport|x-content-type|referrer-policy|x-frame|content-security'
 ```
 
-2026-08-13 時点の実測値:
+2026-08-13 時点の実測値（curl と Cloudflare API の両方で確認）:
 
 - `curl -sI http://mdx-inc.co.jp/` → `HTTP/1.1 200 OK`（301 なし）
 - セキュリティヘッダ 4 種はいずれも不在
+- API 実測: `always_use_https = off` / `ssl = full` / `min_tls_version = 1.0` /
+  `security_header.strict_transport_security.enabled = false` /
+  `http_response_headers_transform` の ruleset は **0 件**
 - `access-control-allow-origin: *` は GitHub Pages 既定（Cloudflare 側で消さない）
 
 ---
 
 ## 1. P0-1: HTTPS を強制する
 
-### 1-1. Cloudflare 側
+Cloudflare 側の設定だけで完了する（GitHub Pages 側は上記「前提」のとおり操作不要）。
 
 1. Cloudflare ダッシュボード → 対象ゾーン `mdx-inc.co.jp` を選択
-2. 左メニュー **SSL/TLS** → **Edge Certificates**
-3. **Always Use HTTPS** を **ON**
-4. 同じ画面の **Minimum TLS Version** が `TLS 1.0` のままなら `TLS 1.2` に上げる（任意・推奨）
-
-### 1-2. GitHub Pages 側
-
-1. `https://github.com/osawa-ux/mdx-corp` → **Settings** → **Pages**
-2. **Enforce HTTPS** に **チェックを入れる**
-   - チェックできない場合は証明書の発行待ち。数十分〜24時間おいて再度確認する
+2. 左メニュー **SSL/TLS** → **概要** で モードが **Full** であることを先に確認する
+   （`Flexible` だった場合はリダイレクトループになるため、**Always Use HTTPS を ON にする前に** Full へ変更する）
+3. **SSL/TLS** → **Edge Certificates**
+4. **Always Use HTTPS** を **ON**
+5. 同じ画面の **Minimum TLS Version** が `TLS 1.0` のままなら `TLS 1.2` に上げる（任意・今回のスコープ外）
 
 ### 1-3. 確認
 
@@ -60,6 +80,9 @@ curl -sI http://www.mdx-inc.co.jp/ | head -3
 ## 2. P0-2: セキュリティヘッダを付与する
 
 GitHub Pages は独自レスポンスヘッダを付けられないため、**Cloudflare の Transform Rules（Response Header Modification）** で付与する。
+
+> HSTS だけは Cloudflare の専用設定（**SSL/TLS → Edge Certificates → HTTP Strict Transport Security (HSTS)**）でも付与できる。
+> どちらか一方にする（両方で付けると重複ヘッダになる）。本 runbook は 4 本まとめて管理できる Transform Rules に寄せる。
 
 ### 2-1. 設定手順
 
@@ -107,6 +130,36 @@ Transform Rules の該当ルールを **無効化（トグル OFF）** する。
   であることを確認できるまでは `max-age` + `includeSubDomains` のみとする。
 
 - **`access-control-allow-origin: *` を消しに行かない。** GitHub Pages 既定であり、静的サイトでは実害がない。
+
+---
+
+## 3-2. API で実施する場合（ダッシュボードの代わり）
+
+`~/.secrets/cloudflare/.env` のトークンで API 実行もできるが、**2026-08-13 時点では書き込み権限が足りない**。
+
+- `CF_API_TOKEN` … このゾーンの設定と ruleset を **読めるが書けない**（write は `Authentication error`）
+- `CF_API_TOKEN_EDGE` … ruleset は読めるがゾーン設定は読めない。ruleset の write も `request is not authorized`
+- 他（ADMIN / WORKERS / TURNSTILE / ROMUBASE）… このゾーンにはアクセス不可
+- `CF_TOKEN_NAVI_REDIRECT` … トークン自体が無効（`Invalid API Token`）
+
+API で完了させたい場合は、Cloudflare ダッシュボードの
+**My Profile → API Tokens** で、`mdx-inc.co.jp` ゾーンに対して
+**Zone Settings: Edit** と **Zone Transform Rules (Config Rules): Edit** を持つトークンを用意する。
+用意できたら次の 2 リクエストで完了する:
+
+```
+PATCH /client/v4/zones/{zone_id}/settings/always_use_https
+      {"value":"on"}
+
+PUT   /client/v4/zones/{zone_id}/rulesets/phases/http_response_headers_transform/entrypoint
+      {"name":"default","kind":"zone","phase":"http_response_headers_transform",
+       "rules":[{"description":"security-headers","expression":"true","action":"rewrite","enabled":true,
+                 "action_parameters":{"headers":{
+                   "Strict-Transport-Security":{"operation":"set","value":"max-age=31536000; includeSubDomains"},
+                   "X-Content-Type-Options":{"operation":"set","value":"nosniff"},
+                   "Referrer-Policy":{"operation":"set","value":"strict-origin-when-cross-origin"},
+                   "Content-Security-Policy":{"operation":"set","value":"frame-ancestors 'self'"}}}}]}
+```
 
 ---
 
