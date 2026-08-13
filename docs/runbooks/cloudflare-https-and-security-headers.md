@@ -5,6 +5,7 @@
 > トップ 200・404 は 404 のまま・リダイレクト 1 回（ループなし）／
 > GA・Cloudflare beacon・Google Fonts はいずれも読み込み継続・console エラー 0 件。
 > 作成された ruleset id: `012b1531d46e4f729b33270320a34fea`（rule 名 `security-headers`）。
+> 併せて **min_tls_version を 1.0 → 1.2** に引き上げた（実測で TLS1.0/1.1 の利用が 0 件だったため。§1 手順 5 参照）。
 
 - 対象: `mdx-inc.co.jp`（GitHub Pages 配信 / Cloudflare 経由）
 - 起点: 2026-08-13 サイトレビュー P0-1・P0-2
@@ -65,7 +66,19 @@ Cloudflare 側の設定だけで完了する（GitHub Pages 側は上記「前�
    （`Flexible` だった場合はリダイレクトループになるため、**Always Use HTTPS を ON にする前に** Full へ変更する）
 3. **SSL/TLS** → **Edge Certificates**
 4. **Always Use HTTPS** を **ON**
-5. 同じ画面の **Minimum TLS Version** が `TLS 1.0` のままなら `TLS 1.2` に上げる（任意・今回のスコープ外）
+5. 同じ画面の **Minimum TLS Version** を `TLS 1.2` にする（2026-08-13 実施済み・`1.0` から引き上げ）
+
+   引き上げ前に**必ず影響を実測すること**。Cloudflare GraphQL で TLS バージョン別のリクエスト数が取れる:
+
+   ```graphql
+   query($zone:String!,$since:String!){viewer{zones(filter:{zoneTag:$zone}){
+     httpRequests1dGroups(limit:100, filter:{date_geq:$since}){
+       sum{clientSSLMap{clientSSLProtocol requests}}}}}}
+   ```
+
+   2026-08-13 の実測（直近30日・54,937 リクエスト）: TLSv1.3 40.96% / TLSv1.2 0.37% /
+   `none`（＝平文 HTTP。現在は 301 で HTTPS へ）58.67% / **TLSv1.0・TLSv1.1 は 0 件（0.000%）**。
+   切り捨てる利用者が実測ゼロだったため引き上げた。
 
 ### 1-3. 確認
 
