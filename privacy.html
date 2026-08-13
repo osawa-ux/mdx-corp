@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260702a" />
+  <link rel="stylesheet" href="styles.css?v=20260813a" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -131,6 +131,38 @@
       left: 0;
       color: var(--color-accent);
     }
+    /* 外部送信の公表テーブル（2026-08-13 追加） */
+    .policy-table-wrap {
+      margin-top: 16px;
+      overflow-x: auto;
+    }
+    .policy-table {
+      width: 100%;
+      min-width: 640px;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .policy-table th,
+    .policy-table td {
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.75;
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+    }
+    .policy-table thead th {
+      background: var(--color-bg-sub);
+      color: #f5f7fa;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .policy-table tbody th {
+      background: var(--color-bg-sub);
+      color: #f5f7fa;
+      font-weight: 700;
+      width: 22%;
+    }
     .policy-contact-box {
       margin-top: 48px;
       padding: 24px;
@@ -157,6 +189,8 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
   <!-- ===== HEADER / NAV ===== -->
   <header class="site-header" id="site-header">
     <div class="header-inner container">
@@ -182,7 +216,7 @@
     </div>
   </header>
 
-  <main class="policy-main">
+  <main id="main" class="policy-main">
 
     <div class="policy-hero">
       <div class="container">
@@ -193,7 +227,7 @@
 
     <div class="policy-body">
 
-      <p class="policy-updated">制定日：2023年6月8日　最終改正日：2026年8月1日</p>
+      <p class="policy-updated">制定日：2023年6月8日　最終改正日：2026年8月13日</p>
 
       <p class="policy-intro">MDX株式会社（以下「当社」といいます。）は、保健医療福祉分野において、医療法人在宅診良会 横浜ホームクリニックの診療事務・診療報酬請求・診療同行その他のサポート業務を受託し、その遂行にあたり患者の診療情報等の要配慮個人情報を含む個人情報を取り扱います。当社は、個人情報の保護が社会的責務であることを認識し、次のとおり個人情報保護方針を定め、これを実行し、維持します。</p>
 
@@ -274,9 +308,45 @@
       </div>
 
       <div class="policy-section">
-        <h2 class="policy-section-title">6. Cookie・アクセス解析</h2>
-        <p class="policy-text">当サイトでは、利用状況の把握及びサービスの改善のためにCookieを使用し、アクセス解析ツール「Googleアナリティクス」を利用しています。これにより収集される情報は、個人を特定しない形で利用します。</p>
+        <h2 class="policy-section-title">6. Cookie及び外部送信に関する公表</h2>
+        <p class="policy-text">当サイトでは、利用状況の把握及びサービスの改善のためにCookieを使用しています。また、電気通信事業法第27条の12（外部送信規律）に基づき、当サイトの閲覧時にご利用の端末から外部の事業者へ送信される情報について、次のとおり公表します。</p>
+
+        <div class="policy-table-wrap">
+          <table class="policy-table">
+            <thead>
+              <tr>
+                <th scope="col">送信先事業者／サービス</th>
+                <th scope="col">送信される情報</th>
+                <th scope="col">送信される情報の利用目的</th>
+                <th scope="col">送信の停止（オプトアウト）方法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Google LLC<br>「Googleアナリティクス」</th>
+                <td>Cookieに保存された識別子、閲覧したページのURL、参照元のURL、ブラウザ・OS・端末の種類、画面サイズ、言語設定、IPアドレス、サイト内での操作履歴</td>
+                <td>当サイトの利用状況の測定及び分析（サイトの改善のため）</td>
+                <td>ブラウザの設定によりCookieを無効にする方法、又はGoogle社が提供する<a href="https://tools.google.com/dlpage/gaoptout/" target="_blank" rel="noopener">Googleアナリティクス オプトアウト アドオン</a>をご利用ください。</td>
+              </tr>
+              <tr>
+                <th scope="row">Cloudflare, Inc.<br>「Cloudflare Web Analytics」</th>
+                <td>閲覧したページのURL、参照元のURL、ブラウザ・OS・端末の種類、画面サイズ、ページの表示速度等の性能情報、IPアドレス</td>
+                <td>当サイトの表示性能及び利用状況の測定（配信品質の改善のため）</td>
+                <td>ブラウザの拡張機能等により、計測用スクリプト（static.cloudflareinsights.com）の読み込みをブロックしてください。</td>
+              </tr>
+              <tr>
+                <th scope="row">Google LLC<br>「Google Fonts」</th>
+                <td>IPアドレス、ブラウザ・OSの種類、参照元のURL（ウェブフォントの取得リクエストに伴い送信されます）</td>
+                <td>当サイトの表示に用いるウェブフォントの配信</td>
+                <td>ブラウザの設定又は拡張機能により、外部ドメイン（fonts.googleapis.com / fonts.gstatic.com）からの読み込みをブロックしてください。この場合、当サイトの表示フォントが変わります。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="policy-text">上記により送信される情報について、当社は個人を特定する目的で利用しません。各送信先事業者における取扱いは、それぞれの事業者が定めるプライバシーポリシー（<a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener">Google LLC</a>／<a href="https://www.cloudflare.com/ja-jp/privacypolicy/" target="_blank" rel="noopener">Cloudflare, Inc.</a>）をご確認ください。</p>
         <p class="policy-text">Cookieはブラウザの設定により無効にすることができます。無効にした場合、当サイトの一部の機能がご利用いただけないことがあります。</p>
+        <p class="policy-text">当サイトで利用する外部サービスを追加・変更した場合は、本項の記載を更新します。</p>
       </div>
 
       <div class="policy-section">
@@ -350,6 +420,10 @@
             <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
           </a>
           <p class="footer-tagline">Apps, Automation &amp; Portals.</p>
+          <p class="footer-contact">
+            <a href="tel:05030981414">050-3098-1414</a>
+            <span class="footer-contact-note">個人情報の取扱いに関するお問い合わせ窓口</span>
+          </p>
         </div>
         <nav class="footer-nav" aria-label="フッターナビゲーション">
           <ul class="footer-nav-list">

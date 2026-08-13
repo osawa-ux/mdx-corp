@@ -865,3 +865,146 @@ html { scroll-behavior: smooth; scroll-padding-top: var(--edt-header-h); }
 .site-header { background-color: rgba(15, 26, 48, 0.88) !important; }
 .site-header.is-scrolled,
 .site-header.scrolled { background-color: rgba(15, 26, 48, 0.97) !important; }
+
+/* =============================================
+   2026-08-13 サイトレビュー対応
+   P1-1 フッター電話 / P3-1 タップ領域 / P3-2 最小フォント / P3-3 skip link
+   ============================================= */
+
+/* P3-3: 本文へスキップ（キーボード/スクリーンリーダー用・フォーカス時のみ表示） */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 12px 20px;
+  background-color: var(--edt-green-dark);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 0 0 6px 0;
+}
+.skip-link:focus { left: 0; }
+
+/* P3-2: 日本語本文の下限を 12.5px（0.78rem）に引き上げ */
+.eyebrow,
+.logo-sub,
+.trio-brand,
+.trio-tags li,
+.optional,
+.required { font-size: 0.78rem; }
+
+/* P3-1: ハンバーガーを 44x44 に（線の見た目は 26x18 のまま padding で拡張） */
+.hamburger {
+  width: 44px;
+  height: 44px;
+  padding: 13px 9px;
+  margin-right: -9px;
+}
+
+/* P3-1: フッターリンクのタップ高さを WCAG 2.2 の 24px 下限より上に */
+.footer-nav-list a,
+.footer-policy-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+}
+
+/* P1-1: フッターの電話番号（用途限定） */
+.footer-contact { margin-top: 8px; }
+.footer-contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--edt-ink);
+}
+.footer-contact a:hover { color: var(--edt-green-dark); }
+.footer-contact-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--edt-muted);
+  line-height: 1.7;
+}
+
+/* P1-1: 会社概要テーブルの用途注記 */
+.company-table-note {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--edt-muted);
+  line-height: 1.75;
+}
+
+/* P1-5: お問い合わせフォームの個人情報同意（取得時明示＋同意チェック） */
+.form-consent {
+  margin-top: 8px;
+  padding: 20px;
+  background-color: var(--edt-card);
+  border: 1px solid var(--edt-line);
+  border-radius: var(--edt-radius-lg);
+}
+.form-consent-details { margin-bottom: 4px; }
+.form-consent-summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--edt-ink);
+  list-style: none;
+  padding: 6px 0;
+}
+.form-consent-summary::-webkit-details-marker { display: none; }
+.form-consent-summary::before {
+  content: '＋ ';
+  color: var(--edt-green-dark);
+  font-weight: 700;
+}
+.form-consent-details[open] .form-consent-summary::before { content: '－ '; }
+.form-consent-dl {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--edt-body);
+  line-height: 1.85;
+}
+.form-consent-dl dt {
+  font-weight: 700;
+  color: var(--edt-ink);
+  margin-top: 10px;
+}
+.form-consent-dl dt:first-child { margin-top: 0; }
+.form-consent-dl dd { margin: 2px 0 0; }
+.form-consent-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 4px;
+  padding: 10px 0;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--edt-body);
+  line-height: 1.7;
+}
+.form-consent-check input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  accent-color: var(--edt-green);
+  cursor: pointer;
+}
+.form-consent-check.is-error {
+  outline: 2px solid var(--edt-error);
+  outline-offset: 4px;
+  border-radius: var(--edt-radius-sm);
+}
+
+/* P3-2/P3-1 追補（2026-08-13 実測フィードバック） */
+/* <small> の縮小で 10.4px になっていたコピーライト行を 12px 以上に戻す */
+.footer-copy small { font-size: 1em; }
+/* ロゴリンクのタップ高さ（WCAG 2.2 の 24px 下限を満たす） */
+.logo { display: inline-flex; align-items: center; min-height: 44px; }
+/* 同意チェックボックスを 24x24 に */
+.form-consent-check input[type="checkbox"] { width: 24px; height: 24px; }

@@ -141,6 +141,14 @@
       minLength: 10,
       minLengthMessage: '10文字以上でご記入ください',
     },
+    // 個人情報の取扱いへの同意（2026-08-13 追加）
+    consent: {
+      required: true,
+      label: '個人情報の取扱いへの同意',
+      checkbox: true,
+      requiredMessage: '個人情報の取扱いにご同意ください',
+      errorTarget: '#consent-label', // エラー表示は input でなくラベル全体に付ける
+    },
   };
 
   function validateField(name) {
@@ -151,10 +159,17 @@
     var fieldErrorEl = document.getElementById(name + '-error');
     if (!field || !fieldErrorEl) return true;
 
+    var errorTarget = rule.errorTarget ? form.querySelector(rule.errorTarget) : field;
+    if (!errorTarget) errorTarget = field;
+
     var value = field.value.trim();
     var message = '';
 
-    if (rule.required && value === '') {
+    if (rule.checkbox) {
+      if (rule.required && !field.checked) {
+        message = rule.requiredMessage || (rule.label + 'が必要です');
+      }
+    } else if (rule.required && value === '') {
       message = rule.label + 'をご入力ください';
     } else if (rule.pattern && value !== '' && !rule.pattern.test(value)) {
       message = rule.patternMessage;
@@ -164,11 +179,13 @@
 
     if (message) {
       fieldErrorEl.textContent = message;
-      field.classList.add('is-error');
+      errorTarget.classList.add('is-error');
+      field.setAttribute('aria-invalid', 'true');
       return false;
     } else {
       fieldErrorEl.textContent = '';
-      field.classList.remove('is-error');
+      errorTarget.classList.remove('is-error');
+      field.removeAttribute('aria-invalid');
       return true;
     }
   }
@@ -177,6 +194,11 @@
   Object.keys(rules).forEach(function (name) {
     var field = form.querySelector('[name="' + name + '"]');
     if (!field) return;
+    if (rules[name].checkbox) {
+      // チェックボックスは change のみ（blur では未チェック状態で赤くなり煩わしいため）
+      field.addEventListener('change', function () { validateField(name); });
+      return;
+    }
     field.addEventListener('blur', function () { validateField(name); });
     field.addEventListener('input', function () {
       if (field.classList.contains('is-error')) validateField(name);
@@ -215,7 +237,18 @@
 
     if (!isValid) {
       var firstError = form.querySelector('.is-error');
-      if (firstError) firstError.focus();
+      if (firstError) {
+        // .is-error はラベル等の非フォーカス要素にも付くため、中の入力要素へ移す
+        var focusTarget = typeof firstError.focus === 'function' &&
+          firstError.matches('input, select, textarea')
+          ? firstError
+          : firstError.querySelector('input, select, textarea');
+        if (focusTarget) {
+          focusTarget.focus();
+        } else {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
       return;
     }
 

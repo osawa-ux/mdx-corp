@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.editorial.css?v=20260715a" />
+  <link rel="stylesheet" href="styles.editorial.css?v=20260813a" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZTNZ1G68S"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -48,8 +48,20 @@
       "addressCountry": "JP"
     },
     "email": "info@mdx-inc.co.jp",
+    "telephone": "+81-50-3098-1414",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "privacy",
+      "name": "個人情報の取扱いに関するお問い合わせ窓口",
+      "telephone": "+81-50-3098-1414",
+      "email": "info@mdx-inc.co.jp",
+      "areaServed": "JP",
+      "availableLanguage": ["ja"]
+    },
     "knowsAbout": ["アプリ開発", "業務自動化", "ポータルサイト開発", "医療DX"],
-    "sameAs": []
+    "sameAs": [
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3020001151960"
+    ]
   }
   </script>
   <script type="application/ld+json">
@@ -80,8 +92,58 @@
     }
   ]
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "まだ課題が整理できていない段階でも相談できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、歓迎しています。「何から手をつければよいか分からない」という段階からのご相談が多くあります。現状のヒアリングをもとに、課題整理からご一緒することが可能です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "小規模な案件でも対応していただけますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、対応しています。大規模な開発案件に限らず、特定の業務フローの改善や、小さな自動化ツールの導入など、小さなご相談から承っています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "費用はどのくらいかかりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ご相談内容・規模・期間によって異なります。まずはヒアリングの上、内容に応じたご提案をいたします。予算感もあわせてお伝えいただけると、よりご提案しやすくなります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "導入後のサポートはありますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。導入して終わりではなく、運用・定着まで伴走することを大切にしています。保守・継続改善のご相談も、導入後にお気軽にご連絡ください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "進め方・スケジュールはどのように決まりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ヒアリング後、現状整理・課題把握を経てご提案いたします。ご要望や事業の状況に合わせて、スモールスタートで始めることも可能です。"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="editorial-lp">
+
+  <a class="skip-link" href="#main">本文へスキップ</a>
 
   <!-- ===== HEADER / NAV ===== -->
   <header class="site-header" id="site-header">
@@ -108,7 +170,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
 
     <!-- ===== HERO（物語） ===== -->
     <section class="hero" id="top">
@@ -181,7 +243,7 @@
             <ul class="trio-tags" aria-label="対応領域">
               <li>AI活用・PoC支援</li>
               <li>業務フロー自動化</li>
-              <li>SCS事業</li>
+              <li>SCS事業（セキュリティ対応支援）</li>
             </ul>
             <a href="#contact" class="trio-cta">詳細・ご相談 →</a>
           </article>
@@ -268,11 +330,15 @@
               </tr>
               <tr>
                 <th scope="row">事業内容</th>
-                <td>SCS事業 / ポータルサイトの企画・運営 / IT・AI活用支援 / 業務改善・デジタル基盤整備</td>
+                <td>SCS事業（セキュリティ対応の支援・評価・改善）/ ポータルサイトの企画・運営 / IT・AI活用支援 / 業務改善・デジタル基盤整備</td>
               </tr>
               <tr>
                 <th scope="row">お問い合わせ</th>
                 <td><a href="mailto:info@mdx-inc.co.jp">info@mdx-inc.co.jp</a></td>
+              </tr>
+              <tr>
+                <th scope="row">電話</th>
+                <td><a href="tel:05030981414">050-3098-1414</a><br><span class="company-table-note">個人情報の取扱いに関するお問い合わせ窓口です。ご相談・お見積り等は上記メール又は<a href="#contact">お問い合わせフォーム</a>をご利用ください。</span></td>
               </tr>
             </tbody>
           </table>
@@ -379,7 +445,7 @@
                 <option value="ai">IT・AI活用支援について</option>
                 <option value="dx">業務改善・デジタル基盤整備について</option>
                 <option value="data">データ活用・可視化支援について</option>
-                <option value="scs">SCS事業について</option>
+                <option value="scs">SCS事業（セキュリティ対応支援）について</option>
                 <option value="partner">業務提携・協業について</option>
                 <option value="other">その他</option>
               </select>
@@ -390,6 +456,30 @@
             <label for="message" class="form-label">お問い合わせ内容 <span class="required" aria-label="必須">必須</span></label>
             <textarea id="message" name="message" class="form-textarea" rows="6" placeholder="ご相談内容やご質問をご記入ください。" required></textarea>
             <p class="form-error" id="message-error" role="alert" aria-live="polite"></p>
+          </div>
+          <div class="form-consent">
+            <details class="form-consent-details">
+              <summary class="form-consent-summary">個人情報の取扱いについて（送信前にご確認ください）</summary>
+              <dl class="form-consent-dl">
+                <dt>取得する事業者</dt>
+                <dd>MDX株式会社（神奈川県横浜市都筑区川和町2330-2 ／ 代表取締役 大澤 直子）</dd>
+                <dt>利用目的</dt>
+                <dd>お問い合わせへの回答及びご連絡のためにのみ利用します。</dd>
+                <dt>第三者提供</dt>
+                <dd>ご本人の同意なく第三者へ提供することはありません（法令に基づく場合を除きます）。</dd>
+                <dt>取扱いの委託</dt>
+                <dd>フォームの送信処理及びメールの受信のため、外部のサービス事業者へ取扱いを委託しています。委託先とは個人情報保護に関する契約を締結し、監督を行っています。</dd>
+                <dt>開示等の請求</dt>
+                <dd>利用目的の通知・開示・訂正・追加・削除・利用停止・消去等のご請求に応じます。窓口：MDX株式会社 個人情報保護管理者 ／ 電話 <a href="tel:05030981414">050-3098-1414</a> ／ メール <a href="mailto:info@mdx-inc.co.jp">info@mdx-inc.co.jp</a>（手続の詳細はプライバシーポリシー「7.（5）開示等の請求等に応じる手続」をご覧ください）</dd>
+                <dt>ご記入の任意性</dt>
+                <dd>ご記入は任意です。ただし必須項目をご記入いただけない場合、お問い合わせへの回答ができないことがあります。</dd>
+              </dl>
+            </details>
+            <label class="form-consent-check" id="consent-label">
+              <input type="checkbox" id="consent" name="consent" value="agreed" required />
+              <span>上記の個人情報の取扱いに同意します <span class="required" aria-label="必須">必須</span></span>
+            </label>
+            <p class="form-error" id="consent-error" role="alert" aria-live="polite"></p>
           </div>
           <div class="form-submit">
             <button type="submit" class="btn btn--primary btn--lg" id="submit-btn">お問い合わせを送信</button>
@@ -426,6 +516,10 @@
             <span class="logo-text logo-text--footer">MDX<span class="logo-sub">株式会社</span></span>
           </a>
           <p class="footer-tagline">在宅医療の現場発。現場を知る医師が、仕組みをつくる。</p>
+          <p class="footer-contact">
+            <a href="tel:05030981414">050-3098-1414</a>
+            <span class="footer-contact-note">個人情報の取扱いに関するお問い合わせ窓口</span>
+          </p>
         </div>
         <nav class="footer-nav" aria-label="フッターナビゲーション">
           <ul class="footer-nav-list">
@@ -455,6 +549,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260630"></script>
+  <script src="script.js?v=20260813"></script>
 </body>
 </html>
