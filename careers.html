@@ -308,6 +308,27 @@
     .careers-privacy-dl dt:first-child { margin-top: 0; }
     .careers-privacy-dl dd { margin: 2px 0 0; }
 
+    /* 応募前の越境移転同意ゲート（2026-08-13・法28条 同意ルート） */
+    .careers-consent {
+      display: flex; align-items: flex-start; gap: 10px;
+      max-width: 620px; margin: 0 auto 8px; padding: 14px 16px;
+      background: var(--color-bg-sub); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      text-align: left; font-size: 0.9rem; line-height: 1.7;
+      color: var(--color-text); cursor: pointer; min-height: 44px;
+    }
+    .careers-consent input[type="checkbox"] {
+      flex-shrink: 0; width: 24px; height: 24px; margin-top: 1px;
+      accent-color: var(--color-accent); cursor: pointer;
+    }
+    .careers-consent.is-error { outline: 2px solid var(--color-error); outline-offset: 4px; }
+    .careers-consent-note {
+      max-width: 620px; margin: 0 auto 16px;
+      font-size: 0.82rem; color: var(--color-text-light); line-height: 1.75; text-align: left;
+    }
+    .btn.is-gated { opacity: 0.45; cursor: not-allowed; }
+    .btn.is-gated:hover { opacity: 0.45; }
+
     /* CTA */
     .careers-cta { text-align: center; margin-top: 48px; }
     .careers-cta-note {
@@ -742,8 +763,8 @@
     <div class="careers-inline-cta">
       <p>ここまでで気になった方へ。応募の前に、話を聞くだけでも構いません。</p>
       <div class="careers-inline-cta-buttons">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--primary" target="_blank" rel="noopener">応募フォームへ</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--outline" target="_blank" rel="noopener">カジュアル面談・見学を希望する</a>
+        <a href="#apply" class="btn btn--primary">応募フォームへ</a>
+        <a href="#apply" class="btn btn--outline">カジュアル面談・見学を希望する</a>
       </div>
     </div>
 
@@ -904,7 +925,7 @@
     <div class="careers-inline-cta">
       <p>条件をご確認いただけましたか。ご不明な点は、面談の場でお答えします。</p>
       <div class="careers-inline-cta-buttons">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--primary" target="_blank" rel="noopener">応募フォームへ</a>
+        <a href="#apply" class="btn btn--primary">応募フォームへ</a>
         <a href="#faq" class="btn btn--outline">よくある質問を見る</a>
       </div>
     </div>
@@ -1053,8 +1074,8 @@
       <div class="careers-inline-cta" style="margin-top:32px;">
         <p>ここに答えが見つからなかった点は、面談やご相談の場でお答えします。</p>
         <div class="careers-inline-cta-buttons">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--primary" target="_blank" rel="noopener">応募フォームへ</a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--outline" target="_blank" rel="noopener">まず話を聞いてみる</a>
+          <a href="#apply" class="btn btn--primary">応募フォームへ</a>
+          <a href="#apply" class="btn btn--outline">まず話を聞いてみる</a>
         </div>
       </div>
     </div>
@@ -1068,7 +1089,7 @@
     </div>
 
     <!-- ===== CTA ===== -->
-    <div class="careers-section">
+    <div class="careers-section" id="apply">
       <h2 class="careers-section-title">応募方法</h2>
       <p class="careers-text">以下の応募フォームよりご連絡ください。<br>簡単な自己紹介と、ご経歴・志望動機をご記入いただけますと、スムーズにご案内できます。</p>
 
@@ -1082,8 +1103,8 @@
           <dd>採用選考及び採用に関するご連絡のためにのみ利用します。他の目的には利用しません。</dd>
           <dt>第三者提供</dt>
           <dd>ご本人の同意なく第三者へ提供することはありません（法令に基づく場合を除きます）。</dd>
-          <dt>取扱いの委託</dt>
-          <dd>応募フォームの提供事業者（Google LLC）へ、フォームの運用に伴う取扱いを委託しています。</dd>
+          <dt>取扱いの委託（アメリカ合衆国への提供を含みます）</dt>
+          <dd>応募フォームの提供及び応募内容の保管のため、<strong>アメリカ合衆国</strong>にある Google LLC へ取扱いを委託しています。この先の応募フォームは同社が提供する「Google フォーム」であり、ご入力いただいた内容は同社のサーバに保管されます。アメリカ合衆国には個人情報の保護に関する包括的な法令が存在せず分野別の個別法が適用されること、同国がAPEC越境プライバシールール（CBPR）システムの参加国であること、同社が ISO/IEC 27001 及び ISO/IEC 27018 の認証を取得していることなど、詳しくは<a href="/privacy.html#third-party">プライバシーポリシー「外国にある第三者への提供（越境移転）について」</a>をご確認ください。ご同意いただけない場合は、郵送でのご応募も承ります（〒224-0057 神奈川県横浜市都筑区川和町2330-2 MDX株式会社 採用担当）。</dd>
           <dt>保管と削除</dt>
           <dd>採用に至らなかった方の応募情報は、選考終了後、法令等により保存が必要な場合を除き、速やかに削除します。採用に至った方の情報は、入社後の人事・労務管理の目的で引き続き利用します。</dd>
           <dt>ご記入の任意性</dt>
@@ -1094,7 +1115,18 @@
       </div>
 
       <div class="careers-cta">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" class="btn btn--primary btn--lg" target="_blank" rel="noopener">応募フォームへ</a>
+        <label class="careers-consent" id="apply-consent-label">
+          <input type="checkbox" id="apply-consent" />
+          <span>上記の個人情報の取扱いに同意し、<strong>アメリカ合衆国にある第三者（Google LLC）への個人情報の提供を認めます</strong></span>
+        </label>
+        <p class="careers-consent-note" id="apply-consent-note">応募フォームは Google（米国）が提供するため、ご同意のうえでお進みください。同意されない場合は郵送でのご応募を承ります。</p>
+        <!-- 同意前に米国へ遷移させないため href は持たせず、同意時に JS が付与する（JS 無効時は遷移不可＝fail-close） -->
+        <a data-href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform"
+           class="btn btn--primary btn--lg is-gated" id="apply-link"
+           role="link" tabindex="0" aria-disabled="true">応募フォームへ</a>
+        <noscript>
+          <p class="careers-consent-note">お使いの環境では応募フォームへのリンクを表示できません。お手数ですが郵送でご応募ください（〒224-0057 神奈川県横浜市都筑区川和町2330-2 MDX株式会社 採用担当）。</p>
+        </noscript>
         <p class="careers-cta-note">カジュアルなご相談・見学のご希望もお気軽にどうぞ。</p>
       </div>
 
@@ -1108,7 +1140,7 @@
   <!-- ===== モバイル固定 CTA ===== -->
   <div class="careers-sticky-cta" aria-label="応募の導線">
     <a class="is-ghost" href="#faq">よくある質問</a>
-    <a class="is-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdKc7NII4z9NcXW5m7XFcBc7kQSOIvb06zOJ3PPGPMo1c6JuA/viewform" target="_blank" rel="noopener">応募・相談する</a>
+    <a class="is-primary" href="#apply">応募・相談する</a>
   </div>
 
   <!-- ===== FOOTER ===== -->
@@ -1189,5 +1221,50 @@
     })();
   </script>
 
+
+  <script>
+    // 応募フォーム（Google・米国）への遷移を、越境移転の同意チェック後に限定する。
+    // href を最初から持たせず同意時に付与する＝JS 無効時も遷移できない（fail-close）。
+    (function () {
+      var cb = document.getElementById('apply-consent');
+      var link = document.getElementById('apply-link');
+      var label = document.getElementById('apply-consent-label');
+      if (!cb || !link) return;
+      var url = link.getAttribute('data-href');
+
+      function sync() {
+        if (cb.checked) {
+          link.setAttribute('href', url);
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+          link.setAttribute('aria-disabled', 'false');
+          link.classList.remove('is-gated');
+          if (label) label.classList.remove('is-error');
+        } else {
+          link.removeAttribute('href');
+          link.removeAttribute('target');
+          link.removeAttribute('rel');
+          link.setAttribute('aria-disabled', 'true');
+          link.classList.add('is-gated');
+        }
+      }
+      cb.addEventListener('change', sync);
+      sync();
+
+      function blocked(e) {
+        if (cb.checked) return;
+        e.preventDefault();
+        if (label) label.classList.add('is-error');
+        cb.focus();
+      }
+      link.addEventListener('click', blocked);
+      link.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        if (!cb.checked) { blocked(e); return; }
+        e.preventDefault();
+        window.open(url, '_blank', 'noopener');
+      });
+    })();
+  </script>
 </body>
 </html>
