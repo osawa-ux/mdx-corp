@@ -66,7 +66,7 @@
     },
     "industry": "情報通信業",
     "workHours": "9:00〜18:00（休憩 13:00〜14:00）",
-    "jobBenefits": "賞与年2回（6月・12月）／昇給年1回（毎年10月改定）／通勤手当（月額20,000円を上限に実費支給）／年間休日130日",
+    "jobBenefits": "賞与年2回（6月・12月／2か月分が目安。業績・査定により変動し、支給日に在籍1年以上の方が対象）／昇給年1回（毎年10月改定）／通勤手当（公共交通機関でのご通勤は月額20,000円を上限に実費支給、交通用具でのご通勤は距離に応じて支給）／年間休日130日",
     "hiringOrganization": {
       "@type": "Organization",
       "name": "MDX株式会社",
@@ -399,7 +399,7 @@
     .careers-doubt-badge {
       display: inline-block; margin-bottom: 10px; padding: 3px 10px;
       border-radius: 999px; background: rgba(14, 165, 233, 0.14);
-      color: var(--color-accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--color-accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em;
     }
 
     /* 1日の流れ */
@@ -483,6 +483,8 @@
       display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px;
     }
     .careers-faq-nav a {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; min-width: 44px;
       padding: 6px 14px; border-radius: 999px;
       border: 1px solid var(--color-border); background: var(--color-bg-sub);
       color: var(--color-text); font-size: 0.82rem; text-decoration: none;
@@ -546,7 +548,7 @@
     </div>
   </header>
 
-  <main id="main" class="careers-main">
+  <main id="main" tabindex="-1" class="careers-main">
 
     <!-- ===== HERO ===== -->
     <div class="careers-hero">
@@ -1083,9 +1085,6 @@
           <dt>取扱いの委託</dt>
           <dd>応募フォームの提供事業者（Google LLC）へ、フォームの運用に伴う取扱いを委託しています。</dd>
           <dt>保管と削除</dt>
-          <!-- TODO(要確認・2026-08-13): 保存期間を具体的な月数で明記するかは要判断。
-               Pマーク審査では期間の明示を求められる可能性があるため、社内規程の保存期間が
-               確定したら「選考終了後◯か月以内に削除」に差し替える。 -->
           <dd>採用に至らなかった方の応募情報は、選考終了後、法令等により保存が必要な場合を除き、速やかに削除します。採用に至った方の情報は、入社後の人事・労務管理の目的で引き続き利用します。</dd>
           <dt>ご記入の任意性</dt>
           <dd>ご記入は任意です。ただし必須項目をご記入いただけない場合、選考のご案内ができないことがあります。</dd>

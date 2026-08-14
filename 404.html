@@ -92,7 +92,7 @@
     </div>
   </header>
 
-  <main class="notfound-main" id="main">
+  <main class="notfound-main" id="main" tabindex="-1">
     <div class="notfound-body">
       <p class="notfound-code">404</p>
       <h1 class="notfound-title">お探しのページは見つかりませんでした</h1>
@@ -153,35 +153,9 @@
     </div>
   </footer>
 
-  <script>
-    // ハンバーガーメニュー
-    (function () {
-      var hamburger = document.getElementById('hamburger');
-      var nav = document.getElementById('global-nav');
-      if (!hamburger || !nav) return;
-      hamburger.addEventListener('click', function () {
-        var isOpen = nav.classList.contains('is-open');
-        hamburger.classList.toggle('is-active', !isOpen);
-        hamburger.setAttribute('aria-expanded', String(!isOpen));
-        hamburger.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
-        nav.classList.toggle('is-open', !isOpen);
-        document.body.style.overflow = isOpen ? '' : 'hidden';
-      });
-    })();
-    // フッター年
-    (function () {
-      var el = document.getElementById('footer-year');
-      if (el) el.textContent = new Date().getFullYear();
-    })();
-    // ヘッダースクロール
-    (function () {
-      var header = document.getElementById('site-header');
-      if (!header) return;
-      window.addEventListener('scroll', function () {
-        header.classList.toggle('is-scrolled', window.scrollY > 10);
-      }, { passive: true });
-    })();
-  </script>
+  <!-- 共通 script.js を使う（独自複製すると script.js の変更から取り残されるため）。
+       フォームが無いページでも initContactForm は早期 return するので安全。 -->
+  <script src="/script.js?v=20260813"></script>
 
 </body>
 </html>

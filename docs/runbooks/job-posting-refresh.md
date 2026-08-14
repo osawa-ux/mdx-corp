@@ -14,7 +14,7 @@ Google しごと検索は、掲載終了日（`validThrough`）が無い求人�
 
 1. `careers.html` の `JobPosting` を開き、次を更新する
    - `datePosted` — 再掲載した日（`YYYY-MM-DD`）
-   - `validThrough` — 掲載期限（通常は 3 か月先）
+   - `validThrough` — 掲載期限。**3 か月先を月末に丸める**（例: 2026-08-13 の設定時は 2026-11-30）
 2. **同じ変更で表示テキストも必ず揃える**（`.careers-hero-updated` の行）
    - 「掲載日」= `datePosted`
    - 「掲載期限」= `validThrough`

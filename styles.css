@@ -2103,7 +2103,7 @@ button {
 
 /* P3-3: 本文へスキップ（キーボード/スクリーンリーダー用・フォーカス時のみ表示） */
 .skip-link {
-  position: absolute;
+  position: fixed;
   left: -9999px;
   top: 0;
   z-index: 1000;
@@ -2132,6 +2132,8 @@ button {
 .footer-policy-list a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  min-width: 44px;
   min-height: 44px;
 }
 

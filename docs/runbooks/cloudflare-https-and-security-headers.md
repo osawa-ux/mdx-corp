@@ -4,7 +4,7 @@
 > 実施後の実測: `curl -sI http://mdx-inc.co.jp/` → **301** ／ セキュリティヘッダ **4 本すべて付与** ／
 > トップ 200・404 は 404 のまま・リダイレクト 1 回（ループなし）／
 > GA・Cloudflare beacon・Google Fonts はいずれも読み込み継続・console エラー 0 件。
-> 作成された ruleset id: `012b1531d46e4f729b33270320a34fea`（rule 名 `security-headers`）。
+> 作成された rule 名: `security-headers`（ruleset id の実値は vault）。
 > 併せて **min_tls_version を 1.0 → 1.2** に引き上げた（実測で TLS1.0/1.1 の利用が 0 件だったため。§1 手順 5 参照）。
 
 - 対象: `mdx-inc.co.jp`（GitHub Pages 配信 / Cloudflare 経由）
@@ -17,18 +17,21 @@
 
 ## 前提（2026-08-13 に API で実測して確定した構成）
 
-- zone id: `167c4e7b6d0ee2eb9b8a3d1ec1677914`
+- zone id: `<zone_id>`（実値は vault `20_Projects/mdx-corp/cloudflare-identifiers.md`）
 - apex `mdx-inc.co.jp` の A レコード 4 本は **GitHub Pages の IP を指し、かつ `proxied=true`（オレンジ雲）**
 - 訪問者向けの TLS は **Cloudflare 側で終端**している（実測: issuer = Let's Encrypt / subject = CN=mdx-inc.co.jp ＝ Cloudflare Universal SSL）
 - SSL/TLS モードは **`full`**（Flexible ではない）
 
 この構成から来る、実施前に知っておくべき 2 点:
 
-1. **GitHub Pages の「Enforce HTTPS」は ON にできない（この構成では不要）。**
+1. **GitHub Pages の「Enforce HTTPS」は ON にできない。**
    proxied のため GitHub 側が独自証明書を発行できず、API は
    `404 The certificate does not exist yet` を返す（2026-08-13 実測）。
-   訪問者から見た HTTPS は Cloudflare が担保しているので実害はない。
    **したがって P0-1 は Cloudflare の Always Use HTTPS 一本で決まる。**
+   残余リスクは受容している: 訪問者〜Cloudflare 間は Cloudflare の証明書で担保されるが、
+   **Cloudflare〜オリジン（GitHub Pages）間は暗号化されるものの証明書の検証はされない**（SSL/TLS モード `full`）。
+   GitHub 側の証明書が発行できない以上 `full (strict)` には上げられないため、この区間の
+   なりすましリスクを受け入れている。オリジンを GitHub Pages 以外へ移すときは `full (strict)` を再検討する。
 2. **SSL/TLS モードが `full` であることが Always Use HTTPS の前提。**
    ここが `flexible` だと、Cloudflare→オリジンが HTTP になり
    GitHub Pages 側が HTTPS へ返すため **リダイレクトループになる**。
@@ -154,18 +157,15 @@ Transform Rules の該当ルールを **無効化（トグル OFF）** する。
 
 ## 3-2. API で実施する場合（ダッシュボードの代わり）
 
-`~/.secrets/cloudflare/.env` のトークンで API 実行もできるが、**2026-08-13 時点では書き込み権限が足りない**。
-
-- `CF_API_TOKEN` … このゾーンの設定と ruleset を **読めるが書けない**（write は `Authentication error`）
-- `CF_API_TOKEN_EDGE` … ruleset は読めるがゾーン設定は読めない。ruleset の write も `request is not authorized`
-- 他（ADMIN / WORKERS / TURNSTILE / ROMUBASE）… このゾーンにはアクセス不可
-- `CF_TOKEN_NAVI_REDIRECT` … トークン自体が無効（`Invalid API Token`）
+API 実行もできるが、**2026-08-13 時点では既存トークンの書き込み権限が足りない**。
+どのトークンが何を持つかの棚卸し結果は public repo に置かない（vault
+`20_Projects/mdx-corp/cloudflare-identifiers.md` を参照）。
 
 API で完了させるには、`mdx-inc.co.jp` ゾーンに対して
 **Zone Settings: Edit**（権限グループ id `3030687196b94b638145a3953da2b699`）と
 **Zone Transform Rules: Edit**（`0ac90a90249747bca6b047d97f0803e9`）を持つトークンが要る。
 
-2026-08-13 の実施では、`CF_API_TOKEN_ADMIN`（= `browser-ops-admin-2026-07-31`・**API Tokens Write** 保有）で
+2026-08-13 の実施では、**API Tokens Write を持つ既存トークン**（どれかは vault 参照）を使って
 **このゾーン限定・上記2権限だけの一時トークンを発行 → 適用 → 即削除**した。
 永続トークンを増やさずに済むので、再実施時もこの方式を推奨する（削除は `finally` で必ず実行し、
 削除後に `/user/tokens` を再取得して残存 0 件を確認すること）。

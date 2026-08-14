@@ -31,12 +31,6 @@
     gtag('js', new Date());
     gtag('config', 'G-MZTNZ1G68S');
   </script>
-  <!-- sameAs の追加候補は 2026-08-13 に実機検証済み。以下は「使えない」と確認したもの:
-       - gBizINFO の ?hojinBangou= URL … 検索フォームが表示されるだけで当社を指さない
-       - github.com/osawa-ux … 個人アカウント（name/company/bio 未設定）で会社の公式プロフィールではない
-       - note … 当社名義のアカウントが存在しない
-       追加するときは「その URL が MDX株式会社を一意に指すか」を実ブラウザで確認してから足すこと
-       （JS レンダリングのサイトが多く curl では判定できない）。 -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -176,7 +170,7 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
 
     <!-- ===== HERO（物語） ===== -->
     <section class="hero" id="top">
