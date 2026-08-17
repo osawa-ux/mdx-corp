@@ -5,8 +5,11 @@ decision-makers: 院長
 ---
 
 > **2026-08-17 院長承認: 案C（共有ドライブでの作り直し）を採用。**
-> 実施順序1（公開文書の是正）は `c4fa42d` で実施済み。以降の手順3〜6 は
-> `docs/runbooks/recruit-form-consent.md` が実行手順の正本。
+> 実施順序1（公開文書の是正）は `c4fa42d` で実施済み。
+> **残りは実施順序2〜6。** うち**実施順序2（法29条の一括記録台帳）は保管場所が未決**である
+> （本人の氏名を含むため public な本 repo には置けない）。手順3〜6 の実行手順は
+> `docs/runbooks/recruit-form-consent.md` が正本で、同 runbook は台帳の作成済みを
+> 旧データ削除の前提ゲートとして持つ。
 # 0001: 応募フォームのオーナー権限移管を断念し、Workspace 共有ドライブでの作り直しに切り替える
 
 ## Context and Problem Statement
