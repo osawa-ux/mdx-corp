@@ -1,8 +1,12 @@
 ---
-status: proposed
+status: accepted
 date: 2026-08-15
 decision-makers: 院長
 ---
+
+> **2026-08-17 院長承認: 案C（共有ドライブでの作り直し）を採用。**
+> 実施順序1（公開文書の是正）は `c4fa42d` で実施済み。以降の手順3〜6 は
+> `docs/runbooks/recruit-form-consent.md` が実行手順の正本。
 # 0001: 応募フォームのオーナー権限移管を断念し、Workspace 共有ドライブでの作り直しに切り替える
 
 ## Context and Problem Statement

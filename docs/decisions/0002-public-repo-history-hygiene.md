@@ -1,8 +1,11 @@
 ---
-status: proposed
+status: accepted
 date: 2026-08-16
 decision-makers: 院長
 ---
+
+> **2026-08-17 院長承認: 案A（受容）を採用。** 履歴の書き換え（force push）は行わない。
+> 件2 は代表者本人の情報であるため、本人の意向で案B へ切り替える余地は残す（本文「Decision Outcome」参照）。
 # 0002: public repo の git 履歴に残る識別子・個人アドレスの扱い
 
 ## Context and Problem Statement
