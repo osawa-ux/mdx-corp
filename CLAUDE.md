@@ -205,3 +205,15 @@ repo 作業時に意識すること:
 - **MEMORY = 軽量 index + 短い原則**。詳細手順・テンプレ・事例は Obsidian `70_SOP/` へ置く
 - 新規 `feedback_*.md` は 50行以内。超えそうなら SOP 分離
 - skill 実行時に読まれるべき挙動ルールは auto-memory でなく vault の `30_Areas/<skill>-patterns/`（委任型 skill レジストリ・正本 `70_SOP/obsidian-save-policy.md`）に書く
+
+---
+
+## 開発コマンド（build / test / lint）
+
+Claude がコードから推測できない実在コマンドと既知の癖の正本。完了判定は証拠（テスト exit code / CI run conclusion）で行う（証拠原則の repo 側受け皿）。**コマンドは実測（実際に実行して exit code を確認）してから記載する**。
+
+- build: なし（静的 HTML サイト。ローカル build コマンドは存在しない。GitHub Pages が `master` push 時に自動で Jekyll ビルド・配信する。2026-08-20 実測: CI「pages build and deployment」run conclusion=success・headSha `b2a4926`〔worktree HEAD と一致〕）
+- test: なし（自動テストスイート未整備。`tools/search_console_submit.py` は Search Console API に実送信する運用スクリプトでありテスト対象外・下記「実行してはいけない」参照）
+- lint / typecheck: なし（lint 設定・ツール未導入。requirements.txt は `google-api-python-client` 等の実行時依存のみで lint ツールは含まない。参考: `python -m py_compile tools/search_console_submit.py` で構文チェックのみ実施＝2026-08-20 実測 exit 0。正式な lint コマンドではない）
+- 実行してはいけない / 長時間コマンド: `python tools/search_console_submit.py submit-and-check`（Google Search Console API へ実送信する運用スクリプト。`GOOGLE_SA_KEY_JSON` 等の実 secret が必要で、ローカル実行は本番の Search Console 状態を変える）。`CNAME` の変更・`.github/workflows/` 配下の変更（既存「運用ガード」節に既定あり・変更が必要なら院長へ報告して停止）
+- 既知の癖（偽赤・環境依存等）: `master` への push は無審査で即本番公開（branch protection なし）。テスト・lint が存在しないため、変更の正しさは push 後の実ページ目視確認と Jekyll ビルド成否（Actions タブ / `gh api repos/osawa-ux/mdx-corp/pages/builds/latest`）でのみ判定できる（既存「運用ガード」節参照）。
