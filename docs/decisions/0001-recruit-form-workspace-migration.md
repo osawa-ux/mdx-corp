@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: superseded by 0003
 date: 2026-08-15
 decision-makers: 院長
 ---
