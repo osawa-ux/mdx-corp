@@ -1,39 +1,54 @@
 # MDX株式会社 robots.txt
 # https://mdx-inc.co.jp/robots.txt
+#
+# ⚠ グループ構文の注意（2026-08-24 追記・実際に踏んだ罠）
+#   robots.txt は「最も具体的に一致した User-agent グループ 1 つだけ」が適用され、
+#   `*` グループと名前付きグループは **結合されない**（Google 公式仕様・RFC 9309）。
+#   下の Googlebot 以下 7 つの名前付きグループがある限り、`*` に書いた Disallow は
+#   それらの bot に一切効かない。**Disallow を足すときは 8 グループすべてに書くこと。**
 
 # ===== 汎用設定（全クローラー） =====
 User-agent: *
 Allow: /
-# Cloudflare のメールアドレス難読化が privacy.html の mailto: を
-# /cdn-cgi/l/email-protection#<token> に置換する。クローラがこれを辿ると
-# 404 を返し、Search Console が「見つかりませんでした（404）」として
-# インデックス未登録要因に計上する（2026-08-24 実測。sitemap 掲載 11 URL は
-# すべて 200 で、404 はこの 1 経路のみ）。実害は無いがノイズなので巡回対象から外す。
-Disallow: /cdn-cgi/
+# Cloudflare のメールアドレス難読化が mailto: を
+# /cdn-cgi/l/email-protection#<token> に置換する（index / about / careers / privacy の
+# 4 ページから参照）。クローラがこれを辿ると 404 を返し、Search Console が
+# 「見つかりませんでした（404）」としてインデックス未登録要因に計上する
+# （2026-08-24 実測。sitemap 掲載 11 URL はすべて 200 で、404 はこの 1 経路のみ）。
+# 実害は無いがノイズなので巡回対象から外す。
+# 範囲を /cdn-cgi/l/ に絞るのは、復号スクリプト /cdn-cgi/scripts/.../email-decode.min.js を
+# クロール可能なまま残すため（ここまで塞ぐと Googlebot のレンダリングで復号されず
+# メールアドレスが [email protected] のまま索引される）。
+Disallow: /cdn-cgi/l/
 
 # ===== 検索エンジン（インデックス・表示用） =====
 
 # Google（通常の検索インデックス）
 User-agent: Googlebot
 Allow: /
+Disallow: /cdn-cgi/l/
 
 # Bing（通常の検索インデックス）
 User-agent: Bingbot
 Allow: /
+Disallow: /cdn-cgi/l/
 
 # ===== 検索AI・Answer Engine（検索結果での引用・回答生成用） =====
 
 # OpenAI / ChatGPT 検索機能（SearchGPT / ChatGPT Browse 等）
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /cdn-cgi/l/
 
 # Anthropic Claude 検索機能
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /cdn-cgi/l/
 
 # Perplexity AI 検索
 User-agent: PerplexityBot
 Allow: /
+Disallow: /cdn-cgi/l/
 
 # ===== 学習系AI（モデル学習用データ収集） =====
 # 現時点ではデフォルト許可（ブロック方針は施主と別途協議）
@@ -41,10 +56,12 @@ Allow: /
 # OpenAI モデル学習クローラー
 User-agent: GPTBot
 Allow: /
+Disallow: /cdn-cgi/l/
 
 # Google AI 学習クローラー（Bard / Gemini 等のトレーニングデータ収集）
 User-agent: Google-Extended
 Allow: /
+Disallow: /cdn-cgi/l/
 
 # ===== サイトマップ =====
 Sitemap: https://mdx-inc.co.jp/sitemap.xml
