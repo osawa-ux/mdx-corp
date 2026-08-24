@@ -4,6 +4,12 @@
 # ===== 汎用設定（全クローラー） =====
 User-agent: *
 Allow: /
+# Cloudflare のメールアドレス難読化が privacy.html の mailto: を
+# /cdn-cgi/l/email-protection#<token> に置換する。クローラがこれを辿ると
+# 404 を返し、Search Console が「見つかりませんでした（404）」として
+# インデックス未登録要因に計上する（2026-08-24 実測。sitemap 掲載 11 URL は
+# すべて 200 で、404 はこの 1 経路のみ）。実害は無いがノイズなので巡回対象から外す。
+Disallow: /cdn-cgi/
 
 # ===== 検索エンジン（インデックス・表示用） =====
 
