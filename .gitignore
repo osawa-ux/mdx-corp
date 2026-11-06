@@ -7,6 +7,8 @@ __pycache__/
 *.pyc
 
 # Google API 認証
+# 内部文書はこの repo に置かない（非公開の repo で管理）。誤って作り直しても追跡されないようにする
+/docs/
 credentials.json
 token.json
 sa-key.json
