@@ -37,9 +37,6 @@ mdx-corp/
 │       └── ogp.svg         # OGP画像元データ
 ├── tools/
 │   └── search_console_submit.py  # Search Console API ツール
-├── docs/
-│   ├── seo-operations.md         # SEO運用ガイド・APIツール設定手順
-│   └── site-launch-checklist.md  # 公開後チェックリスト
 └── .github/
     └── workflows/
         └── search-console-submit.yml  # 自動sitemap再送信
@@ -112,33 +109,37 @@ python tools/search_console_submit.py inspect-defaults
 python tools/search_console_submit.py submit-and-check
 ```
 
-詳細な設定手順は [docs/seo-operations.md](docs/seo-operations.md) を参照してください。
+内部文書（運用手順・チェックリスト等）は非公開の repo で管理しています。
 
 ## GitHub Pages 運用
 
 - **ブランチ:** `master` の `/`（root）から配信
 - **カスタムドメイン:** `mdx-inc.co.jp`（GitHub Pages Settings で設定済み）
-- **HTTPS:** Enforce HTTPS 有効
-- **DNS:** お名前.com で A レコード（GitHub Pages IP × 4）+ CNAME（www → osawa-ux.github.io）
-- **メール:** Google Workspace（info@mdx-inc.co.jp）設定済み・MXレコード反映済み
+- **HTTPS:** 有効
 - **CNAME ファイル:** 削除厳禁（カスタムドメインが外れる）
 
 ## 更新手順
 
+`master` は保護されており、直接 push できません。変更は作業用ブランチから Pull Request を作って merge します。
+
 ```bash
-# 1. 最新を取得
-git pull
+# 1. 最新を取得して作業用ブランチを作る
+git switch master
+git pull --ff-only
+git switch -c <作業用ブランチ名>
 
 # 2. ファイルを編集
 
-# 3. コミット & プッシュ
+# 3. コミットして作業用ブランチを push
 git add <変更ファイル>
 git commit -m "変更内容の説明"
-git push
+git push -u origin <作業用ブランチ名>
 
-# 4. 2〜3分後にサイトで反映を確認
+# 4. GitHub で Pull Request を作り、内容を確認して merge
 
-# 5. (任意) Search Console に sitemap 再送信
+# 5. merge の 2〜3分後にサイトで反映を確認
+
+# 6. (任意) Search Console に sitemap 再送信
 python tools/search_console_submit.py submit-and-check
 ```
 
@@ -151,18 +152,14 @@ python tools/search_console_submit.py submit-and-check
 - [ ] privacy.html / disclaimer.html / careers.html のリンクが動作するか
 - [ ] Search Console でエラーがないか
 
-詳細なチェックリストは [docs/site-launch-checklist.md](docs/site-launch-checklist.md) を参照してください。
-
 ## 採用ページ
 
 - **応募フォーム:** Google フォーム（外部リンク）
 - **フォーム通知:** Google フォーム側で設定（Formspreeとは別管理）
-- **NG表現:** 医療・クリニック・患者などの表現は使用しない（IT/DX企業として表現）
 
 ## 注意事項
 
 - `CNAME` ファイルは削除しないこと（カスタムドメインが外れる）
-- Formspree は Pro プラン（月5,000件）に課金済み
 - OGP画像を差し替えた場合、SNS側のキャッシュ反映に時間がかかる
 - `sitemap.xml` にページを追加した場合、Search Console で再送信する
 - `credentials.json` / `token.json` は `.gitignore` で除外済み — リポジトリにコミットしないこと
